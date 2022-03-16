@@ -23,4 +23,4 @@ const SupermarketSchema = new Schema(
   }
 );
 
-module.exports = model("Product", SupermarketSchema);
+module.exports = model("Supermarket", SupermarketSchema);

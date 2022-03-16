@@ -36,7 +36,7 @@ const createProduct = async (input) => {
 
     return {
       message: "Some error",
-      success: true,
+      success: false,
     };
   }
 };
@@ -54,7 +54,7 @@ const updateProduct = async (input) => {
 
     return {
       message: "Some error",
-      success: true,
+      success: false,
     };
   }
 };
@@ -72,7 +72,7 @@ const deleteProduct = async (id) => {
 
     return {
       message: "Some error",
-      success: true,
+      success: false,
     };
   }
 };
