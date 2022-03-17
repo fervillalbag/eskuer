@@ -15,7 +15,6 @@ const typeDefs = gql`
   type Product {
     id: String
     name: String
-    idSuper: String
     price: [Price]
   }
 
@@ -30,18 +29,12 @@ const typeDefs = gql`
     slug: String
     name: String
     image: String
+    products: [Product]
   }
 
   input ProductInput {
-    name: String
-    idSuper: String
-    price: [PriceInput]
-  }
-
-  input ProductUpdateInput {
     id: String
     name: String
-    idSuper: String
     price: [PriceInput]
   }
 
@@ -49,6 +42,7 @@ const typeDefs = gql`
     slug: String
     name: String
     image: String
+    products: [ProductInput]
   }
 
   input SupermarketUpdateInput {
@@ -56,23 +50,15 @@ const typeDefs = gql`
     slug: String
     name: String
     image: String
+    products: [ProductInput]
   }
 
   type Query {
-    # Product
-    getProducts: [Product]
-    getProduct(id: String!): Product
-
     # Supermarket
     getSupermarkets: [Supermarket]
   }
 
   type Mutation {
-    # Product
-    createProduct(input: ProductInput!): MutationResponse
-    updateProduct(input: ProductUpdateInput!): MutationResponse
-    deleteProduct(id: String!): MutationResponse
-
     # Supermarket
     createSupermarket(input: SupermarketInput!): MutationResponse
     updateSupermarket(

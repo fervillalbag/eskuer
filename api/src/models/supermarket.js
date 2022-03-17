@@ -17,6 +17,9 @@ const SupermarketSchema = new Schema(
       required: [true, "Image is required"],
       trim: true,
     },
+    products: {
+      type: Array,
+    },
   },
   {
     timestamps: true,
