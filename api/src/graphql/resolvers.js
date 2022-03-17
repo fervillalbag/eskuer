@@ -1,19 +1,18 @@
-const supermarketController = require("../controllers/supermarket");
+const productController = require("../controllers/product");
 
 const resolvers = {
   Query: {
     // Supermarket
-    getSupermarkets: () => supermarketController.getSupermarkets(),
+    getProducts: () => productController.getProducts(),
   },
 
   Mutation: {
     // Supermarket
-    createSupermarket: (_, { input }) =>
-      supermarketController.createSupermarket(input),
-    updateSupermarket: (_, { input }) =>
-      supermarketController.updateSupermarket(input),
-    deleteSupermarket: (_, { id }) =>
-      supermarketController.deleteSupermarket(id),
+    createProduct: (_, { input }) =>
+      productController.createProduct(input),
+    updateProduct: (_, { input }) =>
+      productController.updateProduct(input),
+    deleteProduct: (_, { id }) => productController.deleteProduct(id),
   },
 };
 
