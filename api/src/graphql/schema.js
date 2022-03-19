@@ -13,19 +13,23 @@ const typeDefs = gql`
     createdAt: String
   }
 
+  type SupermarketProduct {
+    id: String
+    price: [Price]
+  }
+
   type Supermarket {
     id: String
     slug: String
     name: String
     image: String
-    price: [Price]
   }
 
   type Product {
     id: String
     name: String
     category: String
-    supermarket: [Supermarket]
+    supermarket: SupermarketProduct
   }
 
   input PriceInput {
@@ -35,32 +39,32 @@ const typeDefs = gql`
     createdAt: String
   }
 
+  input SupermarketProductInput {
+    id: String
+    price: [PriceInput]
+  }
+
   input SupermarketInput {
     id: String
     slug: String
     name: String
     image: String
-    price: [PriceInput]
   }
 
   input ProductInput {
     id: String
     name: String
     category: String
-    supermarket: [SupermarketInput]
-  }
-
-  input SupermarketUpdateInput {
-    id: String
-    slug: String
-    name: String
-    image: String
-    price: [PriceInput]
+    supermarket: [SupermarketProductInput]
   }
 
   type Query {
     # Product
     getProducts: [Product]
+
+    # Supermarket
+    getSupermarkets: [Supermarket]
+    getSupermarket(id: String!): Supermarket
   }
 
   type Mutation {
@@ -68,6 +72,11 @@ const typeDefs = gql`
     createProduct(input: ProductInput!): MutationResponse
     updateProduct(input: ProductInput!): MutationResponse
     deleteProduct(id: String!): MutationResponse
+
+    # Supermarket
+    createSupermarket(input: SupermarketInput!): MutationResponse
+    updateSupermarket(input: SupermarketInput!): MutationResponse
+    deleteSupermarket(id: String!): MutationResponse
   }
 `;
 
