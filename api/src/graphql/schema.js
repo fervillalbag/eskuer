@@ -29,7 +29,7 @@ const typeDefs = gql`
     id: String
     name: String
     category: String
-    supermarket: SupermarketProduct
+    supermarket: [SupermarketProduct]
   }
 
   input PriceInput {
@@ -61,6 +61,7 @@ const typeDefs = gql`
   type Query {
     # Product
     getProducts: [Product]
+    getProduct(id: String!): Product
 
     # Supermarket
     getSupermarkets: [Supermarket]

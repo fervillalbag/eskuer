@@ -11,6 +11,18 @@ const getProducts = async () => {
   }
 };
 
+const getProduct = async (id) => {
+  try {
+    console.log(id);
+    const product = await Product.findOne({ _id: id });
+    if (!product) throw new Error("Product not found!");
+    return product;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
 const createProduct = async (input) => {
   try {
     const product = new Product(input);
@@ -72,4 +84,5 @@ module.exports = {
   updateProduct,
   deleteProduct,
   getProducts,
+  getProduct,
 };

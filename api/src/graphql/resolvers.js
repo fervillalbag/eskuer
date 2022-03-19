@@ -5,6 +5,7 @@ const resolvers = {
   Query: {
     // Product
     getProducts: () => productController.getProducts(),
+    getProduct: (_, { id }) => productController.getProduct(id),
 
     // Supermarket
     getSupermarkets: () => supermarketController.getSupermarkets(),
