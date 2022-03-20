@@ -29,6 +29,7 @@ const typeDefs = gql`
     id: String
     name: String
     category: String
+    image: String
     supermarket: [SupermarketProduct]
   }
 
@@ -55,13 +56,14 @@ const typeDefs = gql`
     id: String
     name: String
     category: String
+    image: String
     supermarket: [SupermarketProductInput]
   }
 
   type Query {
     # Product
     getProducts: [Product]
-    getProduct(id: String!): Product
+    getProduct(id: String): Product
 
     # Supermarket
     getSupermarkets: [Supermarket]

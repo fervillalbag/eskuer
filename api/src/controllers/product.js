@@ -13,7 +13,6 @@ const getProducts = async () => {
 
 const getProduct = async (id) => {
   try {
-    console.log(id);
     const product = await Product.findOne({ _id: id });
     if (!product) throw new Error("Product not found!");
     return product;

@@ -11,7 +11,8 @@ const Navbar: React.FC = () => {
       height="60px"
       backgroundColor="white"
       borderTop="1px solid #F1F1F1"
-      position="sticky"
+      width="100%"
+      position="fixed"
       bottom="0"
     >
       <Flex

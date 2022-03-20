@@ -92,7 +92,7 @@ const Home: React.FC = () => {
         </Flex>
       </Box>
 
-      <Box padding="20px" marginTop="5px">
+      <Box padding="20px 20px 70px 20px" marginTop="5px">
         <Heading
           fontSize="20px"
           color="#2D93E8"
