@@ -8,3 +8,12 @@ export const CREATE_PRODUCT = gql`
     }
   }
 `
+
+export const UPDATE_PRODUCT = gql`
+  mutation updateProduct($input: ProductInput!) {
+    updateProduct(input: $input) {
+      message
+      success
+    }
+  }
+`

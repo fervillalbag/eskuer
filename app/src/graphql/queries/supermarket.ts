@@ -10,3 +10,14 @@ export const GET_SUPERMARKETS = gql`
     }
   }
 `
+
+export const GET_SUPERMARKET = gql`
+  query getSupermarket($id: String!) {
+    getSupermarket(id: $id) {
+      id
+      slug
+      name
+      image
+    }
+  }
+`

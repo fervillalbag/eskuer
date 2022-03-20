@@ -1,20 +1,10 @@
 import React from 'react'
 import { Box, Flex, Heading, Text } from '@chakra-ui/react'
-import { useQuery } from '@apollo/client'
 
 import Product from '../components/Product'
 import Navbar from '../components/Navbar'
-import { GET_PRODUCTS } from '../graphql/queries/product'
 
 const Home: React.FC = () => {
-  const { data, loading } = useQuery(GET_PRODUCTS)
-  if (loading) return null
-
-  const supermarkets = data?.getProducts
-
-  // productsArray.forEach(item => console.log(item))
-  console.log(supermarkets)
-
   return (
     <Box backgroundColor="#F5F5F5" minHeight="100vh">
       <Box padding="20px 20px 10px 20px">

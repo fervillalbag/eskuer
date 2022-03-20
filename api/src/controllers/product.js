@@ -47,7 +47,7 @@ const updateProduct = async (input) => {
     await Product.findOneAndUpdate({ _id: input.id }, input);
 
     return {
-      message: "Supermarket updated!",
+      message: "Product updated!",
       success: true,
     };
   } catch (error) {

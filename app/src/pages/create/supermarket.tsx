@@ -25,8 +25,6 @@ const CreateSupermarket: React.FC = () => {
   const [nameSupermarket, setNameSupermarket] = useState<string | null>(null)
   const [slugSupermarket, setSlugSupermarket] = useState<string | null>(null)
 
-  console.log(image)
-
   const [createSupermarket] = useMutation(CREATE_SUPERMARKET)
 
   const inputFileRef = useRef(null)
