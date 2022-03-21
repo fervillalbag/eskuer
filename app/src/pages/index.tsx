@@ -1,10 +1,18 @@
 import React from 'react'
-import { Box, Flex, Heading, Text } from '@chakra-ui/react'
+import { Box, Flex, Heading, Link, Text } from '@chakra-ui/react'
 
 import Product from '../components/Product'
 import Navbar from '../components/Navbar'
+import { useQuery } from '@apollo/client'
+import { GET_PRODUCTS } from '../graphql/queries/product'
+import NextLink from 'next/link'
 
 const Home: React.FC = () => {
+  const { data } = useQuery(GET_PRODUCTS, {
+    fetchPolicy: 'network-only'
+  })
+  const products = data?.getProducts || []
+
   return (
     <Box backgroundColor="#F5F5F5" minHeight="100vh">
       <Box padding="20px 20px 10px 20px">
@@ -93,14 +101,13 @@ const Home: React.FC = () => {
         </Heading>
 
         <Box as="main" marginTop="10px">
-          <Product />
-          <Product />
-          <Product />
-          <Product />
-          <Product />
-          <Product />
-          <Product />
-          <Product />
+          {products.map(product => (
+            <NextLink href={`/product/${product.id}`} key={product.id}>
+              <Link>
+                <Product key={product.id} product={product} />
+              </Link>
+            </NextLink>
+          ))}
         </Box>
       </Box>
 
