@@ -2,19 +2,11 @@ import React, { useRef, useState } from 'react'
 import toast from 'react-hot-toast'
 import { useRouter } from 'next/router'
 import { FaAngleLeft } from 'react-icons/fa'
-import {
-  Box,
-  Button,
-  Flex,
-  Heading,
-  Image,
-  Input,
-  Select
-} from '@chakra-ui/react'
-import { useMutation, useQuery } from '@apollo/client'
+import { Box, Button, Flex, Heading, Image, Input } from '@chakra-ui/react'
+import { useMutation } from '@apollo/client'
 
 import Navbar from '../../components/Navbar'
-import { GET_SUPERMARKETS } from '../../graphql/queries/supermarket'
+// import { GET_SUPERMARKETS } from '../../graphql/queries/supermarket'
 import { CREATE_PRODUCT } from '../../graphql/mutations/product'
 
 export type FileType = {
@@ -37,7 +29,6 @@ const CreateProduct: React.FC = () => {
 
   const [nameProduct, setNameProduct] = useState<string | null>(null)
   const [categoryProduct, setCategoryProduct] = useState<string | null>(null)
-  const [supermarketId, setSupermarketId] = useState<string | null>(null)
 
   const handleChangeImage = (e: React.ChangeEvent<HTMLInputElement>) => {
     const target = e.currentTarget as HTMLInputElement
@@ -48,7 +39,7 @@ const CreateProduct: React.FC = () => {
   }
 
   const handleCreateProduct = async () => {
-    if (!nameProduct || !categoryProduct || !supermarketId || !image)
+    if (!nameProduct || !categoryProduct || !image)
       return toast.error('Todos los campos son obligatorios')
 
     const URL_CLOUDINARY = process.env.URL_CLOUDINARY
@@ -69,13 +60,7 @@ const CreateProduct: React.FC = () => {
           input: {
             name: nameProduct,
             category: categoryProduct,
-            image: imageData?.secure_url,
-            supermarket: [
-              {
-                id: supermarketId,
-                price: []
-              }
-            ]
+            image: imageData?.secure_url
           }
         }
       })
@@ -87,9 +72,9 @@ const CreateProduct: React.FC = () => {
     }
   }
 
-  const { data, loading } = useQuery(GET_SUPERMARKETS)
-  if (loading) return null
-  const supermarkets = data?.getSupermarkets
+  // const { data, loading } = useQuery(GET_SUPERMARKETS)
+  // if (loading) return null
+  // const supermarkets = data?.getSupermarkets
 
   return (
     <Box>
@@ -135,18 +120,6 @@ const CreateProduct: React.FC = () => {
           marginBottom="15px"
           onChange={e => setCategoryProduct(e.target.value)}
         />
-
-        <Select
-          marginBottom="20px"
-          onChange={e => setSupermarketId(e.target.value)}
-        >
-          <option value="">-- Seleccione supermercado --</option>
-          {supermarkets.map(supermarket => (
-            <option key={supermarket.id} value={supermarket.id}>
-              {supermarket.name}
-            </option>
-          ))}
-        </Select>
 
         <Button
           minWidth="initial"

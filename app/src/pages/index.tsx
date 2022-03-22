@@ -12,8 +12,8 @@ const Home: React.FC = () => {
     fetchPolicy: 'network-only'
   })
 
-  const products = data?.getProducts || []
-  console.log(products)
+  // const products = data?.getProducts || []
+  // console.log(products)
 
   return (
     <Box backgroundColor="#F5F5F5" minHeight="100vh">
@@ -103,13 +103,13 @@ const Home: React.FC = () => {
         </Heading>
 
         <Box as="main" marginTop="10px">
-          {products.map(product => (
+          {/* {products.map(product => (
             <NextLink href={`/product/${product.id}`} key={product.id}>
               <Link>
                 <Product key={product.id} product={product} />
               </Link>
             </NextLink>
-          ))}
+          ))} */}
         </Box>
       </Box>
 

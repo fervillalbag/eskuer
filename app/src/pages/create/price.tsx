@@ -3,22 +3,23 @@ import toast from 'react-hot-toast'
 import { Box, Button, Flex, Heading, Input, Select } from '@chakra-ui/react'
 import { FaAngleLeft } from 'react-icons/fa'
 import { useMutation, useQuery } from '@apollo/client'
-import { useRouter } from 'next/router'
+// import { useRouter } from 'next/router'
 
 import Navbar from '../../components/Navbar'
 import { GET_SUPERMARKETS } from '../../graphql/queries/supermarket'
-import { GET_PRODUCT, GET_PRODUCTS } from '../../graphql/queries/product'
-import { UPDATE_PRODUCT } from '../../graphql/mutations/product'
+import { GET_PRODUCTS } from '../../graphql/queries/product'
+import { CREATE_PRICE } from '../../graphql/mutations/price'
+// import { UPDATE_PRODUCT } from '../../graphql/mutations/product'
 
 const CreatePrice: React.FC = () => {
-  const router = useRouter()
+  // const router = useRouter()
 
   const [supermarketId, setSupermarketId] = useState<string | null>(null)
   const [productId, setProductId] = useState<string | null>(null)
   const [price, setPrice] = useState<number>(0)
   const [typeProduct, setTypeProduct] = useState<string | null>('')
 
-  const [updateProduct] = useMutation(UPDATE_PRODUCT)
+  const [createPrice] = useMutation(CREATE_PRICE)
 
   const { data } = useQuery(GET_SUPERMARKETS, {
     fetchPolicy: 'network-only'
@@ -26,85 +27,28 @@ const CreatePrice: React.FC = () => {
   const { data: dataProducts } = useQuery(GET_PRODUCTS, {
     fetchPolicy: 'network-only'
   })
-  const { data: dataProduct } = useQuery(GET_PRODUCT, {
-    fetchPolicy: 'network-only',
-    variables: {
-      id: productId
-    }
-  })
 
   const products = dataProducts?.getProducts || []
   const supermarkets = data?.getSupermarkets || []
-  const product = dataProduct?.getProduct
-
-  const currentMarket = product?.supermarket.find(
-    item => item.id === supermarketId
-  )
 
   const handleAddPrice = async () => {
     if (!price || !typeProduct || !supermarketId || !productId)
       return toast.error('Todos los campos son obligatorios')
 
-    const newProduct = { ...product }
-    delete newProduct.__typename
-
-    const newSupermarket = newProduct.supermarket.map(item => {
-      return {
-        id: item.id,
-        price: [
-          ...item.price,
-          {
-            id: String(new Date().getTime()),
-            value: price,
-            type: typeProduct,
-            createdAt: new Date()
-          }
-        ]
-      }
-    })
-
-    newProduct.supermarket = newSupermarket
-
-    if (!currentMarket) {
-      // console.log('first')
-      // return
-      const response = await updateProduct({
-        variables: {
-          input: {
-            ...newProduct,
-            supermarket: [
-              ...newProduct.supermarket,
-              {
-                id: supermarketId,
-                price: [
-                  {
-                    id: String(new Date().getTime()),
-                    value: price,
-                    type: typeProduct,
-                    createdAt: new Date()
-                  }
-                ]
-              }
-            ]
-          }
-        }
-      })
-      toast.success(response?.data?.updateProduct.message)
-      router.push('/')
-      return
-    }
-    // console.log('second')
-    // return
-    const response = await updateProduct({
+    const response = await createPrice({
       variables: {
         input: {
-          ...newProduct,
-          supermarket: [...newProduct.supermarket]
+          idProduct: productId,
+          idSuper: supermarketId,
+          value: price,
+          type: typeProduct
         }
       }
     })
-    toast.success(response?.data?.updateProduct.message)
-    return router.push('/')
+
+    console.log(response)
+
+    // return router.push('/')
   }
 
   return (
