@@ -17,7 +17,7 @@ const ProductSchema = new Schema(
       required: [true, "Image is required"],
       trim: true,
     },
-    supermarket: {
+    price: {
       type: Array,
     },
   },

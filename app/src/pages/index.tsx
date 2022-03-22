@@ -1,17 +1,19 @@
 import React from 'react'
+import NextLink from 'next/link'
 import { Box, Flex, Heading, Link, Text } from '@chakra-ui/react'
+import { useQuery } from '@apollo/client'
 
 import Product from '../components/Product'
 import Navbar from '../components/Navbar'
-import { useQuery } from '@apollo/client'
 import { GET_PRODUCTS } from '../graphql/queries/product'
-import NextLink from 'next/link'
 
 const Home: React.FC = () => {
   const { data } = useQuery(GET_PRODUCTS, {
     fetchPolicy: 'network-only'
   })
+
   const products = data?.getProducts || []
+  console.log(products)
 
   return (
     <Box backgroundColor="#F5F5F5" minHeight="100vh">

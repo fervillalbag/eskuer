@@ -10,12 +10,8 @@ const typeDefs = gql`
     id: String
     value: Float
     type: String
+    idSuper: String
     createdAt: String
-  }
-
-  type SupermarketProduct {
-    id: String
-    price: [Price]
   }
 
   type Supermarket {
@@ -30,19 +26,15 @@ const typeDefs = gql`
     name: String
     category: String
     image: String
-    supermarket: [SupermarketProduct]
+    price: [Price]
   }
 
   input PriceInput {
     id: String
     value: Float
     type: String
+    idSuper: String
     createdAt: String
-  }
-
-  input SupermarketProductInput {
-    id: String
-    price: [PriceInput]
   }
 
   input SupermarketInput {
@@ -57,7 +49,7 @@ const typeDefs = gql`
     name: String
     category: String
     image: String
-    supermarket: [SupermarketProductInput]
+    price: [PriceInput]
   }
 
   type Query {

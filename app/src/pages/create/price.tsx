@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
+import toast from 'react-hot-toast'
 import { Box, Button, Flex, Heading, Input, Select } from '@chakra-ui/react'
-import Navbar from '../../components/Navbar'
 import { FaAngleLeft } from 'react-icons/fa'
 import { useMutation, useQuery } from '@apollo/client'
+import { useRouter } from 'next/router'
+
+import Navbar from '../../components/Navbar'
 import { GET_SUPERMARKETS } from '../../graphql/queries/supermarket'
 import { GET_PRODUCT, GET_PRODUCTS } from '../../graphql/queries/product'
-import toast from 'react-hot-toast'
 import { UPDATE_PRODUCT } from '../../graphql/mutations/product'
-import { useRouter } from 'next/router'
 
 const CreatePrice: React.FC = () => {
   const router = useRouter()
@@ -19,9 +20,14 @@ const CreatePrice: React.FC = () => {
 
   const [updateProduct] = useMutation(UPDATE_PRODUCT)
 
-  const { data } = useQuery(GET_SUPERMARKETS)
-  const { data: dataProducts } = useQuery(GET_PRODUCTS)
+  const { data } = useQuery(GET_SUPERMARKETS, {
+    fetchPolicy: 'network-only'
+  })
+  const { data: dataProducts } = useQuery(GET_PRODUCTS, {
+    fetchPolicy: 'network-only'
+  })
   const { data: dataProduct } = useQuery(GET_PRODUCT, {
+    fetchPolicy: 'network-only',
     variables: {
       id: productId
     }
@@ -36,9 +42,6 @@ const CreatePrice: React.FC = () => {
   )
 
   const handleAddPrice = async () => {
-    if (!currentMarket)
-      return toast.error('El producto no está agregado en el supermercado')
-
     if (!price || !typeProduct || !supermarketId || !productId)
       return toast.error('Todos los campos son obligatorios')
 
@@ -62,20 +65,46 @@ const CreatePrice: React.FC = () => {
 
     newProduct.supermarket = newSupermarket
 
-    try {
+    if (!currentMarket) {
+      // console.log('first')
+      // return
       const response = await updateProduct({
         variables: {
           input: {
             ...newProduct,
-            supermarket: [...newProduct.supermarket]
+            supermarket: [
+              ...newProduct.supermarket,
+              {
+                id: supermarketId,
+                price: [
+                  {
+                    id: String(new Date().getTime()),
+                    value: price,
+                    type: typeProduct,
+                    createdAt: new Date()
+                  }
+                ]
+              }
+            ]
           }
         }
       })
       toast.success(response?.data?.updateProduct.message)
       router.push('/')
-    } catch (error) {
-      console.log(error)
+      return
     }
+    // console.log('second')
+    // return
+    const response = await updateProduct({
+      variables: {
+        input: {
+          ...newProduct,
+          supermarket: [...newProduct.supermarket]
+        }
+      }
+    })
+    toast.success(response?.data?.updateProduct.message)
+    return router.push('/')
   }
 
   return (
