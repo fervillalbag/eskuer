@@ -1,58 +1,71 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Box, Grid } from '@chakra-ui/react'
-import { ProductType } from '../interfaces/Product'
+
+import { Price } from '../interfaces/Price'
 
 interface ItemProductIprops {
-  product: ProductType
+  price: [Price]
 }
 
-const ItemProduct: React.FC<ItemProductIprops> = ({ product }) => {
-  console.log(product)
+const ItemProduct: React.FC<ItemProductIprops> = ({ price = [] }) => {
+  const [priceArray, setPriceArray] = useState(price || [])
+
+  console.log(price)
+
+  price.forEach(currentPrice => {
+    const isExist = priceArray.find(
+      item => item.idSuper === currentPrice.idSuper
+    )
+
+    if (isExist) {
+      // setPriceArray([...priceArray, ])
+    }
+
+    console.log(isExist)
+  })
 
   return (
     <>
-      {product.supermarket.map(item => (
-        <Grid
-          key={item.id}
-          gridTemplateColumns="1fr 2fr 1fr 100px"
-          borderBottom="1px solid #F0F0F0"
-          padding="10px"
-          alignItems="center"
+      <Grid
+        // key={price.id}
+        gridTemplateColumns="1fr 2fr 1fr 100px"
+        borderBottom="1px solid #F0F0F0"
+        padding="10px"
+        alignItems="center"
+      >
+        <Box
+          color="#333"
+          fontSize="14px"
+          textTransform="uppercase"
+          textAlign="center"
         >
-          <Box
-            color="#333"
-            fontSize="14px"
-            textTransform="uppercase"
-            textAlign="center"
-          >
-            Precio
-          </Box>
-          <Box
-            color="#333"
-            fontSize="12px"
-            textTransform="uppercase"
-            textAlign="center"
-          >
-            Hace 1d
-          </Box>
-          <Box
-            color="#333"
-            fontSize="14px"
-            textTransform="uppercase"
-            textAlign="center"
-          >
-            KG
-          </Box>
-          <Box
-            color="#333"
-            fontSize="14px"
-            textTransform="uppercase"
-            textAlign="right"
-          >
-            Gs. 22.000
-          </Box>
-        </Grid>
-      ))}
+          {/* {price.idSuper} */}
+        </Box>
+        <Box
+          color="#333"
+          fontSize="12px"
+          textTransform="uppercase"
+          textAlign="center"
+        >
+          Hace 1d
+        </Box>
+        <Box
+          color="#333"
+          fontSize="14px"
+          textTransform="uppercase"
+          textAlign="center"
+        >
+          {/* {price.type} */}
+        </Box>
+        <Box
+          color="#333"
+          fontSize="14px"
+          textTransform="uppercase"
+          textAlign="right"
+        >
+          {/* Gs.{price.value} */}
+        </Box>
+      </Grid>
     </>
   )
 }

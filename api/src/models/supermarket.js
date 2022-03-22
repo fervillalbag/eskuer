@@ -13,6 +13,10 @@ const SupermarketSchema = new Schema({
     type: String,
     required: [true, "Image is required"],
   },
+  createdAt: {
+    type: Date,
+    default: new Date(),
+  },
 });
 
 module.exports = model("Supermarket", SupermarketSchema);

@@ -95,9 +95,7 @@ const Product: React.FC = () => {
       </Grid>
 
       <Box>
-        {product?.supermarket.map(item => (
-          <ItemProduct key={item.id} product={product} />
-        ))}
+        <ItemProduct price={product?.price} />
       </Box>
     </Box>
   )

@@ -8,14 +8,10 @@ interface ProductIprops {
 }
 
 const Product: React.FC<ProductIprops> = ({ product }) => {
-  const prices = product?.supermarket.map(item => item.price)
-  const listPrices = prices[0]
-  const pricesValue = listPrices.map(item => item.value)
+  const prices = product.price
 
+  const pricesValue = prices.map(item => item.value)
   const pricesOrder = pricesValue.sort((a, b) => a - b)
-
-  const isHasPrice = prices[0].length > 0
-  if (!isHasPrice) return null
 
   return (
     <Grid

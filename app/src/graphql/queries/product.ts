@@ -7,14 +7,12 @@ export const GET_PRODUCTS = gql`
       name
       category
       image
-      supermarket {
+      price {
         id
-        price {
-          id
-          value
-          type
-          createdAt
-        }
+        idSuper
+        value
+        type
+        createdAt
       }
     }
   }
@@ -27,14 +25,12 @@ export const GET_PRODUCT = gql`
       name
       category
       image
-      supermarket {
+      price {
         id
-        price {
-          id
-          value
-          type
-          createdAt
-        }
+        idSuper
+        value
+        type
+        createdAt
       }
     }
   }

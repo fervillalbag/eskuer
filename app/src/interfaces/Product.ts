@@ -5,10 +5,5 @@ export interface ProductType {
   name: string
   category: string
   image: string
-  supermarket: [Supermarket]
-}
-
-interface Supermarket {
-  id: string
   price: [Price]
 }
