@@ -3,7 +3,8 @@ import toast from 'react-hot-toast'
 import { Box, Button, Flex, Heading, Input, Select } from '@chakra-ui/react'
 import { FaAngleLeft } from 'react-icons/fa'
 import { useMutation, useQuery } from '@apollo/client'
-// import { useRouter } from 'next/router'
+import { useRouter } from 'next/router'
+import dayjs from 'dayjs'
 
 import Navbar from '../../components/Navbar'
 import { GET_SUPERMARKETS } from '../../graphql/queries/supermarket'
@@ -12,7 +13,7 @@ import { CREATE_PRICE } from '../../graphql/mutations/price'
 // import { UPDATE_PRODUCT } from '../../graphql/mutations/product'
 
 const CreatePrice: React.FC = () => {
-  // const router = useRouter()
+  const router = useRouter()
 
   const [supermarketId, setSupermarketId] = useState<string | null>(null)
   const [productId, setProductId] = useState<string | null>(null)
@@ -41,14 +42,15 @@ const CreatePrice: React.FC = () => {
           idProduct: productId,
           idSuper: supermarketId,
           value: price,
-          type: typeProduct
+          type: typeProduct,
+          createdAt: dayjs().format()
         }
       }
     })
 
     console.log(response)
-
-    // return router.push('/')
+    toast.success('Precio añadido')
+    return router.push('/')
   }
 
   return (

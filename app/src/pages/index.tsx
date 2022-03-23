@@ -8,9 +8,10 @@ import Navbar from '../components/Navbar'
 import { GET_PRODUCTS } from '../graphql/queries/product'
 
 const Home: React.FC = () => {
-  const { data } = useQuery(GET_PRODUCTS, {
+  const { data: productsQuery } = useQuery(GET_PRODUCTS, {
     fetchPolicy: 'network-only'
   })
+  const products = productsQuery?.getProducts || []
 
   // const products = data?.getProducts || []
   // console.log(products)
@@ -24,7 +25,7 @@ const Home: React.FC = () => {
           color="#2D93E8"
           textTransform="uppercase"
         >
-          Más buscados
+          Categorías
         </Heading>
       </Box>
 
@@ -35,60 +36,45 @@ const Home: React.FC = () => {
           overflowX="scroll"
           width="max-content"
         >
-          <Box
+          <Flex
             as="article"
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
             width="150px"
             backgroundColor="#FFF"
             padding="10px"
             rounded="md"
             marginRight="20px"
           >
-            <Text color="#818181">Tomate</Text>
-            <Text
-              textAlign="right"
-              fontWeight="bold"
-              marginTop="10px"
-              color="#4d4d4d"
-            >
-              Gs. 11.000 / KG
-            </Text>
-          </Box>
-          <Box
+            <Text color="#818181">Alimentos</Text>
+          </Flex>
+          <Flex
             as="article"
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
             width="150px"
             backgroundColor="#FFF"
             padding="10px"
             rounded="md"
             marginRight="20px"
           >
-            <Text color="#818181">Tomate</Text>
-            <Text
-              textAlign="right"
-              fontWeight="bold"
-              marginTop="10px"
-              color="#4d4d4d"
-            >
-              Gs. 11.000 / KG
-            </Text>
-          </Box>
-          <Box
+            <Text color="#818181">Bebidas</Text>
+          </Flex>
+          <Flex
             as="article"
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
             width="150px"
             backgroundColor="#FFF"
             padding="10px"
             rounded="md"
             marginRight="20px"
           >
-            <Text color="#818181">Tomate</Text>
-            <Text
-              textAlign="right"
-              fontWeight="bold"
-              marginTop="10px"
-              color="#4d4d4d"
-            >
-              Gs. 11.000 / KG
-            </Text>
-          </Box>
+            <Text color="#818181">Bazar</Text>
+          </Flex>
         </Flex>
       </Box>
 
@@ -99,17 +85,17 @@ const Home: React.FC = () => {
           fontWeight="bold"
           textTransform="uppercase"
         >
-          Precios
+          Productos
         </Heading>
 
-        <Box as="main" marginTop="10px">
-          {/* {products.map(product => (
+        <Box as="main" marginTop="15px">
+          {products.map(product => (
             <NextLink href={`/product/${product.id}`} key={product.id}>
-              <Link>
+              <Link _hover={{ textDecoration: 'none' }}>
                 <Product key={product.id} product={product} />
               </Link>
             </NextLink>
-          ))} */}
+          ))}
         </Box>
       </Box>
 

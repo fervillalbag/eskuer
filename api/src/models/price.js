@@ -1,4 +1,5 @@
 const { model, Schema } = require("mongoose");
+const dayjs = require("dayjs");
 
 const PriceSchema = new Schema({
   idProduct: {
@@ -23,7 +24,8 @@ const PriceSchema = new Schema({
   },
   createdAt: {
     type: Date,
-    default: new Date(),
+    required: [true, "Date is required"],
+    trim: true,
   },
 });
 

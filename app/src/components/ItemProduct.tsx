@@ -1,72 +1,81 @@
-import React, { useState } from 'react'
-import { Box, Grid } from '@chakra-ui/react'
+import React from 'react'
+import { Box, Grid, Image } from '@chakra-ui/react'
+import { useQuery } from '@apollo/client'
+import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
+import 'dayjs/locale/es'
 
-import { Price } from '../interfaces/Price'
+// import { Price } from '../interfaces/Price'
+import { GET_PRICES } from '../graphql/queries/price'
 
 interface ItemProductIprops {
-  price: [Price]
+  supermarket: any
+  idProduct: any
 }
 
-const ItemProduct: React.FC<ItemProductIprops> = ({ price = [] }) => {
-  const [priceArray, setPriceArray] = useState(price || [])
+dayjs.extend(relativeTime)
+dayjs.locale('es')
 
-  console.log(price)
-
-  price.forEach(currentPrice => {
-    const isExist = priceArray.find(
-      item => item.idSuper === currentPrice.idSuper
-    )
-
-    if (isExist) {
-      // setPriceArray([...priceArray, ])
+const ItemProduct: React.FC<ItemProductIprops> = ({
+  supermarket,
+  idProduct
+}) => {
+  const { data: pricesQuery } = useQuery(GET_PRICES, {
+    fetchPolicy: 'network-only',
+    variables: {
+      idSuper: supermarket.id,
+      idProduct: idProduct
     }
-
-    console.log(isExist)
   })
 
+  const price = pricesQuery?.getPrices || []
+  const recentProduct = price[0]
+
+  if (price.length === 0) return null
+
   return (
-    <>
-      <Grid
-        // key={price.id}
-        gridTemplateColumns="1fr 2fr 1fr 100px"
-        borderBottom="1px solid #F0F0F0"
-        padding="10px"
-        alignItems="center"
-      >
-        <Box
-          color="#333"
-          fontSize="14px"
-          textTransform="uppercase"
-          textAlign="center"
-        >
-          {/* {price.idSuper} */}
-        </Box>
-        <Box
-          color="#333"
-          fontSize="12px"
-          textTransform="uppercase"
-          textAlign="center"
-        >
-          Hace 1d
-        </Box>
-        <Box
-          color="#333"
-          fontSize="14px"
-          textTransform="uppercase"
-          textAlign="center"
-        >
-          {/* {price.type} */}
-        </Box>
-        <Box
-          color="#333"
-          fontSize="14px"
-          textTransform="uppercase"
-          textAlign="right"
-        >
-          {/* Gs.{price.value} */}
-        </Box>
+    <Grid
+      gridTemplateColumns="60px 80px 1fr 90px"
+      borderBottom="1px solid #F0F0F0"
+      padding="10px"
+      alignItems="center"
+      gap="0 10px"
+    >
+      <Grid placeItems="center">
+        <Image
+          src={supermarket?.image}
+          // width="50px"
+          height="40px"
+          objectFit="contain"
+          alt={supermarket?.name}
+        />
       </Grid>
-    </>
+      <Box
+        fontSize="12px"
+        textTransform="uppercase"
+        textAlign="center"
+        fontWeight="regular"
+        color="#333"
+      >
+        {dayjs(Number(recentProduct.createdAt)).fromNow()}
+      </Box>
+      <Box
+        color="#333"
+        fontSize="14px"
+        textTransform="uppercase"
+        textAlign="center"
+      >
+        {recentProduct?.type}
+      </Box>
+      <Box
+        color="#333"
+        fontSize="14px"
+        textTransform="uppercase"
+        textAlign="right"
+      >
+        Gs. {recentProduct?.value}
+      </Box>
+    </Grid>
   )
 }
 

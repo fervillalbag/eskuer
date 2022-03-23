@@ -2,10 +2,31 @@ const Price = require("../models/price");
 
 const getPrices = async (idProduct, idSuper) => {
   try {
+    if (idProduct && idSuper) {
+      const prices = await Price.find({}).where({
+        idProduct,
+        idSuper,
+      });
+      if (!prices) throw new Error("Prices not found");
+
+      const pricesOrder = prices.sort(
+        (a, b) =>
+          new Date(b.createdAt).getTime() -
+          new Date(a.createdAt).getTime()
+      );
+      return pricesOrder;
+    }
+
     if (idProduct) {
       const prices = await Price.find({}).where({ idProduct });
       if (!prices) throw new Error("Prices not found");
-      return prices;
+
+      const pricesOrder = prices.sort(
+        (a, b) =>
+          new Date(b.createdAt).getTime() -
+          new Date(a.createdAt).getTime()
+      );
+      return pricesOrder;
     }
 
     if (idSuper) {

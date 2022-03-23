@@ -2,16 +2,25 @@ import React from 'react'
 import { Box, Button, Flex, Grid, Image, Text } from '@chakra-ui/react'
 import { BsFillEyeFill } from 'react-icons/bs'
 import { ProductType } from '../interfaces/Product'
+import { useQuery } from '@apollo/client'
+import { GET_PRICES } from '../graphql/queries/price'
 
 interface ProductIprops {
   product: ProductType
 }
 
 const Product: React.FC<ProductIprops> = ({ product }) => {
-  const prices = product.price
+  const { data: priceQuery } = useQuery(GET_PRICES, {
+    variables: {
+      idProduct: product?.id
+    }
+  })
+  const price = priceQuery?.getPrices || []
 
-  const pricesValue = prices.map(item => item.value)
-  const pricesOrder = pricesValue.sort((a, b) => a - b)
+  const pricesValue = price.map(item => item.value)
+  const lowPrice = pricesValue.sort((a, b) => a - b)
+
+  if (lowPrice.length === 0) return null
 
   return (
     <Grid
@@ -60,7 +69,7 @@ const Product: React.FC<ProductIprops> = ({ product }) => {
           textAlign="right"
           fontSize="14px"
         >
-          <Text>Gs. {pricesOrder[0]}</Text>
+          <Text>Gs. {lowPrice[0]}</Text>
         </Box>
         <Box marginLeft="10px">
           <Button
