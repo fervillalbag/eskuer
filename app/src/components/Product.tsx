@@ -1,8 +1,10 @@
 import React from 'react'
-import { Box, Button, Flex, Grid, Image, Text } from '@chakra-ui/react'
+import { Box, Button, Flex, Grid, Text } from '@chakra-ui/react'
 import { BsFillEyeFill } from 'react-icons/bs'
-import { ProductType } from '../interfaces/Product'
 import { useQuery } from '@apollo/client'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
+
+import { ProductType } from '../interfaces/Product'
 import { GET_PRICES } from '../graphql/queries/price'
 
 interface ProductIprops {
@@ -34,13 +36,11 @@ const Product: React.FC<ProductIprops> = ({ product }) => {
       marginBottom="10px"
     >
       <Flex alignItems="center">
-        <Box width="35px" height="35px">
-          <Image
+        <Box width="35px" height="35px" className="image-item">
+          <LazyLoadImage
             src={product?.image}
-            alt=""
-            width="100%"
-            height="100%"
-            objectFit="cover"
+            alt={product?.name}
+            effect="blur"
           />
         </Box>
         <Box marginLeft="10px">

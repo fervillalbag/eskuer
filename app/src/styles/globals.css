@@ -6,3 +6,23 @@
   -ms-overflow-style: none !important;
   scrollbar-width: none !important;
 }
+
+.image-item img {
+  object-fit: cover !important;
+  width: 35px !important;
+  height: 35px !important;
+}
+
+.image-cover img {
+  object-fit: cover !important;
+  width: 120px !important;
+  height: 120px !important;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.image-supermarket img {
+  object-fit: contain !important;
+  /* width: 120px !important; */
+  height: 40px !important;
+}

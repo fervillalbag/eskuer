@@ -1,12 +1,15 @@
 import React from 'react'
 import { useRouter } from 'next/router'
-import { Box, Button, Flex, Grid, Heading, Image } from '@chakra-ui/react'
+import { Box, Button, Flex, Grid, Heading } from '@chakra-ui/react'
 import { FaAngleLeft } from 'react-icons/fa'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
 import { useQuery } from '@apollo/client'
+
 // import { GET_PRODUCT } from '../../graphql/queries/product'
 import ItemProduct from '../../components/ItemProduct'
 import { GET_SUPERMARKETS } from '../../graphql/queries/supermarket'
 import { GET_PRODUCT } from '../../graphql/queries/product'
+import Loader from '../../components/Loader'
 
 const Product: React.FC = () => {
   const router = useRouter()
@@ -14,12 +17,15 @@ const Product: React.FC = () => {
   const { data: supermarketsQuery } = useQuery(GET_SUPERMARKETS, {
     fetchPolicy: 'network-only'
   })
-  const { data: productQuery } = useQuery(GET_PRODUCT, {
-    fetchPolicy: 'network-only',
-    variables: {
-      id: router?.query?.id
+  const { data: productQuery, loading: loadingProduct } = useQuery(
+    GET_PRODUCT,
+    {
+      fetchPolicy: 'network-only',
+      variables: {
+        id: router?.query?.id
+      }
     }
-  })
+  )
 
   const supermarkets = supermarketsQuery?.getSupermarkets || []
   const product = productQuery?.getProduct
@@ -31,8 +37,8 @@ const Product: React.FC = () => {
           minWidth="initial"
           height="auto"
           padding="15px"
-          color="#333"
-          backgroundColor="#f0f0f0"
+          color="#FFF"
+          backgroundColor="hsl(207, 80%, 75%)"
           fontSize="1.2rem"
           _focus={{ shadow: 0 }}
           onClick={() => router.back()}
@@ -41,7 +47,7 @@ const Product: React.FC = () => {
         </Button>
         <Heading
           fontSize="1.2rem"
-          color="#333"
+          color="hsl(0, 0%, 45%)"
           marginLeft="10px"
           fontWeight="bold"
           textTransform="uppercase"
@@ -50,15 +56,21 @@ const Product: React.FC = () => {
         </Heading>
       </Flex>
 
-      <Box>
-        <Image
-          src={product?.image}
-          alt={product?.name}
-          width="120px"
-          height="120px"
-          objectFit="cover"
-          borderRadius="4px"
-        />
+      <Box className="image-cover">
+        {loadingProduct ? (
+          <Box
+            width="120px"
+            height="120px"
+            backgroundColor="#e6e6e6"
+            rounded="4px"
+          ></Box>
+        ) : (
+          <LazyLoadImage
+            src={product?.image}
+            alt={product?.name}
+            effect="blur"
+          />
+        )}
       </Box>
 
       <Grid
@@ -104,13 +116,19 @@ const Product: React.FC = () => {
       </Grid>
 
       <Box>
-        {supermarkets.map(supermarket => (
-          <ItemProduct
-            key={supermarket.id}
-            supermarket={supermarket}
-            idProduct={router?.query?.id}
-          />
-        ))}
+        {loadingProduct ? (
+          <Box marginTop="10px">
+            <Loader />
+          </Box>
+        ) : (
+          supermarkets.map(supermarket => (
+            <ItemProduct
+              key={supermarket.id}
+              supermarket={supermarket}
+              idProduct={router?.query?.id}
+            />
+          ))
+        )}
       </Box>
     </Box>
   )

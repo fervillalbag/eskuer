@@ -1,13 +1,14 @@
 import React from 'react'
-import { Box, Grid, Image } from '@chakra-ui/react'
+import { Box, Grid, Text } from '@chakra-ui/react'
 import { useQuery } from '@apollo/client'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
-import 'dayjs/locale/es'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
 
 // import { Price } from '../interfaces/Price'
 import { GET_PRICES } from '../graphql/queries/price'
 
+import 'dayjs/locale/es'
 interface ItemProductIprops {
   supermarket: any
   idProduct: any
@@ -41,13 +42,11 @@ const ItemProduct: React.FC<ItemProductIprops> = ({
       alignItems="center"
       gap="0 10px"
     >
-      <Grid placeItems="center">
-        <Image
+      <Grid placeItems="center" className="image-supermarket">
+        <LazyLoadImage
           src={supermarket?.image}
-          // width="50px"
-          height="40px"
-          objectFit="contain"
           alt={supermarket?.name}
+          effect="blur"
         />
       </Grid>
       <Box
@@ -74,6 +73,11 @@ const ItemProduct: React.FC<ItemProductIprops> = ({
         textAlign="right"
       >
         Gs. {recentProduct?.value}
+      </Box>
+      <Box marginTop="5px" gridColumn="1/5">
+        <Text fontSize="12px">
+          Sucursal: Blair Waldorf esquina Emily Fields
+        </Text>
       </Box>
     </Grid>
   )

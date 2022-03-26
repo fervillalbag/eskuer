@@ -6,15 +6,16 @@ import { useQuery } from '@apollo/client'
 import Product from '../components/Product'
 import Navbar from '../components/Navbar'
 import { GET_PRODUCTS } from '../graphql/queries/product'
+import Loader from '../components/Loader'
 
 const Home: React.FC = () => {
-  const { data: productsQuery } = useQuery(GET_PRODUCTS, {
-    fetchPolicy: 'network-only'
-  })
+  const { data: productsQuery, loading: loadingProducts } = useQuery(
+    GET_PRODUCTS,
+    {
+      fetchPolicy: 'network-only'
+    }
+  )
   const products = productsQuery?.getProducts || []
-
-  // const products = data?.getProducts || []
-  // console.log(products)
 
   return (
     <Box backgroundColor="#F5F5F5" minHeight="100vh">
@@ -89,13 +90,17 @@ const Home: React.FC = () => {
         </Heading>
 
         <Box as="main" marginTop="15px">
-          {products.map(product => (
-            <NextLink href={`/product/${product.id}`} key={product.id}>
-              <Link _hover={{ textDecoration: 'none' }}>
-                <Product key={product.id} product={product} />
-              </Link>
-            </NextLink>
-          ))}
+          {loadingProducts ? (
+            <Loader />
+          ) : (
+            products.map(product => (
+              <NextLink href={`/product/${product.id}`} key={product.id}>
+                <Link _hover={{ textDecoration: 'none' }}>
+                  <Product key={product.id} product={product} />
+                </Link>
+              </NextLink>
+            ))
+          )}
         </Box>
       </Box>
 

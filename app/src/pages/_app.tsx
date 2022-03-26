@@ -8,6 +8,8 @@ import theme from '../styles/theme'
 import client from '../config/apollo'
 import { Toaster } from 'react-hot-toast'
 
+import 'react-lazy-load-image-component/src/effects/blur.css'
+
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
   return (
     <ApolloProvider client={client}>
