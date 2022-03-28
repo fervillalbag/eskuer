@@ -12,6 +12,11 @@ const PriceSchema = new Schema({
     required: [true, "Supermarket is required"],
     trim: true,
   },
+  idSubsidiary: {
+    type: String,
+    required: [true, "Subsidiary is required"],
+    trim: true,
+  },
   value: {
     type: Number,
     required: [true, "Price is required"],

@@ -1,6 +1,7 @@
 const productController = require("../controllers/product");
 const supermarketController = require("../controllers/supermarket");
 const priceController = require("../controllers/price");
+const subsidiaryController = require("../controllers/subsidiary");
 
 const resolvers = {
   Query: {
@@ -16,6 +17,12 @@ const resolvers = {
     // Price
     getPrices: (_, { idProduct, idSuper }) =>
       priceController.getPrices(idProduct, idSuper),
+
+    // Subsidiary
+    getSubsidiaries: (_, { idSuper }) =>
+      subsidiaryController.getSubsidiaries(idSuper),
+    getSubsidiary: (_, { id }) =>
+      subsidiaryController.getSubsidiary(id),
   },
 
   Mutation: {
@@ -38,6 +45,14 @@ const resolvers = {
     createPrice: (_, { input }) => priceController.createPrice(input),
     updatePrice: (_, { input }) => priceController.updatePrice(input),
     deletePrice: (_, { id }) => priceController.deletePrice(id),
+
+    // Subsidiary
+    createSubsidiary: (_, { input }) =>
+      subsidiaryController.createSubsidiary(input),
+    updateSubsidiary: (_, { input }) =>
+      subsidiaryController.updateSubsidiary(input),
+    deleteSubsidiary: (_, { id }) =>
+      subsidiaryController.deleteSubsidiary(id),
   },
 };
 
