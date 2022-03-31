@@ -1,19 +1,23 @@
 import React from 'react'
 import { Box, Flex, Link } from '@chakra-ui/react'
 import NextLink from 'next/link'
-import { HiOutlineHome, HiSearch } from 'react-icons/hi'
-import { BiLineChart } from 'react-icons/bi'
+import { HiSearch } from 'react-icons/hi'
+import { TiHome } from 'react-icons/ti'
+import { BsQuestionCircleFill } from 'react-icons/bs'
 import { IoMdSettings } from 'react-icons/io'
+import { useRouter } from 'next/router'
 
 const Navbar: React.FC = () => {
+  const { pathname } = useRouter()
+
   return (
     <>
       <Box
         position="fixed"
         bottom="0"
         width="100%"
-        height="80px"
-        background="linear-gradient(180deg, rgba(255,255,255,0.0) 0%, rgba(255,255,255,0.9) 75%)"
+        height="110px"
+        background="linear-gradient(180deg, rgba(255,255,255,0.0) 0%, rgba(255,255,255,0.95) 70%)"
       ></Box>
 
       <Box
@@ -26,6 +30,7 @@ const Navbar: React.FC = () => {
         position="fixed"
         bottom="20px"
         rounded="full"
+        zIndex="50"
         filter="drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.1))"
       >
         <Flex
@@ -35,22 +40,34 @@ const Navbar: React.FC = () => {
           justifyContent="space-between"
         >
           <NextLink href="/">
-            <Link fontSize="28px" color="#003049">
-              <HiOutlineHome />
+            <Link
+              fontSize="28px"
+              color={pathname === '/' ? '"#003049"' : '#d9d9d9'}
+            >
+              <TiHome />
             </Link>
           </NextLink>
-          <NextLink href="/">
-            <Link fontSize="28px" color="#999">
+          <NextLink href="/search">
+            <Link
+              fontSize="28px"
+              color={pathname === '/search' ? '"#003049"' : '#d9d9d9'}
+            >
               <HiSearch />
             </Link>
           </NextLink>
           <NextLink href="/">
-            <Link fontSize="28px" color="#999">
-              <BiLineChart />
+            <Link
+              fontSize="28px"
+              color={pathname === '/questions' ? '"#003049"' : '#d9d9d9'}
+            >
+              <BsQuestionCircleFill />
             </Link>
           </NextLink>
           <NextLink href="/">
-            <Link fontSize="28px" color="#999">
+            <Link
+              fontSize="28px"
+              color={pathname === '/settings' ? '"#003049"' : '#d9d9d9'}
+            >
               <IoMdSettings />
             </Link>
           </NextLink>

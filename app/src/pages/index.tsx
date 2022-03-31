@@ -51,9 +51,8 @@ const Home: React.FC = () => {
               display="flex"
               justifyContent="center"
               alignItems="center"
-              width="150px"
-              backgroundColor="#FDF0D5"
-              padding="10px"
+              backgroundColor="#D5DFE5"
+              padding="10px 20px"
               rounded="2px"
               marginRight="15px"
             >
@@ -66,9 +65,8 @@ const Home: React.FC = () => {
               display="flex"
               justifyContent="center"
               alignItems="center"
-              width="150px"
-              backgroundColor="#FDF0D5"
-              padding="10px"
+              backgroundColor="#D5DFE5"
+              padding="10px 20px"
               rounded="2px"
               marginRight="15px"
             >
@@ -81,9 +79,8 @@ const Home: React.FC = () => {
               display="flex"
               justifyContent="center"
               alignItems="center"
-              width="150px"
-              backgroundColor="#FDF0D5"
-              padding="10px"
+              backgroundColor="#D5DFE5"
+              padding="10px 20px"
               rounded="2px"
               marginRight="15px"
             >
@@ -91,11 +88,25 @@ const Home: React.FC = () => {
                 Bazar
               </Text>
             </Flex>
+            <Flex
+              as="article"
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              backgroundColor="#D5DFE5"
+              padding="10px 20px"
+              rounded="2px"
+              marginRight="15px"
+            >
+              <Text color="#003049" fontWeight="semibold">
+                Panadería
+              </Text>
+            </Flex>
           </Flex>
         </Box>
       </Box>
 
-      <Box padding="20px 20px 90px 20px" marginTop="5px">
+      <Box padding="20px 20px 100px 20px" marginTop="5px">
         <Heading
           fontWeight="bold"
           textTransform="uppercase"
@@ -106,26 +117,19 @@ const Home: React.FC = () => {
           Productos
         </Heading>
 
-        <Grid gridTemplateColumns="repeat(2, 1fr)" gap="2rem">
-          <Box width="100%" height="100px" backgroundColor="#333"></Box>
-          <Box width="100%" height="100px" backgroundColor="#333"></Box>
-          <Box width="100%" height="100px" backgroundColor="#333"></Box>
-          <Box width="100%" height="100px" backgroundColor="#333"></Box>
-          <Box width="100%" height="100px" backgroundColor="#333"></Box>
-          <Box width="100%" height="100px" backgroundColor="#333"></Box>
-        </Grid>
-
         <Box as="main" marginTop="15px">
           {loadingProducts ? (
             <Loader />
           ) : (
-            products.map(product => (
-              <NextLink href={`/product/${product.id}`} key={product.id}>
-                <Link _hover={{ textDecoration: 'none' }}>
-                  <Product key={product.id} product={product} />
-                </Link>
-              </NextLink>
-            ))
+            <Grid gridTemplateColumns="repeat(2, 1fr)" gap="10px">
+              {products.map(product => (
+                <NextLink href={`/product/${product.id}`} key={product.id}>
+                  <Link _hover={{ textDecoration: 'none' }}>
+                    <Product key={product.id} product={product} />
+                  </Link>
+                </NextLink>
+              ))}
+            </Grid>
           )}
         </Box>
       </Box>
