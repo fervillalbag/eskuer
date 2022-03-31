@@ -26,7 +26,7 @@ const Home: React.FC = () => {
         <Image
           src="/ad.jpeg"
           width="100%"
-          height="140px"
+          height="170px"
           objectFit="cover"
           alt=""
           borderRadius="2px"
@@ -55,6 +55,7 @@ const Home: React.FC = () => {
               padding="10px 20px"
               rounded="2px"
               marginRight="15px"
+              textTransform="lowercase"
             >
               <Text color="#003049" fontWeight="semibold">
                 Alimentos
@@ -69,6 +70,7 @@ const Home: React.FC = () => {
               padding="10px 20px"
               rounded="2px"
               marginRight="15px"
+              textTransform="lowercase"
             >
               <Text color="#003049" fontWeight="semibold">
                 Bebidas
@@ -83,6 +85,7 @@ const Home: React.FC = () => {
               padding="10px 20px"
               rounded="2px"
               marginRight="15px"
+              textTransform="lowercase"
             >
               <Text color="#003049" fontWeight="semibold">
                 Bazar
@@ -97,6 +100,7 @@ const Home: React.FC = () => {
               padding="10px 20px"
               rounded="2px"
               marginRight="15px"
+              textTransform="lowercase"
             >
               <Text color="#003049" fontWeight="semibold">
                 Panadería
