@@ -1,5 +1,5 @@
 import React from 'react'
-// import { useRouter } from 'next/router'
+import { useRouter } from 'next/router'
 import { Box } from '@chakra-ui/react'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 // import { useQuery } from '@apollo/client'
@@ -8,9 +8,21 @@ import { LazyLoadImage } from 'react-lazy-load-image-component'
 import ItemProduct from '../../components/ItemProduct'
 // import Loader from '../../components/Loader'
 import Back from '../../components/Back'
+import { useQuery } from '@apollo/client'
+import { GET_SUPERMARKETS } from '../../graphql/queries/supermarket'
+import { GET_PRODUCT } from '../../graphql/queries/product'
 
 const Product: React.FC = () => {
-  // const router = useRouter()
+  const router = useRouter()
+  const { data: dataSupermarkets } = useQuery(GET_SUPERMARKETS)
+  const { data: dataProduct } = useQuery(GET_PRODUCT, {
+    variables: {
+      id: router?.query?.id
+    }
+  })
+
+  const supermarkets = dataSupermarkets?.getSupermarkets || []
+  const product = dataProduct?.getProduct || {}
 
   return (
     <Box padding="20px">
@@ -42,8 +54,14 @@ const Product: React.FC = () => {
       </Box> */}
 
       <Box marginTop="15px">
-        <ItemProduct />
-        <ItemProduct />
+        {supermarkets.length > 0 &&
+          supermarkets.map(supermarket => (
+            <ItemProduct
+              key={supermarket.id}
+              supermarket={supermarket}
+              product={product}
+            />
+          ))}
       </Box>
     </Box>
   )

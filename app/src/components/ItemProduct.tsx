@@ -1,20 +1,46 @@
 import React from 'react'
 import { Box, Grid, Flex, Text } from '@chakra-ui/react'
-// import { useQuery } from '@apollo/client'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
+import { useQuery } from '@apollo/client'
 
 // import { Price } from '../interfaces/Price'
-// import { GET_PRICES } from '../graphql/queries/price'
+
+import { Supermarket } from '../interfaces/Supermarket'
+import { ProductType } from '../interfaces/Product'
+import { GET_PRICES } from '../graphql/queries/price'
+import { GET_SUBSIDIARY } from '../graphql/queries/subsidiaries'
 
 import 'dayjs/locale/es'
-// interface ItemProductIprops {}
+
+interface ItemProductIprops {
+  supermarket: Supermarket
+  product: ProductType
+}
 
 dayjs.extend(relativeTime)
 dayjs.locale('es')
 
-const ItemProduct: React.FC = () => {
+const ItemProduct: React.FC<ItemProductIprops> = ({ supermarket, product }) => {
+  const { data: dataPrices } = useQuery(GET_PRICES, {
+    variables: {
+      idSuper: supermarket.id,
+      idProduct: product.id
+    }
+  })
+
+  const prices = dataPrices?.getPrices || []
+  const recentProduct = prices[0]
+
+  const { data: dataSubsidiary } = useQuery(GET_SUBSIDIARY, {
+    variables: {
+      id: recentProduct?.idSubsidiary
+    }
+  })
+
+  const subsidiary = dataSubsidiary?.getSubsidiary || {}
+
   return (
     <Box borderBottom="1px solid #F0F0F0" marginTop="15px" paddingBottom="15px">
       <Flex
@@ -38,14 +64,14 @@ const ItemProduct: React.FC = () => {
               textTransform="uppercase"
               fontSize="12px"
             >
-              hace 3 diás
+              {dayjs(Number(recentProduct?.createdAt)).fromNow()}
             </Text>
             <Text
               // fontWeight="semibold"
               textTransform="uppercase"
               fontSize="12px"
             >
-              San Lorenzo
+              {subsidiary?.city}
             </Text>
           </Box>
         </Flex>
@@ -57,14 +83,14 @@ const ItemProduct: React.FC = () => {
             textAlign="right"
             fontWeight="bold"
           >
-            Gs. 9.200 / KG
+            {recentProduct?.value} / KG
           </Text>
         </Box>
       </Flex>
 
       <Box marginTop="5px" gridColumn="1/5">
         <Text fontSize="12px" color="#003049" textTransform="uppercase">
-          Manuel Ortíz Guerrero c/ Campo Jordán
+          {subsidiary?.address}
         </Text>
       </Box>
     </Box>

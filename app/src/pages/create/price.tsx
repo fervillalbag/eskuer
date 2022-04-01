@@ -1,15 +1,16 @@
 import React, { useState } from 'react'
 import toast from 'react-hot-toast'
-import { Box, Button, Flex, Heading, Input, Select } from '@chakra-ui/react'
-import { FaAngleLeft } from 'react-icons/fa'
+import dayjs from 'dayjs'
+import { Box, Button, Input, Select } from '@chakra-ui/react'
 import { useMutation, useQuery } from '@apollo/client'
 import { useRouter } from 'next/router'
-import dayjs from 'dayjs'
 
 import Navbar from '../../components/Navbar'
 import { GET_SUPERMARKETS } from '../../graphql/queries/supermarket'
 import { GET_PRODUCTS } from '../../graphql/queries/product'
 import { CREATE_PRICE } from '../../graphql/mutations/price'
+import Back from '../../components/Back'
+import { GET_SUBSIDIARIES } from '../../graphql/queries/subsidiaries'
 // import { UPDATE_PRODUCT } from '../../graphql/mutations/product'
 
 const CreatePrice: React.FC = () => {
@@ -19,21 +20,31 @@ const CreatePrice: React.FC = () => {
   const [productId, setProductId] = useState<string | null>(null)
   const [price, setPrice] = useState<number>(0)
   const [typeProduct, setTypeProduct] = useState<string | null>('')
+  const [subsidiaryId, setSubsidiaryId] = useState<string | null>(null)
 
   const [createPrice] = useMutation(CREATE_PRICE)
 
   const { data } = useQuery(GET_SUPERMARKETS, {
     fetchPolicy: 'network-only'
   })
+
   const { data: dataProducts } = useQuery(GET_PRODUCTS, {
     fetchPolicy: 'network-only'
   })
 
+  const { data: dataSubsidiaries } = useQuery(GET_SUBSIDIARIES, {
+    fetchPolicy: 'network-only',
+    variables: {
+      idSuper: supermarketId
+    }
+  })
+
   const products = dataProducts?.getProducts || []
   const supermarkets = data?.getSupermarkets || []
+  const subsidiaries = dataSubsidiaries?.getSubsidiaries || []
 
   const handleAddPrice = async () => {
-    if (!price || !typeProduct || !supermarketId || !productId)
+    if (!price || !typeProduct || !supermarketId || !productId || !subsidiaryId)
       return toast.error('Todos los campos son obligatorios')
 
     const response = await createPrice({
@@ -41,6 +52,7 @@ const CreatePrice: React.FC = () => {
         input: {
           idProduct: productId,
           idSuper: supermarketId,
+          idSubsidiary: subsidiaryId,
           value: price,
           type: typeProduct,
           createdAt: dayjs().format()
@@ -56,89 +68,90 @@ const CreatePrice: React.FC = () => {
   return (
     <Box>
       <Box padding="20px">
-        <Flex marginBottom="20px" alignItems="center">
+        <Back title="Actualizar precio" />
+
+        <Box marginTop="20px">
+          <Select
+            borderRadius="2px"
+            marginBottom="20px"
+            onChange={e => setProductId(e.target.value)}
+          >
+            <option value="">-- Seleccione producto --</option>
+            {products.map(item => (
+              <option key={item.id} value={item.id}>
+                {item.name}
+              </option>
+            ))}
+          </Select>
+
+          <Select
+            marginBottom="20px"
+            borderRadius="2px"
+            onChange={e => setSupermarketId(e.target.value)}
+          >
+            <option value="">-- Seleccione supermercado --</option>
+            {supermarkets.map(item => (
+              <option key={item.id} value={item.id}>
+                {item.name}
+              </option>
+            ))}
+          </Select>
+
+          <Input
+            type="number"
+            _focus={{ outline: 0 }}
+            borderRadius="4px"
+            paddingLeft="12px"
+            backgroundColor="#F9F9F9"
+            border="0"
+            height="45px"
+            placeholder="precio"
+            marginBottom="15px"
+            onChange={e => setPrice(Number(e.target.value))}
+          />
+
+          <Select
+            borderRadius="2px"
+            marginBottom="20px"
+            onChange={e => setTypeProduct(e.target.value)}
+          >
+            <option value="">-- Seleccione tipo --</option>
+            <option value="kg">KG</option>
+            <option value="un">Unidad</option>
+          </Select>
+
+          <Select
+            borderRadius="2px"
+            marginBottom="20px"
+            onChange={e => setSubsidiaryId(e.target.value)}
+          >
+            <option value="">-- Seleccione sucursal --</option>
+            {subsidiaries.map(item => (
+              <option key={item.id} value={item.id}>
+                {item.address}
+              </option>
+            ))}
+          </Select>
+
           <Button
             minWidth="initial"
             height="auto"
-            padding="15px"
-            color="#333"
-            backgroundColor="#f0f0f0"
-            fontSize="1.2rem"
+            padding="15px 32px"
+            fontWeight="semibold"
+            fontSize="1rem"
+            borderRadius="4px"
+            backgroundColor="#003049"
+            color="#FFF"
             _focus={{ shadow: 0 }}
-          >
-            <FaAngleLeft />
-          </Button>
-          <Heading
-            fontSize="1.2rem"
-            color="#333"
-            marginLeft="10px"
-            fontWeight="bold"
+            _hover={{
+              backgroundColor: '#003049'
+            }}
+            width="100%"
+            onClick={handleAddPrice}
           >
             Añadir precio
-          </Heading>
-        </Flex>
-
-        <Select
-          marginBottom="20px"
-          onChange={e => setProductId(e.target.value)}
-        >
-          <option value="">-- Seleccione producto --</option>
-          {products.map(item => (
-            <option key={item.id} value={item.id}>
-              {item.name}
-            </option>
-          ))}
-        </Select>
-
-        <Select
-          marginBottom="20px"
-          onChange={e => setSupermarketId(e.target.value)}
-        >
-          <option value="">-- Seleccione supermercado --</option>
-          {supermarkets.map(item => (
-            <option key={item.id} value={item.id}>
-              {item.name}
-            </option>
-          ))}
-        </Select>
-
-        <Input
-          type="number"
-          _focus={{ outline: 0 }}
-          borderRadius="4px"
-          paddingLeft="12px"
-          height="45px"
-          placeholder="precio"
-          marginBottom="15px"
-          onChange={e => setPrice(Number(e.target.value))}
-        />
-
-        <Select
-          marginBottom="20px"
-          onChange={e => setTypeProduct(e.target.value)}
-        >
-          <option value="">-- Seleccione tipo --</option>
-          <option value="kg">KG</option>
-          <option value="un">Unidad</option>
-        </Select>
-
-        <Button
-          minWidth="initial"
-          height="auto"
-          padding="15px 32px"
-          fontWeight="medium"
-          fontSize="1rem"
-          backgroundColor="#2D93E8"
-          color="#FFF"
-          _focus={{ shadow: 0 }}
-          _hover={{
-            backgroundColor: '#47a1eb'
-          }}
-          width="100%"
-          onClick={handleAddPrice}
-        >
-          Añadir precio
-        </Button>
+          </Button>
+        </Box>
       </Box>
 
       <Navbar />

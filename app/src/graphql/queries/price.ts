@@ -7,6 +7,7 @@ export const GET_PRICES = gql`
       idProduct
       idSuper
       value
+      idSubsidiary
       createdAt
       type
     }
