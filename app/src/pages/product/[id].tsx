@@ -29,37 +29,26 @@ const Product: React.FC = () => {
       <Back title="Nombre producto" />
       <Box className="image-cover" marginTop="20px">
         <LazyLoadImage
-          src="/carrot.jpeg"
+          src={product?.image}
           alt="Imagen del producto"
           width="100%"
           effect="blur"
         />
       </Box>
-      {/* <Box>
-        {loadingProduct ? (
-          <Box marginTop="10px">
-            <Loader />
-          </Box>
-        ) : (
-          supermarkets.map(supermarket => (
-            <ItemProduct
-              key={supermarket.id}
-              supermarket={supermarket}
-              idProduct={router?.query?.id}
-            />
-          ))
-        )}
-      </Box> */}
 
       <Box marginTop="15px">
-        {supermarkets.length > 0 &&
+        {supermarkets.length < 0 ? (
+          <Box>No hay supermercados con este producto añadido</Box>
+        ) : (
+          supermarkets.length > 0 &&
           supermarkets.map(supermarket => (
             <ItemProduct
               key={supermarket.id}
               supermarket={supermarket}
               product={product}
             />
-          ))}
+          ))
+        )}
       </Box>
     </Box>
   )
