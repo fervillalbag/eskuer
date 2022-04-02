@@ -10,7 +10,6 @@ import { useQuery } from '@apollo/client'
 import { Supermarket } from '../interfaces/Supermarket'
 import { ProductType } from '../interfaces/Product'
 import { GET_PRICES } from '../graphql/queries/price'
-import { GET_SUBSIDIARY } from '../graphql/queries/subsidiaries'
 
 import 'dayjs/locale/es'
 
@@ -33,13 +32,7 @@ const ItemProduct: React.FC<ItemProductIprops> = ({ supermarket, product }) => {
   const prices = dataPrices?.getPrices || []
   const recentProduct = prices[0]
 
-  const { data: dataSubsidiary } = useQuery(GET_SUBSIDIARY, {
-    variables: {
-      id: recentProduct?.idSubsidiary
-    }
-  })
-
-  const subsidiary = dataSubsidiary?.getSubsidiary || {}
+  if (!recentProduct) return null
 
   return (
     <Box borderBottom="1px solid #F0F0F0" marginTop="15px" paddingBottom="15px">
@@ -52,7 +45,7 @@ const ItemProduct: React.FC<ItemProductIprops> = ({ supermarket, product }) => {
         <Flex>
           <Grid alignItems="center" className="image-supermarket" width="40px">
             <LazyLoadImage
-              src="https://www.gruporiquelme.com/storage/app/uploads/public/5b2/437/68a/5b243768a0ca4866054042.png"
+              src={supermarket?.image}
               alt="Logo del supermercado"
               effect="blur"
             />
@@ -71,7 +64,7 @@ const ItemProduct: React.FC<ItemProductIprops> = ({ supermarket, product }) => {
               textTransform="uppercase"
               fontSize="12px"
             >
-              {subsidiary?.city}
+              {supermarket?.city}
             </Text>
           </Box>
         </Flex>
@@ -90,7 +83,7 @@ const ItemProduct: React.FC<ItemProductIprops> = ({ supermarket, product }) => {
 
       <Box marginTop="5px" gridColumn="1/5">
         <Text fontSize="12px" color="#003049" textTransform="uppercase">
-          {subsidiary?.address}
+          {supermarket?.address}
         </Text>
       </Box>
     </Box>

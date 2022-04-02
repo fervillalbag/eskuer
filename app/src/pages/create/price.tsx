@@ -1,16 +1,18 @@
 import React, { useState } from 'react'
 import toast from 'react-hot-toast'
 import dayjs from 'dayjs'
-import { Box, Button, Input, Select } from '@chakra-ui/react'
+import { Box, Button, Input, Select, Text } from '@chakra-ui/react'
 import { useMutation, useQuery } from '@apollo/client'
 import { useRouter } from 'next/router'
 
-import Navbar from '../../components/Navbar'
-import { GET_SUPERMARKETS } from '../../graphql/queries/supermarket'
+import {
+  GET_SUPERMARKET,
+  GET_SUPERMARKETS
+} from '../../graphql/queries/supermarket'
 import { GET_PRODUCTS } from '../../graphql/queries/product'
 import { CREATE_PRICE } from '../../graphql/mutations/price'
 import Back from '../../components/Back'
-import { GET_SUBSIDIARIES } from '../../graphql/queries/subsidiaries'
+
 // import { UPDATE_PRODUCT } from '../../graphql/mutations/product'
 
 const CreatePrice: React.FC = () => {
@@ -19,8 +21,6 @@ const CreatePrice: React.FC = () => {
   const [supermarketId, setSupermarketId] = useState<string | null>(null)
   const [productId, setProductId] = useState<string | null>(null)
   const [price, setPrice] = useState<number>(0)
-  const [typeProduct, setTypeProduct] = useState<string | null>('')
-  const [subsidiaryId, setSubsidiaryId] = useState<string | null>(null)
 
   const [createPrice] = useMutation(CREATE_PRICE)
 
@@ -32,19 +32,19 @@ const CreatePrice: React.FC = () => {
     fetchPolicy: 'network-only'
   })
 
-  const { data: dataSubsidiaries } = useQuery(GET_SUBSIDIARIES, {
+  const { data: dataSupermarket } = useQuery(GET_SUPERMARKET, {
     fetchPolicy: 'network-only',
     variables: {
-      idSuper: supermarketId
+      id: supermarketId
     }
   })
 
   const products = dataProducts?.getProducts || []
   const supermarkets = data?.getSupermarkets || []
-  const subsidiaries = dataSubsidiaries?.getSubsidiaries || []
+  const supermarket = dataSupermarket?.getSupermarket || {}
 
   const handleAddPrice = async () => {
-    if (!price || !typeProduct || !supermarketId || !productId || !subsidiaryId)
+    if (!price || !supermarketId || !productId)
       return toast.error('Todos los campos son obligatorios')
 
     const response = await createPrice({
@@ -52,9 +52,7 @@ const CreatePrice: React.FC = () => {
         input: {
           idProduct: productId,
           idSuper: supermarketId,
-          idSubsidiary: subsidiaryId,
           value: price,
-          type: typeProduct,
           createdAt: dayjs().format()
         }
       }
@@ -92,10 +90,16 @@ const CreatePrice: React.FC = () => {
             <option value="">-- Seleccione supermercado --</option>
             {supermarkets.map(item => (
               <option key={item.id} value={item.id}>
-                {item.name}
+                {item.title}
               </option>
             ))}
           </Select>
+
+          <Box height="45px" backgroundColor="#F9F9F9" marginBottom="15px">
+            <Text lineHeight="45px" paddingLeft="10px" color="#999">
+              {supermarket?.address || 'Dirección vacía'}
+            </Text>
+          </Box>
 
           <Input
             type="number"
@@ -109,29 +113,6 @@ const CreatePrice: React.FC = () => {
             marginBottom="15px"
             onChange={e => setPrice(Number(e.target.value))}
           />
-
-          <Select
-            borderRadius="2px"
-            marginBottom="20px"
-            onChange={e => setTypeProduct(e.target.value)}
-          >
-            <option value="">-- Seleccione tipo --</option>
-            <option value="kg">KG</option>
-            <option value="un">Unidad</option>
-          </Select>
-
-          <Select
-            borderRadius="2px"
-            marginBottom="20px"
-            onChange={e => setSubsidiaryId(e.target.value)}
-          >
-            <option value="">-- Seleccione sucursal --</option>
-            {subsidiaries.map(item => (
-              <option key={item.id} value={item.id}>
-                {item.address}
-              </option>
-            ))}
-          </Select>
 
           <Button
             minWidth="initial"
@@ -153,8 +134,6 @@ const CreatePrice: React.FC = () => {
           </Button>
         </Box>
       </Box>
-
-      <Navbar />
     </Box>
   )
 }

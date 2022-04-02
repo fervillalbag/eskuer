@@ -27,7 +27,6 @@ const Product: React.FC = () => {
   return (
     <Box padding="20px">
       <Back title="Nombre producto" />
-
       <Box className="image-cover" marginTop="20px">
         <LazyLoadImage
           src="/carrot.jpeg"
@@ -36,7 +35,6 @@ const Product: React.FC = () => {
           effect="blur"
         />
       </Box>
-
       {/* <Box>
         {loadingProduct ? (
           <Box marginTop="10px">

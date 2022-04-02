@@ -8,6 +8,9 @@ export const GET_SUPERMARKETS = gql`
       slug
       image
       createdAt
+      city
+      address
+      title
     }
   }
 `
@@ -19,6 +22,9 @@ export const GET_SUPERMARKET = gql`
       name
       slug
       image
+      city
+      address
+      title
       createdAt
     }
   }

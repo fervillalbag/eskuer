@@ -12,7 +12,6 @@ const typeDefs = gql`
     idSuper: String
     idSubsidiary: String
     value: Float
-    type: String
     createdAt: String
   }
 
@@ -21,6 +20,7 @@ const typeDefs = gql`
     name: String
     category: String
     image: String
+    type: String
     createdAt: String
   }
 
@@ -29,22 +29,9 @@ const typeDefs = gql`
     name: String
     slug: String
     image: String
-    createdAt: String
-  }
-
-  type Subsidiary {
-    id: String
-    idSuper: String
     city: String
     address: String
-    createdAt: String
-  }
-
-  input SubsidiaryInput {
-    id: String
-    idSuper: String
-    city: String
-    address: String
+    title: String
     createdAt: String
   }
 
@@ -52,6 +39,7 @@ const typeDefs = gql`
     id: String
     name: String
     category: String
+    type: String
     image: String
   }
 
@@ -60,15 +48,16 @@ const typeDefs = gql`
     name: String
     slug: String
     image: String
+    city: String
+    address: String
+    title: String
   }
 
   input PriceInput {
     id: String
     idProduct: String
     idSuper: String
-    idSubsidiary: String
     value: Float
-    type: String
     createdAt: String
   }
 
@@ -83,10 +72,6 @@ const typeDefs = gql`
 
     # Price
     getPrices(idProduct: String, idSuper: String): [Price]
-
-    # Subsidiary
-    getSubsidiaries(idSuper: String): [Subsidiary]
-    getSubsidiary(id: String): Subsidiary
   }
 
   type Mutation {
@@ -104,11 +89,6 @@ const typeDefs = gql`
     createPrice(input: PriceInput!): MutationResponse
     updatePrice(input: PriceInput!): MutationResponse
     deletePrice(id: String!): MutationResponse
-
-    # Subsidiary
-    createSubsidiary(input: SubsidiaryInput!): MutationResponse
-    updateSubsidiary(input: SubsidiaryInput!): MutationResponse
-    deleteSubsidiary(id: String!): MutationResponse
   }
 `;
 

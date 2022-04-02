@@ -16,6 +16,11 @@ const ProductSchema = new Schema({
     required: [true, "Image is required"],
     trim: true,
   },
+  type: {
+    type: String,
+    required: [true, "Type is required"],
+    trim: true,
+  },
   createdAt: {
     type: Date,
     default: new Date(),

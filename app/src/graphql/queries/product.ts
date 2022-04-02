@@ -7,6 +7,7 @@ export const GET_PRODUCTS = gql`
       name
       category
       createdAt
+      type
       image
     }
   }
@@ -19,6 +20,7 @@ export const GET_PRODUCT = gql`
       name
       category
       image
+      type
       createdAt
     }
   }

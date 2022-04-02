@@ -13,6 +13,18 @@ const SupermarketSchema = new Schema({
     type: String,
     required: [true, "Image is required"],
   },
+  city: {
+    type: String,
+    required: [true, "City is required"],
+  },
+  address: {
+    type: String,
+    required: [true, "Address is required"],
+  },
+  title: {
+    type: String,
+    required: [true, "Title is required"],
+  },
   createdAt: {
     type: Date,
     default: new Date(),

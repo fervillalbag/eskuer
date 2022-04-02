@@ -9,7 +9,6 @@ export const GET_PRICES = gql`
       value
       idSubsidiary
       createdAt
-      type
     }
   }
 `

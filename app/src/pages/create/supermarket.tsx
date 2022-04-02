@@ -4,7 +4,6 @@ import { Box, Button, Image, Input } from '@chakra-ui/react'
 import { useMutation } from '@apollo/client'
 import { useRouter } from 'next/router'
 
-import Navbar from '../../components/Navbar'
 import { CREATE_SUPERMARKET } from '../../graphql/mutations/supermarket'
 import Back from '../../components/Back'
 
@@ -24,6 +23,11 @@ const CreateSupermarket: React.FC = () => {
   const [fileImage, setFileImage] = useState<FileType | null | Blob>(null)
   const [nameSupermarket, setNameSupermarket] = useState<string | null>(null)
   const [slugSupermarket, setSlugSupermarket] = useState<string | null>(null)
+  const [titleSupermarket, setTitleSupermarket] = useState<string | null>(null)
+  const [citySupermarket, setCitySupermarket] = useState<string | null>(null)
+  const [addressSupermarket, setAddressSupermarket] = useState<string | null>(
+    null
+  )
 
   const [createSupermarket] = useMutation(CREATE_SUPERMARKET)
 
@@ -60,7 +64,10 @@ const CreateSupermarket: React.FC = () => {
           input: {
             name: nameSupermarket,
             image: imageData?.secure_url,
-            slug: slugSupermarket
+            slug: slugSupermarket,
+            title: titleSupermarket,
+            city: citySupermarket,
+            address: addressSupermarket
           }
         }
       })
@@ -99,6 +106,39 @@ const CreateSupermarket: React.FC = () => {
             placeholder="slug"
             marginBottom="20px"
             onChange={e => setSlugSupermarket(e.target.value)}
+          />
+          <Input
+            _focus={{ outline: 0 }}
+            paddingLeft="12px"
+            height="45px"
+            backgroundColor="#F9F9F9"
+            borderRadius="2px"
+            border="0"
+            placeholder="dirección"
+            marginBottom="20px"
+            onChange={e => setAddressSupermarket(e.target.value)}
+          />
+          <Input
+            _focus={{ outline: 0 }}
+            paddingLeft="12px"
+            height="45px"
+            backgroundColor="#F9F9F9"
+            borderRadius="2px"
+            border="0"
+            placeholder="ciudad"
+            marginBottom="20px"
+            onChange={e => setCitySupermarket(e.target.value)}
+          />
+          <Input
+            _focus={{ outline: 0 }}
+            paddingLeft="12px"
+            height="45px"
+            backgroundColor="#F9F9F9"
+            borderRadius="2px"
+            border="0"
+            placeholder="título"
+            marginBottom="20px"
+            onChange={e => setTitleSupermarket(e.target.value)}
           />
 
           <Button
@@ -146,7 +186,7 @@ const CreateSupermarket: React.FC = () => {
             color="#FFF"
             _focus={{ shadow: 0 }}
             _hover={{
-              backgroundColor: '#47a1eb'
+              backgroundColor: '#003049'
             }}
             width="100%"
             onClick={handleCreateSupermarket}
@@ -155,8 +195,6 @@ const CreateSupermarket: React.FC = () => {
           </Button>
         </Box>
       </Box>
-
-      <Navbar />
     </Box>
   )
 }

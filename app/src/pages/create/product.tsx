@@ -1,10 +1,9 @@
 import React, { useRef, useState } from 'react'
 import toast from 'react-hot-toast'
 import { useRouter } from 'next/router'
-import { Box, Button, Image, Input } from '@chakra-ui/react'
+import { Box, Button, Image, Input, Select } from '@chakra-ui/react'
 import { useMutation } from '@apollo/client'
 
-import Navbar from '../../components/Navbar'
 // import { GET_SUPERMARKETS } from '../../graphql/queries/supermarket'
 import { CREATE_PRODUCT } from '../../graphql/mutations/product'
 import Back from '../../components/Back'
@@ -27,6 +26,7 @@ const CreateProduct: React.FC = () => {
   const [image, setImage] = useState<string | null>(null)
   const [fileImage, setFileImage] = useState<FileType | null | Blob>(null)
 
+  const [typeProduct, setTypeProduct] = useState<string | null>('')
   const [nameProduct, setNameProduct] = useState<string | null>(null)
   const [categoryProduct, setCategoryProduct] = useState<string | null>(null)
 
@@ -60,7 +60,8 @@ const CreateProduct: React.FC = () => {
           input: {
             name: nameProduct,
             category: categoryProduct,
-            image: imageData?.secure_url
+            image: imageData?.secure_url,
+            type: typeProduct
           }
         }
       })
@@ -105,6 +106,16 @@ const CreateProduct: React.FC = () => {
             marginBottom="15px"
             onChange={e => setCategoryProduct(e.target.value)}
           />
+
+          <Select
+            borderRadius="2px"
+            marginBottom="20px"
+            onChange={e => setTypeProduct(e.target.value)}
+          >
+            <option value="">-- Seleccione tipo --</option>
+            <option value="kg">KG</option>
+            <option value="un">Unidad</option>
+          </Select>
 
           <Button
             minWidth="initial"
@@ -151,7 +162,7 @@ const CreateProduct: React.FC = () => {
             color="#FFF"
             _focus={{ shadow: 0 }}
             _hover={{
-              backgroundColor: '#47a1eb'
+              backgroundColor: '#003049'
             }}
             width="100%"
             onClick={handleCreateProduct}
@@ -160,8 +171,6 @@ const CreateProduct: React.FC = () => {
           </Button>
         </Box>
       </Box>
-
-      <Navbar />
     </Box>
   )
 }
