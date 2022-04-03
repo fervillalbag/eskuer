@@ -55,7 +55,7 @@ const Admin: React.FC = () => {
                   fontWeight="regular"
                   textTransform="lowercase"
                 >
-                  cantidad de productos: 0
+                  mostrar opciones
                 </Text>
               </Box>
             </Grid>
@@ -99,7 +99,7 @@ const Admin: React.FC = () => {
                   fontWeight="regular"
                   textTransform="lowercase"
                 >
-                  cantidad de supermercados: 0
+                  mostrar opciones
                 </Text>
               </Box>
             </Grid>
@@ -143,7 +143,7 @@ const Admin: React.FC = () => {
                   fontWeight="regular"
                   textTransform="lowercase"
                 >
-                  cantidad de precios: 0
+                  mostrar opciones
                 </Text>
               </Box>
             </Grid>
@@ -379,7 +379,7 @@ const Admin: React.FC = () => {
                   fontWeight="regular"
                   textTransform="lowercase"
                 >
-                  cantidad de producto: 0
+                  mostrar opciones
                 </Text>
               </Box>
             </Grid>
@@ -423,7 +423,7 @@ const Admin: React.FC = () => {
                   fontWeight="regular"
                   textTransform="lowercase"
                 >
-                  cantidad de supermercados: 0
+                  mostrar opciones
                 </Text>
               </Box>
             </Grid>
@@ -467,7 +467,7 @@ const Admin: React.FC = () => {
                   fontWeight="regular"
                   textTransform="lowercase"
                 >
-                  cantidad de precio: 0
+                  mostrar opciones
                 </Text>
               </Box>
             </Grid>
