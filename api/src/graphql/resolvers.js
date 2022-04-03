@@ -1,6 +1,7 @@
 const productController = require("../controllers/product");
 const supermarketController = require("../controllers/supermarket");
 const priceController = require("../controllers/price");
+const userController = require("../controllers/user");
 
 const resolvers = {
   Query: {
@@ -19,6 +20,12 @@ const resolvers = {
   },
 
   Mutation: {
+    // User
+    createUser: (_, { input }) => userController.createUser(input),
+    login: (_, { input }) => userController.login(input),
+    updateUser: (_, { input }) => userController.updateUser(input),
+    deleteUser: (_, { id }) => userController.deleteUser(id),
+
     // Product
     createProduct: (_, { input }) =>
       productController.createProduct(input),

@@ -6,6 +6,20 @@ const typeDefs = gql`
     success: String
   }
 
+  type User {
+    id: String
+    name: String
+    email: String
+    username: String
+    avatar: String
+    createdAt: String
+    role: String
+  }
+
+  type Token {
+    token: String
+  }
+
   type Price {
     id: String
     idProduct: String
@@ -33,6 +47,19 @@ const typeDefs = gql`
     address: String
     title: String
     createdAt: String
+  }
+
+  input UserInput {
+    id: String
+    name: String
+    email: String
+    username: String
+    password: String
+  }
+
+  input LoginInput {
+    email: String
+    password: String
   }
 
   input ProductInput {
@@ -75,6 +102,12 @@ const typeDefs = gql`
   }
 
   type Mutation {
+    # User
+    createUser(input: UserInput!): MutationResponse
+    login(input: LoginInput!): Token
+    updateUser(input: UserInput!): MutationResponse
+    deleteUser(id: String!): MutationResponse
+
     # Product
     createProduct(input: ProductInput!): MutationResponse
     updateProduct(input: ProductInput!): MutationResponse
