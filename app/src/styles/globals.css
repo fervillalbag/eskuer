@@ -26,3 +26,11 @@
   /* width: 120px !important; */
   height: 40px !important;
 }
+
+.product-index {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 2px;
+  overflow: hidden;
+}

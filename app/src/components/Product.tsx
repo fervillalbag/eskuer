@@ -1,6 +1,7 @@
 import React from 'react'
-import { Box, Image, Text } from '@chakra-ui/react'
+import { Box, Text } from '@chakra-ui/react'
 import { useQuery } from '@apollo/client'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
 
 import { ProductType } from '../interfaces/Product'
 import { GET_PRICES } from '../graphql/queries/price'
@@ -24,14 +25,15 @@ const Product: React.FC<ProductIprops> = ({ product }) => {
   return (
     <Box>
       <Box position="relative">
-        <Image
-          src={product.image}
-          alt=""
-          width="100%"
-          height="120px"
-          objectFit="cover"
-          borderRadius="2px"
-        />
+        <Box rounded="2px" overflow="hidden">
+          <LazyLoadImage
+            src={product.image}
+            alt=""
+            width="100%"
+            height="120px"
+            className="product-index"
+          />
+        </Box>
 
         <Box
           position="absolute"
