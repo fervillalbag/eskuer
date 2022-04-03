@@ -1,13 +1,25 @@
 import React from 'react'
 import { Box, Image, Text } from '@chakra-ui/react'
+import { useQuery } from '@apollo/client'
 
 import { ProductType } from '../interfaces/Product'
+import { GET_PRICES } from '../graphql/queries/price'
 
 interface ProductIprops {
   product: ProductType
 }
 
 const Product: React.FC<ProductIprops> = ({ product }) => {
+  const { data: dataPrices } = useQuery(GET_PRICES, {
+    variables: {
+      idProduct: product?.id,
+      idSuper: null
+    }
+  })
+
+  const prices = dataPrices?.getPrices || []
+  if (prices.length === 0) return null
+
   return (
     <Box>
       <Box position="relative">
