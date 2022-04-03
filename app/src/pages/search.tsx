@@ -1,23 +1,16 @@
 import React from 'react'
-import { Box, Button, Grid, Input, Heading } from '@chakra-ui/react'
+import { Box, Button, Grid, Input } from '@chakra-ui/react'
 import { HiSearch } from 'react-icons/hi'
 
 import Navbar from '../components/Navbar'
+import Back from '../components/Back'
 
 const Search: React.FC = () => {
   return (
     <Box padding="20px">
-      <Heading
-        fontSize="20px"
-        fontWeight="bold"
-        color="#003049"
-        textTransform="uppercase"
-        marginBottom="15px"
-      >
-        Buscar
-      </Heading>
+      <Back showButton={false} title="Buscar" />
 
-      <Box as="form">
+      <Box as="form" marginTop="15px">
         <Grid gridTemplateColumns="1fr 50px" gap="15px">
           <Box>
             <Input

@@ -6,7 +6,6 @@ const TagProfile: React.FC = () => {
   return (
     <Grid
       gridTemplateColumns="50px 1fr"
-      marginTop="10px"
       alignItems="center"
       width="full"
       gap="0 15px"

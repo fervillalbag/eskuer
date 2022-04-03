@@ -12,11 +12,17 @@ const Settings: React.FC = () => {
       <Box>
         <Back showButton={false} title="Ajustes" />
 
-        <Box marginTop="15px">
-          <Text color="#003049">Cuenta</Text>
+        <Box marginTop="20px">
+          <Text color="#003049" textTransform="uppercase">
+            Cuenta
+          </Text>
 
           <NextLink href="/settings/user">
-            <Link>
+            <Link
+              display="block"
+              marginTop="15px"
+              _hover={{ textDecoration: 'none' }}
+            >
               <TagProfile />
             </Link>
           </NextLink>
