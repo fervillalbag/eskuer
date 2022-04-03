@@ -2,11 +2,12 @@ import React from 'react'
 import { Box, Grid, Link } from '@chakra-ui/react'
 import NextLink from 'next/link'
 import Back from '../../components/Back'
+import Navbar from '../../components/Navbar'
 
 const Admin: React.FC = () => {
   return (
     <Box padding="20px">
-      <Back title="Administrador" />
+      <Back showButton={false} title="Administrador" />
 
       <Grid gridTemplateColumns="repeat(2, 1fr)" gap="15px" marginTop="20px">
         <NextLink href="/create/price">
@@ -64,6 +65,8 @@ const Admin: React.FC = () => {
           </Link>
         </NextLink>
       </Grid>
+
+      <Navbar />
     </Box>
   )
 }

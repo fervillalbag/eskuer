@@ -57,7 +57,14 @@ const Navbar: React.FC = () => {
             </Link>
           </NextLink>
           <NextLink href="/admin">
-            <Link fontSize="24px" color="#e56b6f">
+            <Link
+              fontSize="24px"
+              color={
+                pathname === '/admin'
+                  ? 'hsl(358, 70%, 66%)'
+                  : 'hsl(358, 70%, 85%)'
+              }
+            >
               <FaKey />
             </Link>
           </NextLink>
