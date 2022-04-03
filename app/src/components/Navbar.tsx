@@ -6,6 +6,7 @@ import { TiHome } from 'react-icons/ti'
 import { BsQuestionCircleFill } from 'react-icons/bs'
 import { IoMdSettings } from 'react-icons/io'
 import { useRouter } from 'next/router'
+import { FaKey } from 'react-icons/fa'
 
 const Navbar: React.FC = () => {
   const { pathname } = useRouter()
@@ -53,6 +54,11 @@ const Navbar: React.FC = () => {
               color={pathname === '/search' ? '"#003049"' : '#d9d9d9'}
             >
               <HiSearch />
+            </Link>
+          </NextLink>
+          <NextLink href="/admin">
+            <Link fontSize="24px" color="#e56b6f">
+              <FaKey />
             </Link>
           </NextLink>
           <NextLink href="/">

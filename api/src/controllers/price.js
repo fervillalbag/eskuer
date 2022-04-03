@@ -31,7 +31,6 @@ const getPrices = async (idProduct, idSuper) => {
 
     if (idSuper) {
       const prices = await Price.find({}).where({ idSuper });
-      console.log(prices);
       if (!prices) throw new Error("Prices not found");
       return prices;
     }

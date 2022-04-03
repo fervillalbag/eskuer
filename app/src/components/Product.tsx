@@ -11,6 +11,7 @@ interface ProductIprops {
 
 const Product: React.FC<ProductIprops> = ({ product }) => {
   const { data: dataPrices } = useQuery(GET_PRICES, {
+    fetchPolicy: 'network-only',
     variables: {
       idProduct: product?.id,
       idSuper: null

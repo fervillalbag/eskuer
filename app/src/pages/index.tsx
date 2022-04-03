@@ -1,15 +1,6 @@
 import React from 'react'
 import NextLink from 'next/link'
-import {
-  Box,
-  Flex,
-  Heading,
-  Link,
-  Text,
-  Image,
-  Grid,
-  Button
-} from '@chakra-ui/react'
+import { Box, Flex, Heading, Link, Text, Image, Grid } from '@chakra-ui/react'
 import { useQuery } from '@apollo/client'
 
 import Product from '../components/Product'
@@ -17,12 +8,8 @@ import Navbar from '../components/Navbar'
 import Loader from '../components/Loader'
 import Header from '../components/Header'
 import { GET_PRODUCTS } from '../graphql/queries/product'
-import { FaKey } from 'react-icons/fa'
-import { useRouter } from 'next/router'
 
 const Home: React.FC = () => {
-  const router = useRouter()
-
   const { data: productsQuery, loading: loadingProducts } = useQuery(
     GET_PRODUCTS,
     {
@@ -33,22 +20,6 @@ const Home: React.FC = () => {
 
   return (
     <Box minHeight="100vh">
-      <Button
-        minWidth="initial"
-        position="fixed"
-        bottom="100px"
-        right="20px"
-        width="50px"
-        height="50px"
-        rounded="full"
-        zIndex="100"
-        backgroundColor="#003049"
-        color="white"
-        onClick={() => router.push('/admin')}
-      >
-        <FaKey />
-      </Button>
-
       <Header />
 
       <Box padding="0 20px">

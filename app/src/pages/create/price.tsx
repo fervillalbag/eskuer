@@ -47,7 +47,7 @@ const CreatePrice: React.FC = () => {
     if (!price || !supermarketId || !productId)
       return toast.error('Todos los campos son obligatorios')
 
-    const response = await createPrice({
+    await createPrice({
       variables: {
         input: {
           idProduct: productId,
@@ -58,7 +58,6 @@ const CreatePrice: React.FC = () => {
       }
     })
 
-    console.log(response)
     toast.success('Precio añadido')
     return router.push('/')
   }
