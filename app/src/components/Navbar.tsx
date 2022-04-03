@@ -69,7 +69,7 @@ const Navbar: React.FC = () => {
               <BsQuestionCircleFill />
             </Link>
           </NextLink>
-          <NextLink href="/">
+          <NextLink href="/settings">
             <Link
               fontSize="28px"
               color={pathname === '/settings' ? '"#003049"' : '#d9d9d9'}
