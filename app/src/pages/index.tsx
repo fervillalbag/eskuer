@@ -128,7 +128,7 @@ const Home: React.FC = () => {
             <Grid gridTemplateColumns="repeat(2, 1fr)" gap="10px">
               {products.map(product => (
                 <NextLink href={`/product/${product.id}`} key={product.id}>
-                  <Link _hover={{ textDecoration: 'none' }}>
+                  <Link display="block" _hover={{ textDecoration: 'none' }}>
                     <Product key={product.id} product={product} />
                   </Link>
                 </NextLink>

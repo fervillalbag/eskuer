@@ -24,13 +24,14 @@ const Product: React.FC<ProductIprops> = ({ product }) => {
 
   return (
     <Box>
-      <Box position="relative">
-        <Box rounded="2px" overflow="hidden">
+      <Box position="relative" height="120px" rounded="2px" overflow="hidden">
+        <Box>
           <LazyLoadImage
             src={product.image}
             alt=""
             width="100%"
             height="120px"
+            effect="blur"
             className="product-index"
           />
         </Box>

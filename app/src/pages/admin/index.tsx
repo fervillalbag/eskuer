@@ -4,6 +4,7 @@ import NextLink from 'next/link'
 import { FaStoreAlt } from 'react-icons/fa'
 import { AiFillDollarCircle } from 'react-icons/ai'
 import { MdLocalGroceryStore } from 'react-icons/md'
+import { FiUsers } from 'react-icons/fi'
 
 import Back from '../../components/Back'
 import Navbar from '../../components/Navbar'
@@ -157,6 +158,50 @@ const Admin: React.FC = () => {
       </Text>
 
       <Box marginTop="15px">
+        <NextLink href="/create/price">
+          <Link
+            width="100%"
+            display="flex"
+            color="#003049"
+            textAlign="center"
+            fontWeight="semibold"
+            textTransform="uppercase"
+            fontSize="14px"
+            _hover={{ textDecoration: 'none' }}
+            marginBottom="20px"
+          >
+            <Grid
+              gridTemplateColumns="40px 1fr"
+              width="full"
+              gap="0 15px"
+              alignItems="center"
+            >
+              <Text fontSize="40px" color="#D5DFE5" marginRight="15px">
+                <FiUsers />
+              </Text>
+              <Box>
+                <Text
+                  color="#003049"
+                  textAlign="left"
+                  fontSize="12px"
+                  fontWeight="semibold"
+                >
+                  Lista de usuarios
+                </Text>
+                <Text
+                  color="#9F9F9F"
+                  textAlign="left"
+                  fontSize="12px"
+                  fontWeight="regular"
+                  textTransform="lowercase"
+                >
+                  cantidad de usuarios: 0
+                </Text>
+              </Box>
+            </Grid>
+          </Link>
+        </NextLink>
+
         <NextLink href="/create/price">
           <Link
             width="100%"
