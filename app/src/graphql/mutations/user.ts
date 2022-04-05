@@ -8,3 +8,11 @@ export const REGISTER_USER = gql`
     }
   }
 `
+
+export const LOGIN = gql`
+  mutation login($input: LoginInput!) {
+    login(input: $input) {
+      token
+    }
+  }
+`

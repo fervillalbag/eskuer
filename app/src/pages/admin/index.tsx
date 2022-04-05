@@ -8,8 +8,24 @@ import { FiUsers } from 'react-icons/fi'
 
 import Back from '../../components/Back'
 import Navbar from '../../components/Navbar'
+import useAuth from '../../hooks/useAuth'
+import { useQuery } from '@apollo/client'
+import { GET_USER } from '../../graphql/queries/user'
+import NotFound from '../../components/NotFound'
 
 const Admin: React.FC = () => {
+  const { user } = useAuth()
+
+  const { data: dataUser } = useQuery(GET_USER, {
+    variables: {
+      id: user?.id
+    }
+  })
+
+  const userInfo = dataUser?.getUser || {}
+
+  if (userInfo.role !== 'ADMIN') return <NotFound />
+
   return (
     <Box padding="20px 20px 100px 20px">
       <Back showButton={false} title="Administrador" />

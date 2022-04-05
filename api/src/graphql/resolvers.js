@@ -6,6 +6,9 @@ const userController = require("../controllers/user");
 const resolvers = {
   Query: {
     // Product
+    getUser: (_, { id }) => userController.getUser(id),
+
+    // Product
     getProducts: () => productController.getProducts(),
     getProduct: (_, { id }) => productController.getProduct(id),
 

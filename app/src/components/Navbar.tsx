@@ -1,15 +1,27 @@
 import React from 'react'
 import { Box, Flex, Link } from '@chakra-ui/react'
 import NextLink from 'next/link'
+import { useQuery } from '@apollo/client'
 import { HiSearch } from 'react-icons/hi'
 import { TiHome } from 'react-icons/ti'
 import { BsQuestionCircleFill } from 'react-icons/bs'
 import { IoMdSettings } from 'react-icons/io'
 import { useRouter } from 'next/router'
 import { FaKey } from 'react-icons/fa'
+import useAuth from '../hooks/useAuth'
+import { GET_USER } from '../graphql/queries/user'
 
 const Navbar: React.FC = () => {
   const { pathname } = useRouter()
+  const { user } = useAuth()
+
+  const { data: dataUser } = useQuery(GET_USER, {
+    variables: {
+      id: user?.id
+    }
+  })
+
+  const userInfo = dataUser?.getUser || {}
 
   return (
     <>
@@ -56,18 +68,20 @@ const Navbar: React.FC = () => {
               <HiSearch />
             </Link>
           </NextLink>
-          <NextLink href="/admin">
-            <Link
-              fontSize="24px"
-              color={
-                pathname === '/admin'
-                  ? 'hsl(358, 70%, 66%)'
-                  : 'hsl(358, 70%, 85%)'
-              }
-            >
-              <FaKey />
-            </Link>
-          </NextLink>
+          {userInfo.role === 'ADMIN' && (
+            <NextLink href="/admin">
+              <Link
+                fontSize="24px"
+                color={
+                  pathname === '/admin'
+                    ? 'hsl(358, 70%, 66%)'
+                    : 'hsl(358, 70%, 85%)'
+                }
+              >
+                <FaKey />
+              </Link>
+            </NextLink>
+          )}
           <NextLink href="/">
             <Link
               fontSize="28px"
@@ -76,14 +90,16 @@ const Navbar: React.FC = () => {
               <BsQuestionCircleFill />
             </Link>
           </NextLink>
-          <NextLink href="/settings">
-            <Link
-              fontSize="28px"
-              color={pathname === '/settings' ? '"#003049"' : '#d9d9d9'}
-            >
-              <IoMdSettings />
-            </Link>
-          </NextLink>
+          {user && (
+            <NextLink href="/settings">
+              <Link
+                fontSize="28px"
+                color={pathname === '/settings' ? '"#003049"' : '#d9d9d9'}
+              >
+                <IoMdSettings />
+              </Link>
+            </NextLink>
+          )}
         </Flex>
       </Box>
     </>

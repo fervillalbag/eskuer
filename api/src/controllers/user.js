@@ -9,6 +9,17 @@ const createToken = (user, SECRET_KEY_LOGIN, expiresIn) => {
   return jwt.sign(payload, SECRET_KEY_LOGIN, { expiresIn });
 };
 
+const getUser = async (id) => {
+  try {
+    const user = await User.findOne({ _id: id });
+    if (!user) throw new Error("User not found!");
+    return user;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
 const createUser = async (input) => {
   const newUser = input;
   newUser.email = newUser.email.toLowerCase();
@@ -101,6 +112,7 @@ const deleteUser = async (id) => {
 };
 
 module.exports = {
+  getUser,
   createUser,
   updateUser,
   login,

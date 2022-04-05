@@ -1,1 +1,1 @@
-export const TOKEN = 'token'
+export const TOKEN = 'TOKEN_AUTH_ESKUER'

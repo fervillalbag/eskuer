@@ -8,8 +8,14 @@ import Navbar from '../../components/Navbar'
 import Back from '../../components/Back'
 import TagProfile from '../../components/TagProfile'
 import { IoIosDocument } from 'react-icons/io'
+import useAuth from '../../hooks/useAuth'
+import NotFound from '../../components/NotFound'
 
 const Settings: React.FC = () => {
+  const { user } = useAuth()
+
+  if (!user) return <NotFound />
+
   return (
     <Box padding="20px 20px 100px 20px">
       <Box>
@@ -26,7 +32,7 @@ const Settings: React.FC = () => {
               marginTop="15px"
               _hover={{ textDecoration: 'none' }}
             >
-              <TagProfile />
+              <TagProfile user={user} />
             </Link>
           </NextLink>
         </Box>

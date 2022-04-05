@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import NextLink from 'next/link'
 import { Box, Flex, Heading, Link, Text, Image, Grid } from '@chakra-ui/react'
 import { useQuery } from '@apollo/client'
@@ -8,19 +8,45 @@ import Navbar from '../components/Navbar'
 import Loader from '../components/Loader'
 import Header from '../components/Header'
 import { GET_PRODUCTS } from '../graphql/queries/product'
+import { getToken } from '../utils/helpers'
+import { isAuth, isUserNotFound } from '../utils/actions'
+import useAuth from '../hooks/useAuth'
+import { GET_USER } from '../graphql/queries/user'
 
 const Home: React.FC = () => {
+  isUserNotFound()
+
+  const { user } = useAuth()
+
+  const { data: dataUser } = useQuery(GET_USER, {
+    variables: {
+      id: user?.id
+    }
+  })
+
+  useEffect(() => {
+    const token = getToken()
+
+    if (!token) {
+      return null
+    } else {
+      isAuth()
+    }
+  }, [])
+
   const { data: productsQuery, loading: loadingProducts } = useQuery(
     GET_PRODUCTS,
     {
       fetchPolicy: 'network-only'
     }
   )
+
   const products = productsQuery?.getProducts || []
+  const userInfo = dataUser?.getUser || {}
 
   return (
     <Box minHeight="100vh">
-      <Header />
+      <Header user={userInfo} />
 
       <Box padding="0 20px">
         <Image

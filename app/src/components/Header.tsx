@@ -1,7 +1,16 @@
 import React from 'react'
 import { Flex, Box, Image } from '@chakra-ui/react'
 
-const Header: React.FC = () => {
+import { User } from '../interfaces/User'
+import { useRouter } from 'next/router'
+
+interface HeaderIprops {
+  user: User
+}
+
+const Header: React.FC<HeaderIprops> = ({ user }) => {
+  const router = useRouter()
+
   return (
     <Flex padding="20px" alignItems="center" justifyContent="space-between">
       <Box>
@@ -12,14 +21,21 @@ const Header: React.FC = () => {
           height="30px"
         />
       </Box>
-      <Box>
+      <Box
+        onClick={() => {
+          if (!user.email) {
+            router.push('/login')
+          } else {
+            router.push('/settings/user')
+          }
+        }}
+      >
         <Image
-          src="/profile-fer.png"
+          src={!user?.avatar ? '/profile-avatar.png' : user?.avatar}
           alt="Profile"
           width="40px"
           height="40px"
           borderRadius="full"
-          border="1px solid #d9d9d9"
         />
       </Box>
     </Flex>

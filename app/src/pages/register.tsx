@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import NextLink from 'next/link'
 import toast from 'react-hot-toast'
 import { Box, Input, Button, Text, Link } from '@chakra-ui/react'
@@ -7,6 +7,7 @@ import { useRouter } from 'next/router'
 
 import Back from '../components/Back'
 import { REGISTER_USER } from '../graphql/mutations/user'
+import useAuth from '../hooks/useAuth'
 
 const Register: React.FC = () => {
   const [name, setName] = useState<string | null>(null)
@@ -16,8 +17,17 @@ const Register: React.FC = () => {
   const [confirmPassword, setConfirmPassword] = useState<string | null>(null)
 
   const router = useRouter()
+  const { user } = useAuth()
 
   const [createUser] = useMutation(REGISTER_USER)
+
+  useEffect(() => {
+    ;(async () => {
+      if (user) {
+        router.push('/')
+      }
+    })()
+  }, [user])
 
   const handleRegister = async () => {
     if (password !== confirmPassword) {

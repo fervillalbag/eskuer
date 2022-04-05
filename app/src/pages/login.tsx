@@ -1,15 +1,47 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
 import NextLink from 'next/link'
 import { Box, Input, Button, Text, Link } from '@chakra-ui/react'
+import { useRouter } from 'next/router'
+import { useMutation } from '@apollo/client'
 
 import Back from '../components/Back'
+import { LOGIN } from '../graphql/mutations/user'
+import useAuth from '../hooks/useAuth'
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState<string | null>(null)
   const [password, setPassword] = useState<string | null>(null)
 
+  const router = useRouter()
+
+  const { login, user } = useAuth()
+  const [loginMutation] = useMutation(LOGIN)
+
+  useEffect(() => {
+    ;(async () => {
+      if (user) {
+        router.push('/')
+      }
+    })()
+  }, [user])
+
   const handleLogin = async () => {
-    console.log({ email, password })
+    try {
+      const response = await loginMutation({
+        variables: {
+          input: {
+            email,
+            password
+          }
+        }
+      })
+      login(response?.data?.login?.token)
+      toast.success('Sesión iniciada!')
+      router.push('/')
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (

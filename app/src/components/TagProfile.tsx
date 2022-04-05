@@ -1,8 +1,13 @@
 import React from 'react'
 import { Box, Flex, Image, Text, Button, Grid } from '@chakra-ui/react'
 import { FaAngleRight } from 'react-icons/fa'
+import { User } from '../interfaces/User'
 
-const TagProfile: React.FC = () => {
+interface TagProfileIprops {
+  user: User
+}
+
+const TagProfile: React.FC<TagProfileIprops> = ({ user }) => {
   return (
     <Grid
       gridTemplateColumns="50px 1fr"
@@ -16,7 +21,7 @@ const TagProfile: React.FC = () => {
       <Flex width="full" justifyContent="space-between" alignItems="center">
         <Box>
           <Text fontWeight="semibold" color="#003049">
-            Fernando Villalba
+            {user?.name}
           </Text>
           <Text color="#9F9F9F" fontSize="14px">
             Info personal
