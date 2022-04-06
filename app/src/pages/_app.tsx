@@ -10,15 +10,18 @@ import UserProvider from '../context/UserContext'
 
 import '../styles/globals.css'
 import 'react-lazy-load-image-component/src/effects/blur.css'
+import SuperProvider from '../context/SuperContext'
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
   return (
     <ApolloProvider client={client}>
       <UserProvider>
-        <ChakraProvider theme={theme}>
-          <Component {...pageProps} />
-          <Toaster position="top-center" reverseOrder={false} />
-        </ChakraProvider>
+        <SuperProvider>
+          <ChakraProvider theme={theme}>
+            <Component {...pageProps} />
+            <Toaster position="top-center" reverseOrder={false} />
+          </ChakraProvider>
+        </SuperProvider>
       </UserProvider>
     </ApolloProvider>
   )

@@ -1,11 +1,38 @@
-import React from 'react'
-import { Box } from '@chakra-ui/react'
+import React, { useContext } from 'react'
+import { Box, Grid } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { useQuery } from '@apollo/client'
 
 import Back from '../../components/Back'
 import { GET_SUPERMARKET } from '../../graphql/queries/supermarket'
 import { GET_PRICES_ALL } from '../../graphql/queries/price'
+import Product from '../../components/Product'
+import { GET_PRODUCT } from '../../graphql/queries/product'
+import { SuperContext } from '../../context/SuperContext'
+
+const ProductItem = ({ product }) => {
+  const router = useRouter()
+  const { setSuperSelected } = useContext(SuperContext)
+
+  const { data: dataProduct } = useQuery(GET_PRODUCT, {
+    variables: {
+      id: product?.idProduct
+    }
+  })
+
+  const productInfo = dataProduct?.getProduct || {}
+
+  return (
+    <Box
+      onClick={() => {
+        setSuperSelected(product?.idSuper)
+        router.push(`/supermarket/product/${productInfo.id}`)
+      }}
+    >
+      <Product product={productInfo} />
+    </Box>
+  )
+}
 
 const Supermarket: React.FC = () => {
   const router = useRouter()
@@ -25,12 +52,17 @@ const Supermarket: React.FC = () => {
   })
 
   const products = dataProducts?.getPrices || []
-  console.log(products)
 
   return (
     <Box padding="20px">
       <Box>
         <Back title={supermarket?.name} />
+
+        <Grid gridTemplateColumns="repeat(2, 1fr)" gap="10px" marginTop="25px">
+          {products.map(product => (
+            <ProductItem key={product.id} product={product} />
+          ))}
+        </Grid>
       </Box>
     </Box>
   )

@@ -2,13 +2,10 @@ import React from 'react'
 import { useRouter } from 'next/router'
 import { Box } from '@chakra-ui/react'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
-// import { useQuery } from '@apollo/client'
-
-// import { GET_PRODUCT } from '../../graphql/queries/product'
-import ItemProduct from '../../components/ItemProduct'
-// import Loader from '../../components/Loader'
-import Back from '../../components/Back'
 import { useQuery } from '@apollo/client'
+
+import ItemProduct from '../../components/ItemProduct'
+import Back from '../../components/Back'
 import { GET_SUPERMARKETS } from '../../graphql/queries/supermarket'
 import { GET_PRODUCT } from '../../graphql/queries/product'
 
@@ -26,7 +23,7 @@ const Product: React.FC = () => {
 
   return (
     <Box padding="20px">
-      <Back title="Nombre producto" />
+      <Back title={product?.name} />
       <Box className="image-cover" marginTop="20px">
         <LazyLoadImage
           src={product?.image}
