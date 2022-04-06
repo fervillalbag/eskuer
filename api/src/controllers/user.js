@@ -71,7 +71,11 @@ const login = async (input) => {
     throw new Error("Email or passoword is incorrect!");
 
   return {
-    token: createToken(userFound, process.env.SECRET_KEY_LOGIN, "1h"),
+    token: createToken(
+      userFound,
+      process.env.SECRET_KEY_LOGIN,
+      "72h"
+    ),
   };
 };
 

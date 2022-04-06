@@ -16,13 +16,21 @@ const Supermarket: React.FC = () => {
         <Back title="Supermercados" />
       </Box>
 
-      <Grid gridTemplateColumns="repeat(2, 1fr)">
+      <Grid gridTemplateColumns="repeat(2, 1fr)" marginTop="25px" gap="20px">
         {supermarkets.map(supermarket => (
           <NextLink
             href={`/supermarket/${supermarket.id}`}
             key={supermarket.id}
           >
-            <Link>{supermarket.name}</Link>
+            <Link
+              border="1px solid #003049"
+              rounded="2px"
+              height="120px"
+              padding="10px"
+              _hover={{ textDecoration: 'none' }}
+            >
+              {supermarket.name}
+            </Link>
           </NextLink>
         ))}
       </Grid>

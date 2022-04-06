@@ -20,6 +20,8 @@ const resolvers = {
     // Price
     getPrice: (_, { idProduct, idSuper }) =>
       priceController.getPrice(idProduct, idSuper),
+    getPrices: (_, { idProduct, idSuper }) =>
+      priceController.getPrices(idProduct, idSuper),
   },
 
   Mutation: {

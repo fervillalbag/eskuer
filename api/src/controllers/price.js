@@ -1,5 +1,33 @@
 const Price = require("../models/price");
 
+const getPrices = async (idProduct, idSuper) => {
+  try {
+    if (idProduct && idSuper) {
+      const prices = await Price.find({}).where({
+        idProduct,
+        idSuper,
+      });
+      if (!prices) throw new Error("Prices not found");
+      return prices;
+    }
+
+    if (idProduct) {
+      const prices = await Price.find({}).where({ idProduct });
+      if (!prices) throw new Error("Prices not found");
+      return prices;
+    }
+
+    if (idSuper) {
+      const prices = await Price.find({}).where({ idSuper });
+      if (!prices) throw new Error("Prices not found");
+      return prices;
+    }
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
 const getPrice = async (idProduct, idSuper) => {
   try {
     if (idProduct && idSuper) {
@@ -88,4 +116,5 @@ module.exports = {
   updatePrice,
   deletePrice,
   getPrice,
+  getPrices,
 };

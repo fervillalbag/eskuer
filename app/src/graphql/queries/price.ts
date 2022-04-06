@@ -7,7 +7,18 @@ export const GET_PRICES = gql`
       idProduct
       idSuper
       value
-      idSubsidiary
+      createdAt
+    }
+  }
+`
+
+export const GET_PRICES_ALL = gql`
+  query getPrices($idProduct: String, $idSuper: String) {
+    getPrices(idProduct: $idProduct, idSuper: $idSuper) {
+      id
+      idProduct
+      idSuper
+      value
       createdAt
     }
   }

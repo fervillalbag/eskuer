@@ -101,7 +101,7 @@ const typeDefs = gql`
     getSupermarket(id: String!): Supermarket
 
     # Price
-    # getPrices(idProduct: String, idSuper: String): [Price]
+    getPrices(idProduct: String, idSuper: String): [Price]
     getPrice(idProduct: String, idSuper: String): Price
   }
 
