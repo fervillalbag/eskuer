@@ -7,13 +7,8 @@ import Navbar from '../components/Navbar'
 import Back from '../components/Back'
 import { MdLocalGroceryStore } from 'react-icons/md'
 import { FaStoreAlt } from 'react-icons/fa'
-import { useQuery } from '@apollo/client'
-import { GET_SUPERMARKETS } from '../graphql/queries/supermarket'
 
 const Search: React.FC = () => {
-  const { data: dataSupermarkets } = useQuery(GET_SUPERMARKETS)
-  const supermarkets = dataSupermarkets?.getSupermarkets || []
-
   return (
     <Box padding="20px">
       <Back showButton={false} title="Buscar" />
@@ -86,14 +81,14 @@ const Search: React.FC = () => {
                     fontWeight="regular"
                     textTransform="lowercase"
                   >
-                    cantidad de supemercados: {supermarkets.length}
+                    mostrar supermercados
                   </Text>
                 </Box>
               </Grid>
             </Link>
           </NextLink>
 
-          <NextLink href="/product">
+          <NextLink href="/products">
             <Link
               width="100%"
               display="flex"
@@ -130,7 +125,7 @@ const Search: React.FC = () => {
                     fontWeight="regular"
                     textTransform="lowercase"
                   >
-                    cantidad de productos: 2
+                    mostrar productos
                   </Text>
                 </Box>
               </Grid>
