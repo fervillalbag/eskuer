@@ -1,27 +1,14 @@
 import React from 'react'
 import { Box, Text } from '@chakra-ui/react'
-import { useQuery } from '@apollo/client'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 
 import { ProductType } from '../interfaces/Product'
-import { GET_PRICES } from '../graphql/queries/price'
 
 interface ProductIprops {
   product: ProductType
 }
 
 const Product: React.FC<ProductIprops> = ({ product }) => {
-  const { data: dataPrices } = useQuery(GET_PRICES, {
-    fetchPolicy: 'network-only',
-    variables: {
-      idProduct: product?.id,
-      idSuper: null
-    }
-  })
-
-  const prices = dataPrices?.getPrices || []
-  if (prices.length === 0) return null
-
   return (
     <Box>
       <Box position="relative" height="120px" rounded="2px" overflow="hidden">

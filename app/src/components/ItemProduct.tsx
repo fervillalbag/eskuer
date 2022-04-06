@@ -29,10 +29,9 @@ const ItemProduct: React.FC<ItemProductIprops> = ({ supermarket, product }) => {
     }
   })
 
-  const prices = dataPrices?.getPrices || []
-  const recentProduct = prices[0]
+  const price = dataPrices?.getPrice || null
 
-  if (!recentProduct) return null
+  if (!price) return null
 
   return (
     <Box borderBottom="1px solid #F0F0F0" marginTop="15px" paddingBottom="15px">
@@ -57,7 +56,7 @@ const ItemProduct: React.FC<ItemProductIprops> = ({ supermarket, product }) => {
               textTransform="uppercase"
               fontSize="12px"
             >
-              {dayjs(Number(recentProduct?.createdAt)).fromNow()}
+              {dayjs(Number(price?.createdAt)).fromNow()}
             </Text>
             <Text
               // fontWeight="semibold"
@@ -76,7 +75,7 @@ const ItemProduct: React.FC<ItemProductIprops> = ({ supermarket, product }) => {
             textAlign="right"
             fontWeight="bold"
           >
-            {recentProduct?.value} / KG
+            {price?.value} / KG
           </Text>
         </Box>
       </Flex>

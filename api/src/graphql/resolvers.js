@@ -18,8 +18,8 @@ const resolvers = {
       supermarketController.getSupermarket(id),
 
     // Price
-    getPrices: (_, { idProduct, idSuper }) =>
-      priceController.getPrices(idProduct, idSuper),
+    getPrice: (_, { idProduct, idSuper }) =>
+      priceController.getPrice(idProduct, idSuper),
   },
 
   Mutation: {

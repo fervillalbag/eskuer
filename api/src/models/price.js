@@ -20,6 +20,7 @@ const PriceSchema = new Schema({
   createdAt: {
     type: Date,
     required: [true, "Date is required"],
+    default: Date.now(),
     trim: true,
   },
 });
