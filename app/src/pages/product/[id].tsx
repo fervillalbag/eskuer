@@ -6,20 +6,27 @@ import { useQuery } from '@apollo/client'
 
 import ItemProduct from '../../components/ItemProduct'
 import Back from '../../components/Back'
-import { GET_SUPERMARKETS } from '../../graphql/queries/supermarket'
+
 import { GET_PRODUCT } from '../../graphql/queries/product'
+import { GET_PRICES_ALL } from '../../graphql/queries/price'
 
 const Product: React.FC = () => {
   const router = useRouter()
-  const { data: dataSupermarkets } = useQuery(GET_SUPERMARKETS)
+
   const { data: dataProduct } = useQuery(GET_PRODUCT, {
     variables: {
       id: router?.query?.id
     }
   })
 
-  const supermarkets = dataSupermarkets?.getSupermarkets || []
+  const { data: dataPrices } = useQuery(GET_PRICES_ALL, {
+    variables: {
+      idProduct: router?.query?.id
+    }
+  })
+
   const product = dataProduct?.getProduct || {}
+  const prices = dataPrices?.getPrices || []
 
   return (
     <Box padding="20px">
@@ -34,17 +41,11 @@ const Product: React.FC = () => {
       </Box>
 
       <Box marginTop="15px">
-        {supermarkets.length < 0 ? (
+        {prices.length === 0 ? (
           <Box>No hay supermercados con este producto añadido</Box>
         ) : (
-          supermarkets.length > 0 &&
-          supermarkets.map(supermarket => (
-            <ItemProduct
-              key={supermarket.id}
-              supermarket={supermarket}
-              product={product}
-            />
-          ))
+          prices.length > 0 &&
+          prices.map(price => <ItemProduct key={price.id} price={price} />)
         )}
       </Box>
     </Box>

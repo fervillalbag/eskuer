@@ -7,31 +7,24 @@ import { useQuery } from '@apollo/client'
 
 // import { Price } from '../interfaces/Price'
 
-import { Supermarket } from '../interfaces/Supermarket'
-import { ProductType } from '../interfaces/Product'
-import { GET_PRICES } from '../graphql/queries/price'
-
 import 'dayjs/locale/es'
+import { GET_SUPERMARKET } from '../graphql/queries/supermarket'
 
 interface ItemProductIprops {
-  supermarket: Supermarket
-  product: ProductType
+  price: any
 }
 
 dayjs.extend(relativeTime)
 dayjs.locale('es')
 
-const ItemProduct: React.FC<ItemProductIprops> = ({ supermarket, product }) => {
-  const { data: dataPrices } = useQuery(GET_PRICES, {
+const ItemProduct: React.FC<ItemProductIprops> = ({ price }) => {
+  const { data: dataSupermarket } = useQuery(GET_SUPERMARKET, {
     variables: {
-      idSuper: supermarket.id,
-      idProduct: product.id
+      id: price?.idSuper
     }
   })
 
-  const price = dataPrices?.getPrice || null
-
-  if (!price) return null
+  const supermarket = dataSupermarket?.getSupermarket || {}
 
   return (
     <Box borderBottom="1px solid #F0F0F0" marginTop="15px" paddingBottom="15px">

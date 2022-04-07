@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { useRouter } from 'next/router'
 import NextLink from 'next/link'
 import { Box, Flex, Heading, Link, Text, Image, Grid } from '@chakra-ui/react'
 import { useQuery } from '@apollo/client'
@@ -15,6 +16,7 @@ import { GET_USER } from '../graphql/queries/user'
 
 const Home: React.FC = () => {
   isUserNotFound()
+  const router = useRouter()
 
   const { user } = useAuth()
 
@@ -82,6 +84,7 @@ const Home: React.FC = () => {
               rounded="2px"
               marginRight="15px"
               textTransform="lowercase"
+              onClick={() => router.push(`/category/food`)}
             >
               <Text color="#003049" fontWeight="semibold">
                 Alimentos
@@ -97,6 +100,7 @@ const Home: React.FC = () => {
               rounded="2px"
               marginRight="15px"
               textTransform="lowercase"
+              onClick={() => router.push(`/category/drink`)}
             >
               <Text color="#003049" fontWeight="semibold">
                 Bebidas
@@ -112,6 +116,7 @@ const Home: React.FC = () => {
               rounded="2px"
               marginRight="15px"
               textTransform="lowercase"
+              onClick={() => router.push(`/category/bazar`)}
             >
               <Text color="#003049" fontWeight="semibold">
                 Bazar
@@ -127,6 +132,7 @@ const Home: React.FC = () => {
               rounded="2px"
               marginRight="15px"
               textTransform="lowercase"
+              onClick={() => router.push(`/category/bread`)}
             >
               <Text color="#003049" fontWeight="semibold">
                 Panadería
