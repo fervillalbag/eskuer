@@ -358,7 +358,7 @@ const Admin: React.FC = () => {
       </Text>
 
       <Box marginTop="15px">
-        <NextLink href="/create/price">
+        <NextLink href="/update/product">
           <Link
             width="100%"
             display="flex"
