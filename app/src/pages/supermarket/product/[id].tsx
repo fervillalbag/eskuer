@@ -7,6 +7,8 @@ import { SuperContext } from '../../../context/SuperContext'
 import { GET_PRICES } from '../../../graphql/queries/price'
 import Back from '../../../components/Back'
 import { GET_PRODUCT } from '../../../graphql/queries/product'
+import ItemProduct from '../../../components/ItemProduct'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
 
 const ProductSupermarket: React.FC = () => {
   const router = useRouter()
@@ -34,6 +36,17 @@ const ProductSupermarket: React.FC = () => {
     <Box padding="20px">
       <Box>
         <Back title={product?.name} />
+
+        <Box className="image-cover" marginTop="20px">
+          <LazyLoadImage
+            src={product?.image}
+            alt="Imagen del producto"
+            width="100%"
+            effect="blur"
+          />
+        </Box>
+
+        <ItemProduct key={price.id} price={price} />
       </Box>
     </Box>
   )

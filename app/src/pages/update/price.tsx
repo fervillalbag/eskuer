@@ -5,14 +5,12 @@ import { Box, Button, Input, Select, Text } from '@chakra-ui/react'
 import { useMutation, useQuery } from '@apollo/client'
 import { useRouter } from 'next/router'
 
-import {
-  GET_SUPERMARKET,
-  GET_SUPERMARKETS
-} from '../../graphql/queries/supermarket'
+import { GET_SUPERMARKET } from '../../graphql/queries/supermarket'
 import { GET_PRODUCTS } from '../../graphql/queries/product'
-import { CREATE_PRICE } from '../../graphql/mutations/price'
+import { UPDATE_PRICE } from '../../graphql/mutations/price'
 import Back from '../../components/Back'
-import { GET_PRICES } from '../../graphql/queries/price'
+import { GET_PRICES, GET_PRICES_ALL } from '../../graphql/queries/price'
+import SelectSuper from '../../components/SelectSuper'
 
 const CreatePrice: React.FC = () => {
   const router = useRouter()
@@ -21,7 +19,7 @@ const CreatePrice: React.FC = () => {
   const [productId, setProductId] = useState<string | null>(null)
   const [price, setPrice] = useState<number>(0)
 
-  const [createPrice] = useMutation(CREATE_PRICE)
+  const [updatePrice] = useMutation(UPDATE_PRICE)
 
   const { data: dataProducts } = useQuery(GET_PRODUCTS, {
     fetchPolicy: 'network-only'
@@ -34,7 +32,11 @@ const CreatePrice: React.FC = () => {
     }
   })
 
-  const { data: dataSupermarkets } = useQuery(GET_SUPERMARKETS)
+  const { data: dataPrices } = useQuery(GET_PRICES_ALL, {
+    variables: {
+      idProduct: productId
+    }
+  })
 
   const { data: dataPrice } = useQuery(GET_PRICES, {
     variables: {
@@ -45,7 +47,7 @@ const CreatePrice: React.FC = () => {
 
   const products = dataProducts?.getProducts || []
   const supermarket = dataSupermarket?.getSupermarket || {}
-  const supermarkets = dataSupermarkets?.getSupermarkets || []
+  const prices = dataPrices?.getPrices || []
 
   const product = dataPrice?.getPrice || null
 
@@ -53,12 +55,10 @@ const CreatePrice: React.FC = () => {
     if (!price || !supermarketId || !productId)
       return toast.error('Todos los campos son obligatorios')
 
-    if (product?.id)
-      return toast.error('Este producto ya tiene un precio asignado')
-
-    await createPrice({
+    await updatePrice({
       variables: {
         input: {
+          id: product?.id,
           idProduct: productId,
           idSuper: supermarketId,
           value: price,
@@ -96,10 +96,8 @@ const CreatePrice: React.FC = () => {
             onChange={e => setSupermarketId(e.target.value)}
           >
             <option value="">-- Seleccione supermercado --</option>
-            {supermarkets.map(item => (
-              <option key={item.id} value={item.id}>
-                {item.name}
-              </option>
+            {prices.map(item => (
+              <SelectSuper key={item.id} item={item} />
             ))}
           </Select>
 
@@ -138,7 +136,7 @@ const CreatePrice: React.FC = () => {
             width="100%"
             onClick={handleAddPrice}
           >
-            Añadir precio
+            Actualizar precio
           </Button>
         </Box>
       </Box>

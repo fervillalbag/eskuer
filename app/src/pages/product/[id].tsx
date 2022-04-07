@@ -20,6 +20,7 @@ const Product: React.FC = () => {
   })
 
   const { data: dataPrices } = useQuery(GET_PRICES_ALL, {
+    fetchPolicy: 'network-only',
     variables: {
       idProduct: router?.query?.id
     }

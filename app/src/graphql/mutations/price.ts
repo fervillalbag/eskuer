@@ -8,3 +8,12 @@ export const CREATE_PRICE = gql`
     }
   }
 `
+
+export const UPDATE_PRICE = gql`
+  mutation updatePrice($input: PriceInput!) {
+    updatePrice(input: $input) {
+      message
+      success
+    }
+  }
+`

@@ -150,7 +150,7 @@ const Admin: React.FC = () => {
                   fontSize="12px"
                   fontWeight="semibold"
                 >
-                  Añadir un nuevo precio
+                  Añadir precio a un producto
                 </Text>
                 <Text
                   color="#9F9F9F"
@@ -446,7 +446,7 @@ const Admin: React.FC = () => {
           </Link>
         </NextLink>
 
-        <NextLink href="/create/price">
+        <NextLink href="/update/price">
           <Link
             width="100%"
             display="flex"
@@ -474,7 +474,7 @@ const Admin: React.FC = () => {
                   fontSize="12px"
                   fontWeight="semibold"
                 >
-                  Editar un precio
+                  Editar precio de un producto
                 </Text>
                 <Text
                   color="#9F9F9F"
