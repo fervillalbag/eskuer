@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Grid, Link } from '@chakra-ui/react'
+import { Box, Grid, Link, Text } from '@chakra-ui/react'
 import { useQuery } from '@apollo/client'
 import NextLink from 'next/link'
 
@@ -23,13 +23,24 @@ const Supermarket: React.FC = () => {
             key={supermarket.id}
           >
             <Link
-              border="1px solid #003049"
+              // border="1px solid #003049"
+              backgroundColor="#D5DFE5"
               rounded="2px"
               height="120px"
               padding="10px"
               _hover={{ textDecoration: 'none' }}
             >
-              {supermarket.name}
+              <Text
+                // fontSize="14px"
+                textTransform="uppercase"
+                fontWeight="bold"
+                color="#003049"
+              >
+                {supermarket.name}
+              </Text>
+              <Text fontSize="12px" textTransform="uppercase" color="#003049">
+                {supermarket.address}
+              </Text>
             </Link>
           </NextLink>
         ))}

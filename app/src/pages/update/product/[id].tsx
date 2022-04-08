@@ -1,10 +1,23 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/router'
-import { Box, Button, Image, Input, Select } from '@chakra-ui/react'
+import {
+  Box,
+  Button,
+  Image,
+  Input,
+  Select,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton
+} from '@chakra-ui/react'
 import { useMutation, useQuery } from '@apollo/client'
 
 import Back from '../../../components/Back'
-import { GET_PRODUCT } from '../../../graphql/queries/product'
+import { DELETE_PRODUCT, GET_PRODUCT } from '../../../graphql/queries/product'
 import { UPDATE_PRODUCT } from '../../../graphql/mutations/product'
 import toast from 'react-hot-toast'
 
@@ -25,6 +38,8 @@ const ProductItemUpdate: React.FC = () => {
       id: router?.query?.id
     }
   })
+
+  const [deleteProduct] = useMutation(DELETE_PRODUCT)
 
   const product = dataProduct?.getProduct || {}
 
@@ -50,7 +65,7 @@ const ProductItemUpdate: React.FC = () => {
   const handleProductUpdate = async () => {
     if (!image) {
       try {
-        const response = await updateProduct({
+        await updateProduct({
           variables: {
             input: {
               id: productValue?.id,
@@ -61,7 +76,7 @@ const ProductItemUpdate: React.FC = () => {
             }
           }
         })
-        console.log(response)
+
         return toast.success('Producto actualizado')
       } catch (error) {
         console.log(error)
@@ -82,7 +97,7 @@ const ProductItemUpdate: React.FC = () => {
     const imageData = await resImage.json()
 
     try {
-      const response = await updateProduct({
+      await updateProduct({
         variables: {
           input: {
             id: productValue?.id,
@@ -93,7 +108,7 @@ const ProductItemUpdate: React.FC = () => {
           }
         }
       })
-      console.log(response)
+
       return toast.success('Producto actualizado')
     } catch (error) {
       console.log(error)
@@ -101,8 +116,66 @@ const ProductItemUpdate: React.FC = () => {
     }
   }
 
+  const handleDeleteProduct = async (id: string) => {
+    try {
+      await deleteProduct({
+        variables: {
+          id
+        }
+      })
+
+      toast.success('Producto eliminado correctamente!')
+      router.push('/')
+    } catch (error) {
+      console.log(error)
+      toast.error('Hubo un error!')
+    }
+  }
+
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const onClose = () => setIsOpen(false)
+  const onOpen = () => setIsOpen(true)
+
   return (
     <Box padding="20px">
+      <Modal isOpen={isOpen} onClose={onClose} isCentered size="xs">
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader padding="15px">Eliminar</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody padding="0 15px">¿Desea eliminar el producto?</ModalBody>
+
+          <ModalFooter
+            display="grid"
+            gridTemplateColumns="repeat(2, 1fr)"
+            gap="15px"
+            padding="15px"
+            marginTop="10px"
+          >
+            <Button
+              rounded="2px"
+              width="100%"
+              color="#003049"
+              backgroundColor="#D5DFE5"
+              onClick={onClose}
+            >
+              Cerrar
+            </Button>
+            <Button
+              rounded="2px"
+              width="100%"
+              color="red.700"
+              backgroundColor="red.100"
+              _focus={{ shadow: 0 }}
+              _hover={{ backgroundColor: 'red.200' }}
+              onClick={() => handleDeleteProduct(productValue?.id)}
+            >
+              Si, eliminar
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+
       <Box>
         <Back title={product?.name} />
       </Box>
@@ -200,6 +273,24 @@ const ProductItemUpdate: React.FC = () => {
           onClick={handleProductUpdate}
         >
           Actualizar producto
+        </Button>
+
+        <Button
+          rounded="2px"
+          backgroundColor="red.500"
+          color="#FFF"
+          padding="15px 32px"
+          height="auto"
+          display="block"
+          width="full"
+          marginTop="10px"
+          onClick={onOpen}
+          _focus={{ shadow: 0 }}
+          _hover={{
+            backgroundColor: 'red.700'
+          }}
+        >
+          Eliminar producto
         </Button>
       </Box>
     </Box>

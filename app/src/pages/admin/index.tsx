@@ -386,7 +386,7 @@ const Admin: React.FC = () => {
                   fontSize="12px"
                   fontWeight="semibold"
                 >
-                  Editar un producto
+                  Editar/Eliminar un producto
                 </Text>
                 <Text
                   color="#9F9F9F"

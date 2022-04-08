@@ -9,10 +9,13 @@ import Product from '../../../components/Product'
 import { GET_PRODUCTS } from '../../../graphql/queries/product'
 
 const ProductsUpdate: React.FC = () => {
-  const { data: dataProducts, loading: loadingProducts } =
-    useQuery(GET_PRODUCTS)
+  const { data: dataProducts, loading: loadingProducts } = useQuery(
+    GET_PRODUCTS,
+    {
+      fetchPolicy: 'network-only'
+    }
+  )
   const products = dataProducts?.getProducts || []
-  console.log(products)
 
   return (
     <Box padding="20px">
