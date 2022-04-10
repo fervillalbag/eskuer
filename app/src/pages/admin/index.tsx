@@ -402,7 +402,7 @@ const Admin: React.FC = () => {
           </Link>
         </NextLink>
 
-        <NextLink href="/create/price">
+        <NextLink href="/update/supermarket">
           <Link
             width="100%"
             display="flex"
@@ -430,7 +430,7 @@ const Admin: React.FC = () => {
                   fontSize="12px"
                   fontWeight="semibold"
                 >
-                  Editar un supermercado
+                  Editar/Eliminar un supermercado
                 </Text>
                 <Text
                   color="#9F9F9F"

@@ -32,7 +32,7 @@ const Back: React.FC<BackIprops> = ({ title, showButton = true }) => {
       <Box marginLeft={!showButton ? '0' : '15px'}>
         <Text
           fontWeight="bold"
-          fontSize="20px"
+          fontSize="18px"
           color="#003049"
           textTransform="uppercase"
         >

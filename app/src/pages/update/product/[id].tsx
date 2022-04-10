@@ -36,7 +36,8 @@ const ProductItemUpdate: React.FC = () => {
   const { data: dataProduct, loading } = useQuery(GET_PRODUCT, {
     variables: {
       id: router?.query?.id
-    }
+    },
+    fetchPolicy: 'network-only'
   })
 
   const [deleteProduct] = useMutation(DELETE_PRODUCT)

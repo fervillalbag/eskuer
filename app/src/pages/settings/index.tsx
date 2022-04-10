@@ -1,13 +1,13 @@
 import React from 'react'
-import { Box, Text, Link, Grid } from '@chakra-ui/react'
 import NextLink from 'next/link'
+import { Box, Text, Link, Grid } from '@chakra-ui/react'
 import { BsQuestionCircleFill } from 'react-icons/bs'
 import { MdLocalGroceryStore } from 'react-icons/md'
+import { IoIosDocument } from 'react-icons/io'
 
 import Navbar from '../../components/Navbar'
 import Back from '../../components/Back'
 import TagProfile from '../../components/TagProfile'
-import { IoIosDocument } from 'react-icons/io'
 import useAuth from '../../hooks/useAuth'
 import NotFound from '../../components/NotFound'
 
@@ -116,7 +116,7 @@ const Settings: React.FC = () => {
                     fontSize="12px"
                     fontWeight="semibold"
                   >
-                    Preguntas realizas
+                    Preguntas realizadas
                   </Text>
                   <Text
                     color="#9F9F9F"

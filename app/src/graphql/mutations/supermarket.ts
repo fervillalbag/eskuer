@@ -8,3 +8,21 @@ export const CREATE_SUPERMARKET = gql`
     }
   }
 `
+
+export const UPDATE_SUPERMARKET = gql`
+  mutation updateSupermarket($input: SupermarketInput!) {
+    updateSupermarket(input: $input) {
+      message
+      success
+    }
+  }
+`
+
+export const DELETE_SUPERMARKET = gql`
+  mutation deleteSupermarket($id: String!) {
+    deleteSupermarket(id: $id) {
+      message
+      success
+    }
+  }
+`
