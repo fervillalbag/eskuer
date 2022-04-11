@@ -13,3 +13,17 @@ export const GET_USER = gql`
     }
   }
 `
+
+export const GET_USERS = gql`
+  query getUsers {
+    getUsers {
+      id
+      name
+      email
+      username
+      createdAt
+      avatar
+      role
+    }
+  }
+`

@@ -16,3 +16,12 @@ export const LOGIN = gql`
     }
   }
 `
+
+export const DELETE_USER = gql`
+  mutation deleteUser($id: String!) {
+    deleteUser(id: $id) {
+      message
+      success
+    }
+  }
+`

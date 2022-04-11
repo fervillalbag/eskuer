@@ -27,6 +27,10 @@ const Login: React.FC = () => {
   }, [user])
 
   const handleLogin = async () => {
+    if (!email || !password) {
+      return toast.error('Todos los campos son obligatorios')
+    }
+
     try {
       const response = await loginMutation({
         variables: {
@@ -36,10 +40,14 @@ const Login: React.FC = () => {
           }
         }
       })
+
       login(response?.data?.login?.token)
       toast.success('Sesión iniciada!')
       router.push('/')
     } catch (error) {
+      if (error?.message === 'User not found!') {
+        toast.error('Este usuario no existe')
+      }
       console.log(error)
     }
   }

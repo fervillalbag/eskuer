@@ -7,6 +7,7 @@ const resolvers = {
   Query: {
     // Product
     getUser: (_, { id }) => userController.getUser(id),
+    getUsers: () => userController.getUsers(),
 
     // Product
     getProducts: () => productController.getProducts(),

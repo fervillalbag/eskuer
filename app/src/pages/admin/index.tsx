@@ -10,7 +10,7 @@ import Back from '../../components/Back'
 import Navbar from '../../components/Navbar'
 import useAuth from '../../hooks/useAuth'
 import { useQuery } from '@apollo/client'
-import { GET_USER } from '../../graphql/queries/user'
+import { GET_USER, GET_USERS } from '../../graphql/queries/user'
 import NotFound from '../../components/NotFound'
 
 const Admin: React.FC = () => {
@@ -22,7 +22,12 @@ const Admin: React.FC = () => {
     }
   })
 
+  const { data: dataUsers } = useQuery(GET_USERS, {
+    fetchPolicy: 'network-only'
+  })
+
   const userInfo = dataUser?.getUser || {}
+  const users = dataUsers?.getUsers || []
 
   if (userInfo.role !== 'ADMIN') return <NotFound />
 
@@ -174,7 +179,7 @@ const Admin: React.FC = () => {
       </Text>
 
       <Box marginTop="15px">
-        <NextLink href="/create/price">
+        <NextLink href="/user">
           <Link
             width="100%"
             display="flex"
@@ -211,7 +216,7 @@ const Admin: React.FC = () => {
                   fontWeight="regular"
                   textTransform="lowercase"
                 >
-                  cantidad de usuarios: 0
+                  cantidad de usuarios: {users.length}
                 </Text>
               </Box>
             </Grid>
