@@ -1,4 +1,5 @@
 const Supermarket = require("../models/supermarket");
+const Price = require("../models/price");
 
 const getSupermarkets = async () => {
   try {
@@ -59,6 +60,7 @@ const updateSupermarket = async (input) => {
 
 const deleteSupermarket = async (id) => {
   try {
+    await Price.find({}).deleteMany({ idSupermarket: id });
     await Supermarket.findOneAndDelete({ _id: id });
 
     return {

@@ -5,12 +5,12 @@ import { Box, Button, Input, Select, Text } from '@chakra-ui/react'
 import { useMutation, useQuery } from '@apollo/client'
 import { useRouter } from 'next/router'
 
+import Back from '../../components/Back'
+import SelectSuper from '../../components/SelectSuper'
 import { GET_SUPERMARKET } from '../../graphql/queries/supermarket'
 import { GET_PRODUCTS } from '../../graphql/queries/product'
 import { UPDATE_PRICE } from '../../graphql/mutations/price'
-import Back from '../../components/Back'
 import { GET_PRICES, GET_PRICES_ALL } from '../../graphql/queries/price'
-import SelectSuper from '../../components/SelectSuper'
 
 const CreatePrice: React.FC = () => {
   const router = useRouter()
@@ -33,12 +33,14 @@ const CreatePrice: React.FC = () => {
   })
 
   const { data: dataPrices } = useQuery(GET_PRICES_ALL, {
+    fetchPolicy: 'network-only',
     variables: {
       idProduct: productId
     }
   })
 
   const { data: dataPrice } = useQuery(GET_PRICES, {
+    fetchPolicy: 'network-only',
     variables: {
       idSuper: supermarketId,
       idProduct: productId

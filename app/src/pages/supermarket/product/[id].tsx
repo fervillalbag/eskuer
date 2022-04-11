@@ -16,6 +16,7 @@ const ProductSupermarket: React.FC = () => {
   const { superSelected } = useContext(SuperContext)
 
   const { data: dataPrice } = useQuery(GET_PRICES, {
+    fetchPolicy: 'network-only',
     variables: {
       idProduct: router?.query?.id,
       idSuper: superSelected
@@ -25,6 +26,7 @@ const ProductSupermarket: React.FC = () => {
   const price = dataPrice?.getPrice || {}
 
   const { data: dataProduct } = useQuery(GET_PRODUCT, {
+    fetchPolicy: 'network-only',
     variables: {
       id: price?.idProduct
     }

@@ -7,7 +7,9 @@ import Back from '../../components/Back'
 import { GET_SUPERMARKETS } from '../../graphql/queries/supermarket'
 
 const Supermarket: React.FC = () => {
-  const { data: dataSupermarkets } = useQuery(GET_SUPERMARKETS)
+  const { data: dataSupermarkets } = useQuery(GET_SUPERMARKETS, {
+    fetchPolicy: 'network-only'
+  })
   const supermarkets = dataSupermarkets?.getSupermarkets || []
 
   return (

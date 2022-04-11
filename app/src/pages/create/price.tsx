@@ -37,6 +37,7 @@ const CreatePrice: React.FC = () => {
   const { data: dataSupermarkets } = useQuery(GET_SUPERMARKETS)
 
   const { data: dataPrice } = useQuery(GET_PRICES, {
+    fetchPolicy: 'network-only',
     variables: {
       idSuper: supermarketId,
       idProduct: productId

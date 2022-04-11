@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Box, Grid } from '@chakra-ui/react'
+import { Box, Grid, Text } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { useQuery } from '@apollo/client'
 
@@ -15,6 +15,7 @@ const ProductItem = ({ product }) => {
   const { setSuperSelected } = useContext(SuperContext)
 
   const { data: dataProduct } = useQuery(GET_PRODUCT, {
+    fetchPolicy: 'network-only',
     variables: {
       id: product?.idProduct
     }
@@ -58,10 +59,16 @@ const Supermarket: React.FC = () => {
       <Box>
         <Back title={supermarket?.name} />
 
-        <Grid gridTemplateColumns="repeat(2, 1fr)" gap="10px" marginTop="25px">
-          {products.map(product => (
-            <ProductItem key={product.id} product={product} />
-          ))}
+        <Grid gridTemplateColumns="repeat(2, 1fr)" gap="10px" marginTop="20px">
+          {products.length === 0 ? (
+            <Box gridColumn="1/4">
+              <Text>No existen productos en este supermercado</Text>
+            </Box>
+          ) : (
+            products.map(product => (
+              <ProductItem key={product.id} product={product} />
+            ))
+          )}
         </Grid>
       </Box>
     </Box>
