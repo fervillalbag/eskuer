@@ -49,6 +49,13 @@ const typeDefs = gql`
     createdAt: String
   }
 
+  type LikeProduct {
+    id: String
+    idUser: String
+    idProduct: String
+    createdAt: String
+  }
+
   input UserInput {
     id: String
     name: String
@@ -104,6 +111,11 @@ const typeDefs = gql`
     # Price
     getPrices(idProduct: String, idSuper: String): [Price]
     getPrice(idProduct: String, idSuper: String): Price
+
+    # Like Product
+    getLikeProducts: [LikeProduct]
+    getLikesProductsUser(idUser: String): [LikeProduct]
+    getLikeProduct(idProduct: String, idUser: String): LikeProduct
   }
 
   type Mutation {
@@ -127,6 +139,17 @@ const typeDefs = gql`
     createPrice(input: PriceInput!): MutationResponse
     updatePrice(input: PriceInput!): MutationResponse
     deletePrice(id: String!): MutationResponse
+
+    # Like Product
+    createLikeProduct(
+      idUser: String
+      idProduct: String
+    ): MutationResponse
+    deleteLikeProduct(
+      id: String
+      idUser: String
+      idProduct: String
+    ): MutationResponse
   }
 `;
 

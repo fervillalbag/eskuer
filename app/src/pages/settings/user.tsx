@@ -19,7 +19,7 @@ const SettingsUser: React.FC = () => {
 
       <Box marginTop="25px">
         <Text color="#003049" marginTop="20px" textTransform="uppercase">
-          Configuración
+          Modificar cuenta
         </Text>
 
         <Box marginTop="15px">
