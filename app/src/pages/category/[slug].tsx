@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Grid, Link } from '@chakra-ui/react'
+import { Box, Grid, Link, Text } from '@chakra-ui/react'
 import Back from '../../components/Back'
 import { useRouter } from 'next/router'
 import Loader from '../../components/Loader'
@@ -33,6 +33,10 @@ const CategoryItem: React.FC = () => {
       <Box as="main" marginTop="15px">
         {loadingProducts ? (
           <Loader />
+        ) : productsFilter.length === 0 ? (
+          <Box>
+            <Text>No hay productos en esta categoría</Text>
+          </Box>
         ) : (
           <Grid gridTemplateColumns="repeat(2, 1fr)" gap="10px">
             {productsFilter.map(product => (
