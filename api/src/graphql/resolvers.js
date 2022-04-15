@@ -29,8 +29,8 @@ const resolvers = {
     getLikeProducts: () => likeProduct.getLikeProducts(),
     getLikesProductsUser: (_, { idUser }) =>
       likeProduct.getLikesProductsUser(idUser),
-    getLikeProduct: (_, { idProduct, idUser }) =>
-      likeProduct.getLikeProduct(idProduct, idUser),
+    getLikeProduct: (_, { input }) =>
+      likeProduct.getLikeProduct(input),
   },
 
   Mutation: {

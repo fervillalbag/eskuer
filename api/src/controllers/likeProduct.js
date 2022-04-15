@@ -96,21 +96,23 @@ const getLikesProductsUser = async (idUser) => {
   }
 };
 
-const getLikeProduct = async (idUser, idProduct) => {
+const getLikeProduct = async (input) => {
   try {
-    const likeProduct = await LikeProduct.findOne({
-      idUser,
-      idProduct,
-    });
+    if (input.idUser && input.idProduct) {
+      const likeProduct = await LikeProduct.findOne({
+        idUser: input.idUser,
+        idProduct: input.idProduct,
+      });
 
-    if (!likeProduct) {
-      return {
-        message: "No like product found!",
-        success: false,
-      };
+      if (!likeProduct) {
+        return {
+          message: "No like product found!",
+          success: false,
+        };
+      }
+
+      return likeProduct;
     }
-
-    return likeProduct;
   } catch (error) {
     console.log(error);
 

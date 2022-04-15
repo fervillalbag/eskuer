@@ -69,6 +69,11 @@ const typeDefs = gql`
     password: String
   }
 
+  input LikeProductInput {
+    idUser: String
+    idProduct: String
+  }
+
   input ProductInput {
     id: String
     name: String
@@ -115,7 +120,7 @@ const typeDefs = gql`
     # Like Product
     getLikeProducts: [LikeProduct]
     getLikesProductsUser(idUser: String): [LikeProduct]
-    getLikeProduct(idProduct: String, idUser: String): LikeProduct
+    getLikeProduct(input: LikeProductInput): LikeProduct
   }
 
   type Mutation {
