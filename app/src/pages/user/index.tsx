@@ -85,7 +85,7 @@ const UserListPage: NextPage = () => {
             marginTop="10px"
           >
             <Button
-              rounded="2px"
+              rounded="3px"
               width="100%"
               color="#003049"
               backgroundColor="#D5DFE5"
@@ -94,7 +94,7 @@ const UserListPage: NextPage = () => {
               Cerrar
             </Button>
             <Button
-              rounded="2px"
+              rounded="3px"
               width="100%"
               color="red.700"
               backgroundColor="red.100"
@@ -151,7 +151,7 @@ const UserListPage: NextPage = () => {
                 backgroundColor="red.400"
                 color="#FFF"
                 fontSize="14px"
-                rounded="2px"
+                rounded="3px"
                 _hover={{ backgroundColor: 'red.500' }}
                 _focus={{ shadow: 0 }}
                 onClick={() => {

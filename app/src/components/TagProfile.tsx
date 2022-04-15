@@ -35,6 +35,7 @@ const TagProfile: React.FC<TagProfileIprops> = ({ user }) => {
             backgroundColor="#FDF0D5"
             color="#003049"
             fontSize="22px"
+            rounded="3px"
             _focus={{ border: 0 }}
           >
             <FaAngleRight />

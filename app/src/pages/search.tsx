@@ -32,9 +32,11 @@ const Search: React.FC = () => {
             <Button
               minWidth="initial"
               height="100%"
-              borderRadius="2px"
+              rounded="3px 3px 0 0"
               backgroundColor="#FDF0D5"
               color="#003049"
+              border="1px solid #003049"
+              borderBottom="4px solid #003049"
               fontSize="24px"
               _focus={{ border: 0 }}
             >

@@ -111,7 +111,10 @@ const getLikeProduct = async (input) => {
         };
       }
 
-      return likeProduct;
+      return {
+        id: likeProduct._id,
+        value: true,
+      };
     }
   } catch (error) {
     console.log(error);

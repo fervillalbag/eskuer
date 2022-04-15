@@ -180,7 +180,7 @@ const SupermarketEditPage: NextPage = () => {
             marginTop="10px"
           >
             <Button
-              rounded="2px"
+              rounded="3px"
               width="100%"
               color="#003049"
               backgroundColor="#D5DFE5"
@@ -189,7 +189,7 @@ const SupermarketEditPage: NextPage = () => {
               Cerrar
             </Button>
             <Button
-              rounded="2px"
+              rounded="3px"
               width="100%"
               color="red.700"
               backgroundColor="red.100"

@@ -11,7 +11,7 @@ interface ProductIprops {
 const Product: React.FC<ProductIprops> = ({ product }) => {
   return (
     <Box>
-      <Box position="relative" height="120px" rounded="2px" overflow="hidden">
+      <Box position="relative" height="120px" rounded="3px" overflow="hidden">
         <Box>
           <LazyLoadImage
             src={product.image}

@@ -79,11 +79,13 @@ const Home: React.FC = () => {
               display="flex"
               justifyContent="center"
               alignItems="center"
-              backgroundColor="#D5DFE5"
+              backgroundColor="#FFF"
               padding="10px 20px"
-              rounded="2px"
+              rounded="3px 3px 0 0"
               marginRight="15px"
               textTransform="lowercase"
+              border="1px solid #003049"
+              borderBottom="4px solid #003049"
               onClick={() => router.push(`/category/food`)}
             >
               <Text color="#003049" fontWeight="semibold">
@@ -95,11 +97,13 @@ const Home: React.FC = () => {
               display="flex"
               justifyContent="center"
               alignItems="center"
-              backgroundColor="#D5DFE5"
+              backgroundColor="#FFF"
               padding="10px 20px"
-              rounded="2px"
+              rounded="3px 3px 0 0"
               marginRight="15px"
               textTransform="lowercase"
+              border="1px solid #003049"
+              borderBottom="4px solid #003049"
               onClick={() => router.push(`/category/drink`)}
             >
               <Text color="#003049" fontWeight="semibold">
@@ -111,11 +115,13 @@ const Home: React.FC = () => {
               display="flex"
               justifyContent="center"
               alignItems="center"
-              backgroundColor="#D5DFE5"
+              backgroundColor="#FFF"
               padding="10px 20px"
-              rounded="2px"
+              rounded="3px 3px 0 0"
               marginRight="15px"
               textTransform="lowercase"
+              border="1px solid #003049"
+              borderBottom="4px solid #003049"
               onClick={() => router.push(`/category/bazar`)}
             >
               <Text color="#003049" fontWeight="semibold">
@@ -127,11 +133,13 @@ const Home: React.FC = () => {
               display="flex"
               justifyContent="center"
               alignItems="center"
-              backgroundColor="#D5DFE5"
+              backgroundColor="#FFF"
               padding="10px 20px"
-              rounded="2px"
+              rounded="3px 3px 0 0"
               marginRight="15px"
               textTransform="lowercase"
+              border="1px solid #003049"
+              borderBottom="4px solid #003049"
               onClick={() => router.push(`/category/bread`)}
             >
               <Text color="#003049" fontWeight="semibold">

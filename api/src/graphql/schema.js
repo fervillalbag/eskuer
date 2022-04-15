@@ -56,6 +56,11 @@ const typeDefs = gql`
     createdAt: String
   }
 
+  type IsLike {
+    id: String
+    value: Boolean
+  }
+
   input UserInput {
     id: String
     name: String
@@ -120,7 +125,7 @@ const typeDefs = gql`
     # Like Product
     getLikeProducts: [LikeProduct]
     getLikesProductsUser(idUser: String): [LikeProduct]
-    getLikeProduct(input: LikeProductInput): LikeProduct
+    getLikeProduct(input: LikeProductInput): IsLike
   }
 
   type Mutation {

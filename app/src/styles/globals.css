@@ -15,8 +15,8 @@
 
 .image-cover img {
   object-fit: cover !important;
-  width: 50% !important;
-  height: 160px !important;
+  width: 100% !important;
+  height: 150px !important;
   border-radius: 2px;
   overflow: hidden;
 }

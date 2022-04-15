@@ -134,16 +134,20 @@ const Register: React.FC = () => {
 
         <Button
           minWidth="initial"
+          marginTop="5px"
           height="auto"
           padding="15px 32px"
           fontWeight="semibold"
           fontSize="1rem"
           borderRadius="4px"
-          backgroundColor="#003049"
-          color="#FFF"
+          backgroundColor="#FFF"
+          rounded="3px 3px 0 0"
+          color="#003049"
+          border="1px solid #003049"
+          borderBottom="4px solid #003049"
           _focus={{ shadow: 0 }}
           _hover={{
-            backgroundColor: '#003049'
+            backgroundColor: '#FFF'
           }}
           width="100%"
           onClick={handleRegister}

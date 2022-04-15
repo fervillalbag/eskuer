@@ -51,7 +51,7 @@ const SettingsUser: React.FC = () => {
                     fontSize="12px"
                     fontWeight="semibold"
                   >
-                    Cambiar el nombre
+                    Cambiar nombre
                   </Text>
                   <Text
                     color="#9F9F9F"
@@ -158,12 +158,15 @@ const SettingsUser: React.FC = () => {
 
         <Button
           minWidth="initial"
-          rounded="2px"
           display="block"
           width="full"
-          height="45px"
+          height="50px"
+          rounded="3px 3px 0 0"
+          border="1px solid #003049"
+          borderBottom="4px solid #003049"
           backgroundColor="#FFF"
           onClick={logout}
+          marginTop="30px"
         >
           Cerrar sesión
         </Button>

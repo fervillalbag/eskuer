@@ -27,7 +27,7 @@ const SupermarketsUpdate: NextPage = () => {
           >
             <Link
               backgroundColor="#D5DFE5"
-              rounded="2px"
+              rounded="3px"
               height="120px"
               padding="10px"
               _hover={{ textDecoration: 'none' }}

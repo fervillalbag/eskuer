@@ -154,7 +154,7 @@ const ProductItemUpdate: React.FC = () => {
             marginTop="10px"
           >
             <Button
-              rounded="2px"
+              rounded="3px"
               width="100%"
               color="#003049"
               backgroundColor="#D5DFE5"
@@ -163,7 +163,7 @@ const ProductItemUpdate: React.FC = () => {
               Cerrar
             </Button>
             <Button
-              rounded="2px"
+              rounded="3px"
               width="100%"
               color="red.700"
               backgroundColor="red.100"
@@ -277,7 +277,7 @@ const ProductItemUpdate: React.FC = () => {
         </Button>
 
         <Button
-          rounded="2px"
+          rounded="3px"
           backgroundColor="red.500"
           color="#FFF"
           padding="15px 32px"

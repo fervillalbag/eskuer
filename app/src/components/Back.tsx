@@ -21,6 +21,9 @@ const Back: React.FC<BackIprops> = ({ title, showButton = true }) => {
             height="50px"
             backgroundColor="#FDF0D5"
             color="#003049"
+            rounded="3px 3px 0 0"
+            border="1px solid #003049"
+            borderBottom="4px solid #003049"
             fontSize="22px"
             _focus={{ border: 0 }}
             onClick={() => router.back()}
