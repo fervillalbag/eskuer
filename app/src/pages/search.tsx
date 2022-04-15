@@ -1,7 +1,7 @@
 import React from 'react'
 import NextLink from 'next/link'
 import { Box, Button, Grid, Input, Text, Link } from '@chakra-ui/react'
-import { HiSearch } from 'react-icons/hi'
+import { FiSearch } from 'react-icons/fi'
 
 import Navbar from '../components/Navbar'
 import Back from '../components/Back'
@@ -40,7 +40,7 @@ const Search: React.FC = () => {
               fontSize="24px"
               _focus={{ border: 0 }}
             >
-              <HiSearch />
+              <FiSearch />
             </Button>
           </Box>
         </Grid>

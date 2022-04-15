@@ -1,13 +1,13 @@
 import React from 'react'
-import { Box, Flex, Link } from '@chakra-ui/react'
 import NextLink from 'next/link'
+import { Box, Flex, Link } from '@chakra-ui/react'
 import { useQuery } from '@apollo/client'
-import { HiSearch } from 'react-icons/hi'
 import { TiHome } from 'react-icons/ti'
-import { BsQuestionCircleFill } from 'react-icons/bs'
-import { IoMdSettings } from 'react-icons/io'
+import { IoIosKey, IoMdSettings } from 'react-icons/io'
 import { useRouter } from 'next/router'
-import { FaKey } from 'react-icons/fa'
+import { FiSearch } from 'react-icons/fi'
+import { GoCommentDiscussion } from 'react-icons/go'
+
 import useAuth from '../hooks/useAuth'
 import { GET_USER } from '../graphql/queries/user'
 
@@ -36,15 +36,17 @@ const Navbar: React.FC = () => {
       <Box
         height="60px"
         backgroundColor="white"
-        borderTop="1px solid #F1F1F1"
+        // borderTop="1px solid #F1F1F1"
         width="calc(100% - 40px)"
         left="50%"
         transform="translate(-50%, 0)"
         position="fixed"
         bottom="20px"
-        rounded="full"
+        rounded="5px 5px 0 0"
         zIndex="50"
-        filter="drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.1))"
+        border="1px solid #003049"
+        borderBottom="4px solid #003049"
+        // filter="drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.1))"
       >
         <Flex
           alignItems="center"
@@ -54,47 +56,43 @@ const Navbar: React.FC = () => {
         >
           <NextLink href="/">
             <Link
-              fontSize="28px"
-              color={pathname === '/' ? '"#003049"' : '#d9d9d9'}
+              fontSize="26px"
+              color={pathname === '/' ? '"#003049"' : '#d5dfe4'}
             >
               <TiHome />
             </Link>
           </NextLink>
           <NextLink href="/search">
             <Link
-              fontSize="28px"
-              color={pathname === '/search' ? '"#003049"' : '#d9d9d9'}
+              fontSize="26px"
+              color={pathname === '/search' ? '"#003049"' : '#d5dfe4'}
             >
-              <HiSearch />
+              <FiSearch />
             </Link>
           </NextLink>
           {userInfo.role === 'ADMIN' && (
             <NextLink href="/admin">
               <Link
-                fontSize="24px"
-                color={
-                  pathname === '/admin'
-                    ? 'hsl(358, 70%, 66%)'
-                    : 'hsl(358, 70%, 85%)'
-                }
+                fontSize="26px"
+                color={pathname === '/admin' ? '#003049' : '#d5dfe4'}
               >
-                <FaKey />
+                <IoIosKey />
               </Link>
             </NextLink>
           )}
           <NextLink href="/">
             <Link
-              fontSize="28px"
-              color={pathname === '/questions' ? '"#003049"' : '#d9d9d9'}
+              fontSize="26px"
+              color={pathname === '/questions' ? '"#003049"' : '#d5dfe4'}
             >
-              <BsQuestionCircleFill />
+              <GoCommentDiscussion />
             </Link>
           </NextLink>
           {user && (
             <NextLink href="/settings">
               <Link
-                fontSize="28px"
-                color={pathname === '/settings' ? '"#003049"' : '#d9d9d9'}
+                fontSize="26px"
+                color={pathname === '/settings' ? '"#003049"' : '#d5dfe4'}
               >
                 <IoMdSettings />
               </Link>
