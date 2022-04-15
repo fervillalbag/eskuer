@@ -40,7 +40,7 @@ const Admin: React.FC = () => {
   if (userInfo.role !== 'ADMIN') return <NotFound />
 
   return (
-    <Box padding="20px 20px 100px 20px">
+    <Box padding="20px 20px 90px 20px">
       <Back showButton={false} title="Administrador" />
       <Text color="#003049" marginTop="20px" textTransform="uppercase">
         Añadir

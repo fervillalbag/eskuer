@@ -1,7 +1,12 @@
 import React from 'react'
+import NextLink from 'next/link'
+import { Box, Grid, Text, Link, Button } from '@chakra-ui/react'
+import { MdOutlineAlternateEmail } from 'react-icons/md'
+import { FaKey, FaUser } from 'react-icons/fa'
 
 import NotFound from '../../components/NotFound'
 import useAuth from '../../hooks/useAuth'
+import Back from '../../components/Back'
 
 const SettingsUser: React.FC = () => {
   const { user, logout } = useAuth()
@@ -9,9 +14,161 @@ const SettingsUser: React.FC = () => {
   if (!user) return <NotFound />
 
   return (
-    <div>
-      <button onClick={logout}>Cerrar sesión</button>
-    </div>
+    <Box padding="20px">
+      <Back title="Info personal" />
+
+      <Box marginTop="25px">
+        <Text color="#003049" marginTop="20px" textTransform="uppercase">
+          Configuración
+        </Text>
+
+        <Box marginTop="15px">
+          <NextLink href="/create/price">
+            <Link
+              width="100%"
+              display="flex"
+              color="#003049"
+              textAlign="center"
+              fontWeight="semibold"
+              textTransform="uppercase"
+              fontSize="14px"
+              _hover={{ textDecoration: 'none' }}
+              marginBottom="20px"
+            >
+              <Grid
+                gridTemplateColumns="40px 1fr"
+                width="full"
+                gap="0 15px"
+                alignItems="center"
+              >
+                <Text fontSize="40px" color="#D5DFE5" marginRight="15px">
+                  <FaUser />
+                </Text>
+                <Box>
+                  <Text
+                    color="#003049"
+                    textAlign="left"
+                    fontSize="12px"
+                    fontWeight="semibold"
+                  >
+                    Cambiar el nombre
+                  </Text>
+                  <Text
+                    color="#9F9F9F"
+                    textAlign="left"
+                    fontSize="12px"
+                    fontWeight="regular"
+                    textTransform="lowercase"
+                  >
+                    mostrar opción
+                  </Text>
+                </Box>
+              </Grid>
+            </Link>
+          </NextLink>
+
+          <NextLink href="/create/price">
+            <Link
+              width="100%"
+              display="flex"
+              color="#003049"
+              textAlign="center"
+              fontWeight="semibold"
+              textTransform="uppercase"
+              fontSize="14px"
+              _hover={{ textDecoration: 'none' }}
+              marginBottom="20px"
+            >
+              <Grid
+                gridTemplateColumns="40px 1fr"
+                width="full"
+                gap="0 15px"
+                alignItems="center"
+              >
+                <Text fontSize="40px" color="#D5DFE5" marginRight="15px">
+                  <MdOutlineAlternateEmail />
+                </Text>
+                <Box>
+                  <Text
+                    color="#003049"
+                    textAlign="left"
+                    fontSize="12px"
+                    fontWeight="semibold"
+                  >
+                    Cambiar email
+                  </Text>
+                  <Text
+                    color="#9F9F9F"
+                    textAlign="left"
+                    fontSize="12px"
+                    fontWeight="regular"
+                    textTransform="lowercase"
+                  >
+                    mostrar opción
+                  </Text>
+                </Box>
+              </Grid>
+            </Link>
+          </NextLink>
+
+          <NextLink href="/create/price">
+            <Link
+              width="100%"
+              display="flex"
+              color="#003049"
+              textAlign="center"
+              fontWeight="semibold"
+              textTransform="uppercase"
+              fontSize="14px"
+              _hover={{ textDecoration: 'none' }}
+              marginBottom="20px"
+            >
+              <Grid
+                gridTemplateColumns="40px 1fr"
+                width="full"
+                gap="0 15px"
+                alignItems="center"
+              >
+                <Text fontSize="40px" color="#D5DFE5" marginRight="15px">
+                  <FaKey />
+                </Text>
+                <Box>
+                  <Text
+                    color="#003049"
+                    textAlign="left"
+                    fontSize="12px"
+                    fontWeight="semibold"
+                  >
+                    Cambiar contraseña
+                  </Text>
+                  <Text
+                    color="#9F9F9F"
+                    textAlign="left"
+                    fontSize="12px"
+                    fontWeight="regular"
+                    textTransform="lowercase"
+                  >
+                    mostrar opción
+                  </Text>
+                </Box>
+              </Grid>
+            </Link>
+          </NextLink>
+        </Box>
+
+        <Button
+          minWidth="initial"
+          rounded="2px"
+          display="block"
+          width="full"
+          height="45px"
+          backgroundColor="#FFF"
+          onClick={logout}
+        >
+          Cerrar sesión
+        </Button>
+      </Box>
+    </Box>
   )
 }
 
