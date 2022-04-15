@@ -12,6 +12,8 @@ import useAuth from '../../hooks/useAuth'
 import { useQuery } from '@apollo/client'
 import { GET_USER, GET_USERS } from '../../graphql/queries/user'
 import NotFound from '../../components/NotFound'
+import { GET_PRODUCTS } from '../../graphql/queries/product'
+import { GET_SUPERMARKETS } from '../../graphql/queries/supermarket'
 
 const Admin: React.FC = () => {
   const { user } = useAuth()
@@ -26,8 +28,14 @@ const Admin: React.FC = () => {
     fetchPolicy: 'network-only'
   })
 
+  const { data: dataProducts } = useQuery(GET_PRODUCTS)
+
+  const { data: dataSupermarkets } = useQuery(GET_SUPERMARKETS)
+
   const userInfo = dataUser?.getUser || {}
   const users = dataUsers?.getUsers || []
+  const products = dataProducts?.getProducts || []
+  const supermarkets = dataSupermarkets?.getSupermarkets || []
 
   if (userInfo.role !== 'ADMIN') return <NotFound />
 
@@ -223,7 +231,7 @@ const Admin: React.FC = () => {
           </Link>
         </NextLink>
 
-        <NextLink href="/create/price">
+        <NextLink href="/list/product">
           <Link
             width="100%"
             display="flex"
@@ -260,14 +268,14 @@ const Admin: React.FC = () => {
                   fontWeight="regular"
                   textTransform="lowercase"
                 >
-                  cantidad de productos: 0
+                  cantidad de productos: {products.length}
                 </Text>
               </Box>
             </Grid>
           </Link>
         </NextLink>
 
-        <NextLink href="/create/price">
+        <NextLink href="/list/supermarket">
           <Link
             width="100%"
             display="flex"
@@ -304,51 +312,7 @@ const Admin: React.FC = () => {
                   fontWeight="regular"
                   textTransform="lowercase"
                 >
-                  cantidad de supermercados: 0
-                </Text>
-              </Box>
-            </Grid>
-          </Link>
-        </NextLink>
-
-        <NextLink href="/create/price">
-          <Link
-            width="100%"
-            display="flex"
-            color="#003049"
-            textAlign="center"
-            fontWeight="semibold"
-            textTransform="uppercase"
-            fontSize="14px"
-            _hover={{ textDecoration: 'none' }}
-            marginBottom="20px"
-          >
-            <Grid
-              gridTemplateColumns="40px 1fr"
-              width="full"
-              gap="0 15px"
-              alignItems="center"
-            >
-              <Text fontSize="40px" color="#D5DFE5" marginRight="15px">
-                <AiFillDollarCircle />
-              </Text>
-              <Box>
-                <Text
-                  color="#003049"
-                  textAlign="left"
-                  fontSize="12px"
-                  fontWeight="semibold"
-                >
-                  Lista de precios
-                </Text>
-                <Text
-                  color="#9F9F9F"
-                  textAlign="left"
-                  fontSize="12px"
-                  fontWeight="regular"
-                  textTransform="lowercase"
-                >
-                  cantidad de precios: 0
+                  cantidad de supermercados: {supermarkets.length}
                 </Text>
               </Box>
             </Grid>
