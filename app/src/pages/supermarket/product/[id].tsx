@@ -39,7 +39,7 @@ const ProductSupermarket: React.FC = () => {
       <Box>
         <Back title={product?.name} />
 
-        <Box className="image-cover" marginTop="20px">
+        <Box width="150px" className="image-cover" marginTop="20px">
           <LazyLoadImage
             src={product?.image}
             alt="Imagen del producto"

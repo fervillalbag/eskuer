@@ -1,4 +1,5 @@
 import React from 'react'
+import toast from 'react-hot-toast'
 import { useRouter } from 'next/router'
 import { Box, Flex, Button } from '@chakra-ui/react'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
@@ -6,7 +7,6 @@ import { useMutation, useQuery } from '@apollo/client'
 
 import ItemProduct from '../../components/ItemProduct'
 import Back from '../../components/Back'
-
 import { GET_PRODUCT } from '../../graphql/queries/product'
 import { GET_PRICES_ALL } from '../../graphql/queries/price'
 import { BsBookmark, BsBookmarkFill } from 'react-icons/bs'
@@ -112,7 +112,11 @@ const Product: React.FC = () => {
             fontSize="20px"
             _hover={{ backgroundColor: '#FFF' }}
             onClick={() => {
-              if (dataLike?.value) {
+              if (!user?.id) {
+                toast.error(
+                  'Necesitas tener una cuenta para guardar un producto'
+                )
+              } else if (dataLike?.value) {
                 handleDeleteLikeProduct()
               } else {
                 handleAddLikeProduct()
