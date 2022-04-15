@@ -8,3 +8,14 @@ export const GET_LIKE_PRODUCT = gql`
     }
   }
 `
+
+export const GET_LIKE_PRODUCTS_USER = gql`
+  query getLikesProductsUser($idUser: String) {
+    getLikesProductsUser(idUser: $idUser) {
+      id
+      idUser
+      idProduct
+      createdAt
+    }
+  }
+`

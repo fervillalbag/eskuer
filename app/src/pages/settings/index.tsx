@@ -44,7 +44,7 @@ const Settings: React.FC = () => {
         </Text>
 
         <Box marginTop="15px">
-          <NextLink href="/create/price">
+          <NextLink href="/saved/products">
             <Link
               width="100%"
               display="flex"
