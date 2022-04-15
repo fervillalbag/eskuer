@@ -268,11 +268,13 @@ const SupermarketEditPage: NextPage = () => {
         <Button
           minWidth="initial"
           height="auto"
+          borderRadius="3px 3px 0 0"
           padding="12px 32px"
           fontWeight="medium"
           fontSize="1rem"
-          borderRadius="2px"
           backgroundColor="#D5DFE5"
+          border="1px solid #003049"
+          borderBottom="4px solid #003049"
           color="#003049"
           onClick={() => inputFileRef.current.click()}
           _focus={{ shadow: 0 }}
@@ -303,16 +305,19 @@ const SupermarketEditPage: NextPage = () => {
           minWidth="initial"
           height="auto"
           padding="15px 32px"
-          borderRadius="2px"
           fontWeight="semibold"
           fontSize="1rem"
-          backgroundColor="#003049"
-          color="#FFF"
+          borderRadius="3px 3px 0 0"
+          border="1px solid #003049"
+          backgroundColor="#FFF"
+          borderBottom="4px solid #003049"
+          color="#003049"
           _focus={{ shadow: 0 }}
           _hover={{
             backgroundColor: '#003049'
           }}
           width="100%"
+          marginTop="25px"
           onClick={handleCreateSupermarket}
         >
           Actualizado super
@@ -322,17 +327,21 @@ const SupermarketEditPage: NextPage = () => {
           minWidth="initial"
           height="auto"
           padding="15px 32px"
-          borderRadius="2px"
           fontWeight="semibold"
           fontSize="1rem"
-          backgroundColor="red.500"
-          color="#FFF"
-          marginTop="10px"
+          borderRadius="3px 3px 0 0"
+          border="1px solid"
+          borderBottom="4px solid"
+          borderColor="red.500"
+          borderBottomColor="red.500"
+          backgroundColor="#FFF"
+          color="red.500"
           _focus={{ shadow: 0 }}
           _hover={{
             backgroundColor: '#003049'
           }}
           width="100%"
+          marginTop="15px"
           onClick={onOpen}
         >
           Eliminar super

@@ -237,11 +237,13 @@ const ProductItemUpdate: React.FC = () => {
         <Button
           minWidth="initial"
           height="auto"
-          borderRadius="2px"
+          borderRadius="3px 3px 0 0"
           padding="12px 32px"
           fontWeight="medium"
           fontSize="1rem"
           backgroundColor="#D5DFE5"
+          border="1px solid #003049"
+          borderBottom="4px solid #003049"
           color="#003049"
           onClick={() => inputFileRef.current.click()}
           _focus={{ shadow: 0 }}
@@ -262,9 +264,11 @@ const ProductItemUpdate: React.FC = () => {
           padding="15px 32px"
           fontWeight="semibold"
           fontSize="1rem"
-          borderRadius="2px"
-          backgroundColor="#003049"
-          color="#FFF"
+          borderRadius="3px 3px 0 0"
+          border="1px solid #003049"
+          backgroundColor="#FFF"
+          borderBottom="4px solid #003049"
+          color="#003049"
           _focus={{ shadow: 0 }}
           _hover={{
             backgroundColor: '#003049'
@@ -277,19 +281,25 @@ const ProductItemUpdate: React.FC = () => {
         </Button>
 
         <Button
-          rounded="3px"
-          backgroundColor="red.500"
-          color="#FFF"
-          padding="15px 32px"
+          minWidth="initial"
           height="auto"
-          display="block"
-          width="full"
-          marginTop="10px"
-          onClick={onOpen}
+          padding="15px 32px"
+          fontWeight="semibold"
+          fontSize="1rem"
+          borderRadius="3px 3px 0 0"
+          border="1px solid"
+          borderBottom="4px solid"
+          borderColor="red.500"
+          borderBottomColor="red.500"
+          backgroundColor="#FFF"
+          color="red.500"
           _focus={{ shadow: 0 }}
           _hover={{
-            backgroundColor: 'red.700'
+            backgroundColor: '#003049'
           }}
+          width="100%"
+          marginTop="15px"
+          onClick={onOpen}
         >
           Eliminar producto
         </Button>

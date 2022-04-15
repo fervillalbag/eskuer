@@ -120,11 +120,13 @@ const CreateProduct: React.FC = () => {
           <Button
             minWidth="initial"
             height="auto"
-            borderRadius="2px"
+            borderRadius="3px 3px 0 0"
             padding="12px 32px"
             fontWeight="medium"
             fontSize="1rem"
             backgroundColor="#D5DFE5"
+            border="1px solid #003049"
+            borderBottom="4px solid #003049"
             color="#003049"
             onClick={() => inputFileRef.current.click()}
             _focus={{ shadow: 0 }}
@@ -157,9 +159,11 @@ const CreateProduct: React.FC = () => {
             padding="15px 32px"
             fontWeight="semibold"
             fontSize="1rem"
-            borderRadius="2px"
-            backgroundColor="#003049"
-            color="#FFF"
+            borderRadius="3px 3px 0 0"
+            border="1px solid #003049"
+            backgroundColor="#FFF"
+            borderBottom="4px solid #003049"
+            color="#003049"
             _focus={{ shadow: 0 }}
             _hover={{
               backgroundColor: '#003049'

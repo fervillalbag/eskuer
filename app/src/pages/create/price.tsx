@@ -129,9 +129,11 @@ const CreatePrice: React.FC = () => {
             padding="15px 32px"
             fontWeight="semibold"
             fontSize="1rem"
-            borderRadius="4px"
-            backgroundColor="#003049"
-            color="#FFF"
+            borderRadius="3px 3px 0 0"
+            border="1px solid #003049"
+            backgroundColor="#FFF"
+            borderBottom="4px solid #003049"
+            color="#003049"
             _focus={{ shadow: 0 }}
             _hover={{
               backgroundColor: '#003049'

@@ -26,18 +26,15 @@ const SupermarketsUpdate: NextPage = () => {
             key={supermarket.id}
           >
             <Link
-              backgroundColor="#D5DFE5"
-              rounded="3px"
+              backgroundColor="#FFF"
+              rounded="3px 3px 0 0"
               height="120px"
               padding="10px"
+              border="1px solid #003049"
+              borderBottom="4px solid #003049"
               _hover={{ textDecoration: 'none' }}
             >
-              <Text
-                // fontSize="14px"
-                textTransform="uppercase"
-                fontWeight="bold"
-                color="#003049"
-              >
+              <Text textTransform="uppercase" fontWeight="bold" color="#003049">
                 {supermarket.name}
               </Text>
               <Text fontSize="12px" textTransform="uppercase" color="#003049">

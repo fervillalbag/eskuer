@@ -144,11 +144,13 @@ const CreateSupermarket: React.FC = () => {
           <Button
             minWidth="initial"
             height="auto"
+            borderRadius="3px 3px 0 0"
             padding="12px 32px"
             fontWeight="medium"
             fontSize="1rem"
-            borderRadius="2px"
             backgroundColor="#D5DFE5"
+            border="1px solid #003049"
+            borderBottom="4px solid #003049"
             color="#003049"
             onClick={() => inputFileRef.current.click()}
             _focus={{ shadow: 0 }}
@@ -179,11 +181,13 @@ const CreateSupermarket: React.FC = () => {
             minWidth="initial"
             height="auto"
             padding="15px 32px"
-            borderRadius="2px"
             fontWeight="semibold"
             fontSize="1rem"
-            backgroundColor="#003049"
-            color="#FFF"
+            borderRadius="3px 3px 0 0"
+            border="1px solid #003049"
+            backgroundColor="#FFF"
+            borderBottom="4px solid #003049"
+            color="#003049"
             _focus={{ shadow: 0 }}
             _hover={{
               backgroundColor: '#003049'

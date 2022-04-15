@@ -414,50 +414,6 @@ const Admin: React.FC = () => {
             </Grid>
           </Link>
         </NextLink>
-
-        <NextLink href="/update/price">
-          <Link
-            width="100%"
-            display="flex"
-            color="#003049"
-            textAlign="center"
-            fontWeight="semibold"
-            textTransform="uppercase"
-            fontSize="14px"
-            _hover={{ textDecoration: 'none' }}
-            marginBottom="20px"
-          >
-            <Grid
-              gridTemplateColumns="40px 1fr"
-              width="full"
-              gap="0 15px"
-              alignItems="center"
-            >
-              <Text fontSize="40px" color="#D5DFE5" marginRight="15px">
-                <AiFillDollarCircle />
-              </Text>
-              <Box>
-                <Text
-                  color="#003049"
-                  textAlign="left"
-                  fontSize="12px"
-                  fontWeight="semibold"
-                >
-                  Editar precio de un producto
-                </Text>
-                <Text
-                  color="#9F9F9F"
-                  textAlign="left"
-                  fontSize="12px"
-                  fontWeight="regular"
-                  textTransform="lowercase"
-                >
-                  mostrar opciones
-                </Text>
-              </Box>
-            </Grid>
-          </Link>
-        </NextLink>
       </Box>
 
       <Navbar />
