@@ -314,10 +314,10 @@ const SupermarketEditPage: NextPage = () => {
           color="#003049"
           _focus={{ shadow: 0 }}
           _hover={{
-            backgroundColor: '#003049'
+            backgroundColor: '#FFF'
           }}
           width="100%"
-          marginTop="25px"
+          marginTop="10px"
           onClick={handleCreateSupermarket}
         >
           Actualizado super
@@ -338,7 +338,7 @@ const SupermarketEditPage: NextPage = () => {
           color="red.500"
           _focus={{ shadow: 0 }}
           _hover={{
-            backgroundColor: '#003049'
+            backgroundColor: '#FFF'
           }}
           width="100%"
           marginTop="15px"

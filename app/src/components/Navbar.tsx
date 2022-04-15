@@ -29,8 +29,9 @@ const Navbar: React.FC = () => {
         position="fixed"
         bottom="0"
         width="100%"
-        height="110px"
+        height="80px"
         background="linear-gradient(180deg, rgba(255,255,255,0.0) 0%, rgba(255,255,255,0.95) 75%)"
+        zIndex="1"
       ></Box>
 
       <Box

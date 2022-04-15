@@ -136,7 +136,7 @@ const CreatePrice: React.FC = () => {
             color="#003049"
             _focus={{ shadow: 0 }}
             _hover={{
-              backgroundColor: '#003049'
+              backgroundColor: '#FFF'
             }}
             width="100%"
             onClick={handleAddPrice}
