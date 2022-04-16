@@ -3,6 +3,7 @@ const supermarketController = require("../controllers/supermarket");
 const priceController = require("../controllers/price");
 const userController = require("../controllers/user");
 const likeProduct = require("../controllers/likeProduct");
+const postController = require("../controllers/post");
 
 const resolvers = {
   Query: {
@@ -31,6 +32,10 @@ const resolvers = {
       likeProduct.getLikesProductsUser(idUser),
     getLikeProduct: (_, { input }) =>
       likeProduct.getLikeProduct(input),
+
+    // Post
+    getPosts: () => postController.getPosts(),
+    getPost: (_, { id }) => postController.getPost(id),
   },
 
   Mutation: {
@@ -65,6 +70,11 @@ const resolvers = {
       likeProduct.createLikeProduct(idUser, idProduct),
     deleteLikeProduct: (_, { id, idUser, idProduct }) =>
       likeProduct.deleteLikeProduct(id, idUser, idProduct),
+
+    // Post
+    createPost: (_, { input }) => postController.createPost(input),
+    updatePost: (_, { input }) => postController.updatePost(input),
+    deletePost: (_, { id }) => postController.deletePost(id),
   },
 };
 

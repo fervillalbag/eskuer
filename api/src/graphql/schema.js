@@ -61,6 +61,22 @@ const typeDefs = gql`
     value: Boolean
   }
 
+  type Post {
+    id: String
+    title: String
+    idUser: String
+    image: String
+    createdAt: String
+    updateAt: String
+  }
+
+  input PostInput {
+    id: String
+    title: String
+    idUser: String
+    image: String
+  }
+
   input UserInput {
     id: String
     name: String
@@ -126,6 +142,10 @@ const typeDefs = gql`
     getLikeProducts: [LikeProduct]
     getLikesProductsUser(idUser: String): [LikeProduct]
     getLikeProduct(input: LikeProductInput): IsLike
+
+    # Post
+    getPosts: [Post]
+    getPost(id: String): Post
   }
 
   type Mutation {
@@ -160,6 +180,11 @@ const typeDefs = gql`
       idUser: String
       idProduct: String
     ): MutationResponse
+
+    # Post
+    createPost(input: PostInput!): MutationResponse
+    updatePost(input: PostInput!): MutationResponse
+    deletePost(id: String!): MutationResponse
   }
 `;
 
