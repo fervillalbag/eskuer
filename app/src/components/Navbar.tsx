@@ -30,14 +30,13 @@ const Navbar: React.FC = () => {
         bottom="0"
         width="100%"
         height="80px"
-        background="linear-gradient(180deg, rgba(255,255,255,0.0) 0%, rgba(255,255,255,0.95) 75%)"
+        background="linear-gradient(180deg, rgba(255,255,255,0.0) 0%, rgba(255,255,255,0.97) 75%)"
         zIndex="1"
       ></Box>
 
       <Box
         height="60px"
         backgroundColor="white"
-        // borderTop="1px solid #F1F1F1"
         width="calc(100% - 40px)"
         left="50%"
         transform="translate(-50%, 0)"
@@ -47,7 +46,6 @@ const Navbar: React.FC = () => {
         zIndex="50"
         border="1px solid #D5DFE5"
         borderBottom="4px solid #D5DFE5"
-        // filter="drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.1))"
       >
         <Flex
           alignItems="center"

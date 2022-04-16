@@ -22,10 +22,12 @@ const SupermarketsUpdate: NextPage = () => {
       <Grid gridTemplateColumns="repeat(2, 1fr)" marginTop="25px" gap="20px">
         {supermarkets.map(supermarket => (
           <Box
-            backgroundColor="#D5DFE5"
-            rounded="3px"
+            backgroundColor="#FFF"
+            rounded="3px 3px 0 0"
             height="120px"
             padding="10px"
+            border="1px solid #003049"
+            borderBottom="4px solid #003049"
             _hover={{ textDecoration: 'none' }}
             key={supermarket.id}
           >
