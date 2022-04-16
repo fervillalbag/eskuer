@@ -4,6 +4,7 @@ const priceController = require("../controllers/price");
 const userController = require("../controllers/user");
 const likeProduct = require("../controllers/likeProduct");
 const postController = require("../controllers/post");
+const likePostController = require("../controllers/likePost");
 
 const resolvers = {
   Query: {
@@ -36,6 +37,13 @@ const resolvers = {
     // Post
     getPosts: () => postController.getPosts(),
     getPost: (_, { id }) => postController.getPost(id),
+
+    // Like Post
+    getLikePosts: () => likePostController.getLikePosts(),
+    getLikesPostsUser: (_, { idUser }) =>
+      likePostController.getLikesPostsUser(idUser),
+    getLikePost: (_, { idUser, idPost }) =>
+      likePostController.getLikePost(idUser, idPost),
   },
 
   Mutation: {
@@ -75,6 +83,12 @@ const resolvers = {
     createPost: (_, { input }) => postController.createPost(input),
     updatePost: (_, { input }) => postController.updatePost(input),
     deletePost: (_, { id }) => postController.deletePost(id),
+
+    // Like Post
+    createLikePost: (_, { idUser, idPost }) =>
+      likePostController.createLikePost(idUser, idPost),
+    deleteLikePost: (_, { id, idUser, idPost }) =>
+      likePostController.deleteLikePost(id, idUser, idPost),
   },
 };
 

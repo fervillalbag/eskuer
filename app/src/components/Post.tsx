@@ -33,7 +33,7 @@ const Post: React.FC<PostIprops> = ({ post }) => {
         <Image
           width="100%"
           height="100px"
-          objectFit="cover"
+          objectFit="contain"
           verticalAlign="top"
           src={post?.image}
           alt=""

@@ -56,6 +56,13 @@ const typeDefs = gql`
     createdAt: String
   }
 
+  type LikePost {
+    id: String
+    idUser: String
+    idPost: String
+    createdAt: String
+  }
+
   type IsLike {
     id: String
     value: Boolean
@@ -146,6 +153,11 @@ const typeDefs = gql`
     # Post
     getPosts: [Post]
     getPost(id: String): Post
+
+    # Like Post
+    getLikePosts: [LikePost]
+    getLikesPostsUser(idUser: String): [LikePost]
+    getLikePost(idUser: String, idPost: String): IsLike
   }
 
   type Mutation {
@@ -185,6 +197,14 @@ const typeDefs = gql`
     createPost(input: PostInput!): MutationResponse
     updatePost(input: PostInput!): MutationResponse
     deletePost(id: String!): MutationResponse
+
+    # Like Post
+    createLikePost(idUser: String, idPost: String): MutationResponse
+    deleteLikePost(
+      id: String
+      idUser: String
+      idPost: String
+    ): MutationResponse
   }
 `;
 
