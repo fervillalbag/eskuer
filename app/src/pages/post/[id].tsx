@@ -1,10 +1,24 @@
-import React from 'react'
+import React, { useState } from 'react'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import { NextPage } from 'next'
-import { Box, Button, Flex, Image, Text } from '@chakra-ui/react'
+import {
+  Box,
+  Button,
+  Flex,
+  Image,
+  Text,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton
+} from '@chakra-ui/react'
 import { useRouter } from 'next/router'
-import { useQuery } from '@apollo/client'
+import { useMutation, useQuery } from '@apollo/client'
+import toast from 'react-hot-toast'
 
 import 'dayjs/locale/es'
 
@@ -12,12 +26,23 @@ import Back from '../../components/Back'
 import { GET_POST } from '../../graphql/queries/post'
 import { GET_USER } from '../../graphql/queries/user'
 import CommentPost from '../../components/CommentPost'
+import {
+  CREATE_LIKE_POST,
+  DELETE_LIKE_POST
+} from '../../graphql/mutations/likePost'
+import useAuth from '../../hooks/useAuth'
+import { GET_LIKE_POST } from '../../graphql/queries/likePost'
+import { BsBookmark, BsBookmarkFill } from 'react-icons/bs'
+import { DELETE_POST } from '../../graphql/mutations/post'
 
 dayjs.extend(relativeTime)
 dayjs.locale('es')
 
 const PostItem: NextPage = () => {
   const router = useRouter()
+  const { user: userLocal } = useAuth()
+
+  const [isOpen, setIsOpen] = useState<boolean>(false)
 
   const { data: dataPost } = useQuery(GET_POST, {
     variables: {
@@ -33,10 +58,99 @@ const PostItem: NextPage = () => {
     }
   })
 
+  const { data: dataLike, refetch: refetchLike } = useQuery(GET_LIKE_POST, {
+    fetchPolicy: 'network-only',
+    variables: {
+      idPost: router?.query?.id,
+      idUser: userLocal?.id
+    }
+  })
+
+  const [createLikePost] = useMutation(CREATE_LIKE_POST)
+  const [deleteLikePost] = useMutation(DELETE_LIKE_POST)
+  const [deletePost] = useMutation(DELETE_POST)
+
+  const handleAddLikePost = async () => {
+    await createLikePost({
+      variables: {
+        idPost: post?.id,
+        idUser: userLocal?.id
+      }
+    })
+    refetchLike()
+  }
+
   const user = dataUser?.getUser || {}
+  const likePost = dataLike?.getLikePost || {}
+
+  const handleDeleteLikePost = async () => {
+    await deleteLikePost({
+      variables: {
+        id: likePost?.id,
+        idPost: post?.id,
+        idUser: userLocal?.id
+      }
+    })
+    refetchLike()
+  }
+
+  const handleDeletePost = async () => {
+    try {
+      await deletePost({
+        variables: {
+          id: post?.id
+        }
+      })
+      toast.success('Pregunta eliminada!')
+      router.push('/post')
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const onClose = () => setIsOpen(false)
+  const onOpen = () => setIsOpen(true)
 
   return (
     <Box padding="20px">
+      <Modal isOpen={isOpen} onClose={onClose} isCentered size="xs">
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader padding="15px">Eliminar</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody padding="0 15px">¿Desea eliminar la pregunta?</ModalBody>
+
+          <ModalFooter
+            display="grid"
+            gridTemplateColumns="repeat(2, 1fr)"
+            gap="15px"
+            padding="15px"
+            marginTop="10px"
+          >
+            <Button
+              rounded="3px"
+              width="100%"
+              color="#003049"
+              backgroundColor="#D5DFE5"
+              onClick={onClose}
+            >
+              Cerrar
+            </Button>
+            <Button
+              rounded="3px"
+              width="100%"
+              color="red.700"
+              backgroundColor="red.100"
+              _focus={{ shadow: 0 }}
+              _hover={{ backgroundColor: 'red.200' }}
+              onClick={() => handleDeletePost()}
+            >
+              Si, eliminar
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+
       <Box>
         <Back title="Pregunta" />
       </Box>
@@ -44,30 +158,64 @@ const PostItem: NextPage = () => {
       <Box marginTop="20px">
         <Text color="#003049">{post?.title}</Text>
 
-        <Flex marginTop="10px" alignItems="center">
+        <Flex
+          marginTop="15px"
+          alignItems="center"
+          justifyContent="space-between"
+        >
+          <Flex alignItems="center">
+            <Box>
+              <Image
+                src={!user?.avatar ? '/profile-avatar.png' : user?.avatar}
+                width="50px"
+                height="50px"
+                objectFit="cover"
+                borderRadius="100%"
+                overflow="hidden"
+                alt=""
+              />
+            </Box>
+            <Box marginLeft="10px">
+              <Text
+                fontSize="14px"
+                fontWeight="semibold"
+                textTransform="capitalize"
+                color="#003049"
+              >
+                {user?.name}
+              </Text>
+              <Text fontSize="12px" color="#003049">
+                {dayjs(parseInt(post?.createdAt)).fromNow()}
+              </Text>
+            </Box>
+          </Flex>
+
           <Box>
-            <Image
-              src={!user?.avatar ? '/profile-avatar.png' : user?.avatar}
-              width="50px"
-              height="50px"
-              objectFit="cover"
-              borderRadius="100%"
-              overflow="hidden"
-              alt=""
-            />
-          </Box>
-          <Box marginLeft="10px">
-            <Text
-              fontSize="14px"
-              fontWeight="semibold"
-              textTransform="capitalize"
-              color="#003049"
+            <Button
+              minWidth="initial"
+              height="45px"
+              padding="15px"
+              border="1px solid #003049"
+              rounded="3px 3px 0 0"
+              borderBottom="4px solid #003049"
+              backgroundColor="#FFF"
+              fontSize="20px"
+              _hover={{ backgroundColor: '#FFF' }}
+              onClick={() => {
+                if (!user?.id) {
+                  toast.error(
+                    'Necesitas tener una cuenta para guardar un producto'
+                  )
+                } else if (likePost?.value) {
+                  handleDeleteLikePost()
+                } else {
+                  handleAddLikePost()
+                }
+              }}
+              _focus={{ shadow: 0 }}
             >
-              {user?.name}
-            </Text>
-            <Text fontSize="12px" color="#003049">
-              {dayjs(parseInt(post?.createdAt)).fromNow()}
-            </Text>
+              {likePost?.value ? <BsBookmarkFill /> : <BsBookmark />}
+            </Button>
           </Box>
         </Flex>
 
@@ -104,6 +252,29 @@ const PostItem: NextPage = () => {
             // onClick={handleLogin}
           >
             Comentar
+          </Button>
+          <Button
+            minWidth="initial"
+            marginTop="10px"
+            height="auto"
+            padding="15px 32px"
+            fontWeight="semibold"
+            fontSize="1rem"
+            borderRadius="4px"
+            backgroundColor="#FFF"
+            rounded="3px 3px 0 0"
+            color="red.500"
+            border="1px solid"
+            borderBottom="4px solid"
+            borderColor="red.500"
+            _focus={{ shadow: 0 }}
+            _hover={{
+              backgroundColor: '#FFF'
+            }}
+            width="100%"
+            onClick={onOpen}
+          >
+            Eliminar pregunta
           </Button>
 
           <Flex

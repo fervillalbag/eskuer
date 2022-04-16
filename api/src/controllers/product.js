@@ -1,5 +1,6 @@
 const Price = require("../models/price");
 const Product = require("../models/product");
+const LikeProduct = require("../models/likeProduct");
 
 const getProducts = async () => {
   try {
@@ -63,6 +64,7 @@ const updateProduct = async (input) => {
 
 const deleteProduct = async (id) => {
   try {
+    await LikeProduct.find({}).deleteMany({ idProduct: id });
     await Price.find({}).deleteMany({ idProduct: id });
     await Product.findOneAndDelete({ _id: id });
 

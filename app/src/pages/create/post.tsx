@@ -52,7 +52,7 @@ const Post: NextPage = () => {
     const imageData = await resImage.json()
 
     try {
-      const response = await createPost({
+      await createPost({
         variables: {
           input: {
             idUser: user?.id,
@@ -61,7 +61,7 @@ const Post: NextPage = () => {
         }
       })
 
-      toast.success(response?.data?.createPost.message)
+      toast.success('Pregunta creada!')
       router.push('/post')
     } catch (error) {
       console.log(error)

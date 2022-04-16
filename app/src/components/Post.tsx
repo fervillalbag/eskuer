@@ -1,10 +1,17 @@
 import React from 'react'
+import toast from 'react-hot-toast'
 import { Box, Grid, Image, Text, Button } from '@chakra-ui/react'
-import { BsBookmark } from 'react-icons/bs'
+import { BsBookmark, BsBookmarkFill } from 'react-icons/bs'
 import { useRouter } from 'next/router'
-import { useQuery } from '@apollo/client'
+import { useMutation, useQuery } from '@apollo/client'
 
 import { GET_USER } from '../graphql/queries/user'
+import {
+  CREATE_LIKE_POST,
+  DELETE_LIKE_POST
+} from '../graphql/mutations/likePost'
+import useAuth from '../hooks/useAuth'
+import { GET_LIKE_POST } from '../graphql/queries/likePost'
 
 interface PostIprops {
   post: any
@@ -12,6 +19,7 @@ interface PostIprops {
 
 const Post: React.FC<PostIprops> = ({ post }) => {
   const router = useRouter()
+  const { user: userLocal } = useAuth()
 
   const { data: dataUser } = useQuery(GET_USER, {
     variables: {
@@ -19,7 +27,40 @@ const Post: React.FC<PostIprops> = ({ post }) => {
     }
   })
 
+  const { data: dataLike, refetch: refetchLike } = useQuery(GET_LIKE_POST, {
+    fetchPolicy: 'network-only',
+    variables: {
+      idPost: post?.id,
+      idUser: userLocal?.id
+    }
+  })
+
+  const [createLikePost] = useMutation(CREATE_LIKE_POST)
+  const [deleteLikePost] = useMutation(DELETE_LIKE_POST)
+
+  const handleAddLikePost = async () => {
+    await createLikePost({
+      variables: {
+        idPost: post?.id,
+        idUser: userLocal?.id
+      }
+    })
+    refetchLike()
+  }
+
   const user = dataUser?.getUser || {}
+  const likePost = dataLike?.getLikePost || {}
+
+  const handleDeleteLikePost = async () => {
+    await deleteLikePost({
+      variables: {
+        id: likePost?.id,
+        idPost: post?.id,
+        idUser: userLocal?.id
+      }
+    })
+    refetchLike()
+  }
 
   return (
     <Grid
@@ -56,19 +97,18 @@ const Post: React.FC<PostIprops> = ({ post }) => {
           backgroundColor="#FFF"
           fontSize="20px"
           _hover={{ backgroundColor: '#FFF' }}
-          // onClick={() => {
-          //   if (!user?.id) {
-          //     toast.error('Necesitas tener una cuenta para guardar un producto')
-          //   } else if (dataLike?.value) {
-          //     handleDeleteLikeProduct()
-          //   } else {
-          //     handleAddLikeProduct()
-          //   }
-          // }}
+          onClick={() => {
+            if (!user?.id) {
+              toast.error('Necesitas tener una cuenta para guardar un producto')
+            } else if (likePost?.value) {
+              handleDeleteLikePost()
+            } else {
+              handleAddLikePost()
+            }
+          }}
           _focus={{ shadow: 0 }}
         >
-          {/* {dataLike?.value ? <BsBookmarkFill /> : <BsBookmark />} */}
-          <BsBookmark />
+          {likePost?.value ? <BsBookmarkFill /> : <BsBookmark />}
         </Button>
       </Box>
     </Grid>
