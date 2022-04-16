@@ -73,10 +73,6 @@ const CreateProduct: React.FC = () => {
     }
   }
 
-  // const { data, loading } = useQuery(GET_SUPERMARKETS)
-  // if (loading) return null
-  // const supermarkets = data?.getSupermarkets
-
   return (
     <Box>
       <Box padding="20px">
