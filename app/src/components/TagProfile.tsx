@@ -16,7 +16,11 @@ const TagProfile: React.FC<TagProfileIprops> = ({ user }) => {
       gap="0 15px"
     >
       <Box width="50px">
-        <Image src="/profile-avatar.png" alt="" width="50px" />
+        <Image
+          src={!user?.avatar ? '/profile-avatar.png' : user?.avatar}
+          alt=""
+          width="50px"
+        />
       </Box>
       <Flex width="full" justifyContent="space-between" alignItems="center">
         <Box>

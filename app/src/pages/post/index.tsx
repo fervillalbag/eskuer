@@ -12,7 +12,6 @@ const Post: NextPage = () => {
   const { data: dataPosts } = useQuery(GET_POSTS)
 
   const posts = dataPosts?.getPosts || []
-  console.log(posts)
 
   return (
     <Box padding="20px">
@@ -21,8 +20,9 @@ const Post: NextPage = () => {
       </Box>
 
       <Box marginTop="20px">
-        <PostComponent />
-        <PostComponent />
+        {posts.map(post => (
+          <PostComponent key={post.id} post={post} />
+        ))}
       </Box>
 
       <Navbar />

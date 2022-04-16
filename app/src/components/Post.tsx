@@ -1,8 +1,26 @@
 import React from 'react'
 import { Box, Grid, Image, Text, Button } from '@chakra-ui/react'
 import { BsBookmark } from 'react-icons/bs'
+import { useRouter } from 'next/router'
+import { useQuery } from '@apollo/client'
 
-const Post: React.FC = () => {
+import { GET_USER } from '../graphql/queries/user'
+
+interface PostIprops {
+  post: any
+}
+
+const Post: React.FC<PostIprops> = ({ post }) => {
+  const router = useRouter()
+
+  const { data: dataUser } = useQuery(GET_USER, {
+    variables: {
+      id: post?.idUser
+    }
+  })
+
+  const user = dataUser?.getUser || {}
+
   return (
     <Grid
       gridTemplateColumns="100px 1fr auto"
@@ -11,20 +29,20 @@ const Post: React.FC = () => {
       borderBottom="1px solid #d9d9d9"
       paddingBottom="20px"
     >
-      <Box>
+      <Box onClick={() => router.push(`/post/${post.id}`)}>
         <Image
           width="100%"
           height="100px"
           objectFit="cover"
           verticalAlign="top"
-          src="/carrot.jpeg"
+          src={post?.image}
           alt=""
         />
       </Box>
-      <Box>
-        <Text fontSize="14px">¿Dónde puedo conseguir este producto?</Text>
-        <Text fontSize="14px" fontWeight="semibold">
-          Fernando Villalba
+      <Box onClick={() => router.push(`/post/${post.id}`)}>
+        <Text fontSize="14px">{post?.title}</Text>
+        <Text fontSize="14px" fontWeight="semibold" textTransform="capitalize">
+          {user?.name}
         </Text>
       </Box>
       <Box>

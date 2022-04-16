@@ -5,8 +5,6 @@ import relativeTime from 'dayjs/plugin/relativeTime'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import { useQuery } from '@apollo/client'
 
-// import { Price } from '../interfaces/Price'
-
 import 'dayjs/locale/es'
 import { GET_SUPERMARKET } from '../graphql/queries/supermarket'
 
