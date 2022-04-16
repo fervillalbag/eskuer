@@ -48,7 +48,7 @@ const getLikePost = async (idUser, idPost) => {
 
 const createLikePost = async (idUser, idPost) => {
   try {
-    const likePostFound = await LikePost.findOne({ idPost });
+    const likePostFound = await LikePost.findOne({ idPost, idUser });
 
     if (likePostFound) {
       return {

@@ -249,33 +249,35 @@ const PostItem: NextPage = () => {
               backgroundColor: '#FFF'
             }}
             width="100%"
-            // onClick={handleLogin}
+            onClick={() => router.push(`/post/comment/create/${post?.id}`)}
           >
             Comentar
           </Button>
-          <Button
-            minWidth="initial"
-            marginTop="10px"
-            height="auto"
-            padding="15px 32px"
-            fontWeight="semibold"
-            fontSize="1rem"
-            borderRadius="4px"
-            backgroundColor="#FFF"
-            rounded="3px 3px 0 0"
-            color="red.500"
-            border="1px solid"
-            borderBottom="4px solid"
-            borderColor="red.500"
-            _focus={{ shadow: 0 }}
-            _hover={{
-              backgroundColor: '#FFF'
-            }}
-            width="100%"
-            onClick={onOpen}
-          >
-            Eliminar pregunta
-          </Button>
+          {userLocal?.id === post?.idUser && (
+            <Button
+              minWidth="initial"
+              marginTop="10px"
+              height="auto"
+              padding="15px 32px"
+              fontWeight="semibold"
+              fontSize="1rem"
+              borderRadius="4px"
+              backgroundColor="#FFF"
+              rounded="3px 3px 0 0"
+              color="red.500"
+              border="1px solid"
+              borderBottom="4px solid"
+              borderColor="red.500"
+              _focus={{ shadow: 0 }}
+              _hover={{
+                backgroundColor: '#FFF'
+              }}
+              width="100%"
+              onClick={onOpen}
+            >
+              Eliminar pregunta
+            </Button>
+          )}
 
           <Flex
             alignItems="center"
