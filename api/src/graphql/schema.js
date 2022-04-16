@@ -67,7 +67,7 @@ const typeDefs = gql`
     idUser: String
     image: String
     createdAt: String
-    updateAt: String
+    updatedAt: String
   }
 
   input PostInput {

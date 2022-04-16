@@ -8,7 +8,7 @@ export const GET_POSTS = gql`
       idUser
       image
       createdAt
-      updateAt
+      updatedAt
     }
   }
 `
@@ -21,7 +21,7 @@ export const GET_POST = gql`
       idUser
       image
       createdAt
-      updateAt
+      updatedAt
     }
   }
 `

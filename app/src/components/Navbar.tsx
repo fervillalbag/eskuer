@@ -79,10 +79,10 @@ const Navbar: React.FC = () => {
               </Link>
             </NextLink>
           )}
-          <NextLink href="/">
+          <NextLink href="/post">
             <Link
               fontSize="26px"
-              color={pathname === '/questions' ? '"#003049"' : '#d5dfe4'}
+              color={pathname === '/post' ? '"#003049"' : '#d5dfe4'}
             >
               <GoCommentDiscussion />
             </Link>
