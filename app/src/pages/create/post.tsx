@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import { NextPage } from 'next'
-import { Box, Button, Image, Input } from '@chakra-ui/react'
+import { Box, Button, Flex, Image, Input, Text } from '@chakra-ui/react'
 import Back from '../../components/Back'
 import toast from 'react-hot-toast'
 import { useMutation } from '@apollo/client'
@@ -20,6 +20,7 @@ export type FileType = {
 const Post: NextPage = () => {
   const [image, setImage] = useState('')
   const [fileImage, setFileImage] = useState<FileType | null | Blob>(null)
+  const [loadingUpload, setLoadingUpload] = useState<boolean>(false)
   const inputFileRef = useRef(null)
 
   const { user } = useAuth()
@@ -38,6 +39,8 @@ const Post: NextPage = () => {
 
   const handleCreatePost = async () => {
     if (!image) return toast.error('Todos los campos son obligatorios')
+
+    setLoadingUpload(true)
 
     const URL_CLOUDINARY = process.env.URL_CLOUDINARY
     const formData = new FormData()
@@ -66,7 +69,21 @@ const Post: NextPage = () => {
     } catch (error) {
       console.log(error)
     }
+
+    setLoadingUpload(false)
   }
+
+  if (loadingUpload)
+    return (
+      <Flex
+        width="100%"
+        height="100vh"
+        alignItems="center"
+        justifyContent="center"
+      >
+        <Text textAlign="center">Publicando..</Text>
+      </Flex>
+    )
 
   return (
     <Box padding="20px">
