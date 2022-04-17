@@ -1,8 +1,7 @@
 import React from 'react'
 import NextLink from 'next/link'
 import { Box, Grid, Text, Link, Button } from '@chakra-ui/react'
-import { MdOutlineAlternateEmail } from 'react-icons/md'
-import { FaKey, FaUser } from 'react-icons/fa'
+import { FaKey, FaRegEnvelope, FaUser } from 'react-icons/fa'
 
 import NotFound from '../../components/NotFound'
 import useAuth from '../../hooks/useAuth'
@@ -23,7 +22,7 @@ const SettingsUser: React.FC = () => {
         </Text>
 
         <Box marginTop="15px">
-          <NextLink href="/create/price">
+          <NextLink href="#">
             <Link
               width="100%"
               display="flex"
@@ -67,7 +66,7 @@ const SettingsUser: React.FC = () => {
             </Link>
           </NextLink>
 
-          <NextLink href="/create/price">
+          <NextLink href="#">
             <Link
               width="100%"
               display="flex"
@@ -86,7 +85,7 @@ const SettingsUser: React.FC = () => {
                 alignItems="center"
               >
                 <Text fontSize="40px" color="#D5DFE5" marginRight="15px">
-                  <MdOutlineAlternateEmail />
+                  <FaRegEnvelope />
                 </Text>
                 <Box>
                   <Text
@@ -111,7 +110,7 @@ const SettingsUser: React.FC = () => {
             </Link>
           </NextLink>
 
-          <NextLink href="/create/price">
+          <NextLink href="#">
             <Link
               width="100%"
               display="flex"

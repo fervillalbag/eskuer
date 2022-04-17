@@ -29,6 +29,8 @@ const Back: React.FC<BackIprops> = ({ title, showButton = true }) => {
             onClick={() => {
               if (router.pathname === '/post/[id]') {
                 router.push('/post')
+              } else if (router.pathname === '/settings/user') {
+                router.push('/settings')
               } else {
                 router.back()
               }

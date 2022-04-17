@@ -68,15 +68,16 @@ const PostItem: NextPage = () => {
     }
   })
 
-  const { data: dataCommentsPosts, loading: loadingComments } = useQuery(
-    GET_COMMENT_POST_ON_POST,
-    {
-      fetchPolicy: 'network-only',
-      variables: {
-        idPost: router?.query?.id
-      }
+  const {
+    data: dataCommentsPosts,
+    loading: loadingComments,
+    refetch: refetchCommentPost
+  } = useQuery(GET_COMMENT_POST_ON_POST, {
+    fetchPolicy: 'network-only',
+    variables: {
+      idPost: router?.query?.id
     }
-  )
+  })
 
   const [createLikePost] = useMutation(CREATE_LIKE_POST)
   const [deleteLikePost] = useMutation(DELETE_LIKE_POST)
@@ -326,7 +327,11 @@ const PostItem: NextPage = () => {
               </Box>
             ) : (
               commentsPostOrder?.map(comment => (
-                <CommentPost key={comment.id} comment={comment} />
+                <CommentPost
+                  key={comment.id}
+                  comment={comment}
+                  refetchCommentPost={refetchCommentPost}
+                />
               ))
             )}
           </Box>

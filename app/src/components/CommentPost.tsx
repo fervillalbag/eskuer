@@ -1,32 +1,72 @@
-import React from 'react'
+import React, { useState } from 'react'
 import dayjs from 'dayjs'
+import toast from 'react-hot-toast'
 import relativeTime from 'dayjs/plugin/relativeTime'
-import { Box, Button, Flex, Image, Text } from '@chakra-ui/react'
-import { useQuery } from '@apollo/client'
+import {
+  Box,
+  Button,
+  Flex,
+  Image,
+  Text,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton
+} from '@chakra-ui/react'
+import { useMutation, useQuery } from '@apollo/client'
 import { FaTrash } from 'react-icons/fa'
 
 import { GET_USER } from '../graphql/queries/user'
 
 import 'dayjs/locale/es'
 import useAuth from '../hooks/useAuth'
+import { DELETE_COMMENT_POST } from '../graphql/mutations/commentPost'
 
 dayjs.extend(relativeTime)
 dayjs.locale('es')
 
 interface CommentPostIprops {
   comment: any
+  refetchCommentPost: () => void
 }
 
-const CommentPost: React.FC<CommentPostIprops> = ({ comment }) => {
+const CommentPost: React.FC<CommentPostIprops> = ({
+  comment,
+  refetchCommentPost
+}) => {
   const { data: dataUser } = useQuery(GET_USER, {
     variables: {
       id: comment?.idUser
     }
   })
 
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [deleteCommentPost] = useMutation(DELETE_COMMENT_POST)
+
   const { user: userLocal } = useAuth()
 
   const user = dataUser?.getUser || {}
+
+  const onClose = () => setIsOpen(false)
+  const onOpen = () => setIsOpen(true)
+
+  const handleDeleteCommentPost = async () => {
+    try {
+      await deleteCommentPost({
+        variables: {
+          id: comment?.id
+        }
+      })
+      refetchCommentPost()
+      toast.success('Comentario eliminado correctamente')
+      onClose()
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <Box
@@ -37,6 +77,44 @@ const CommentPost: React.FC<CommentPostIprops> = ({ comment }) => {
       backgroundColor="#EFF3F5"
       rounded="3px 3px 0 0"
     >
+      <Modal isOpen={isOpen} onClose={onClose} isCentered size="xs">
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader padding="15px">Eliminar</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody padding="0 15px">¿Desea eliminar el comentario?</ModalBody>
+
+          <ModalFooter
+            display="grid"
+            gridTemplateColumns="repeat(2, 1fr)"
+            gap="15px"
+            padding="15px"
+            marginTop="10px"
+          >
+            <Button
+              rounded="3px"
+              width="100%"
+              color="#003049"
+              backgroundColor="#D5DFE5"
+              onClick={onClose}
+            >
+              Cerrar
+            </Button>
+            <Button
+              rounded="3px"
+              width="100%"
+              color="red.700"
+              backgroundColor="red.100"
+              _focus={{ shadow: 0 }}
+              _hover={{ backgroundColor: 'red.200' }}
+              onClick={handleDeleteCommentPost}
+            >
+              Si, eliminar
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+
       <Flex alignItems="center" justifyContent="space-between">
         <Flex alignItems="center">
           <Box>
@@ -78,6 +156,7 @@ const CommentPost: React.FC<CommentPostIprops> = ({ comment }) => {
               color="red.400"
               _focus={{ shadow: 0 }}
               _hover={{ backgroundColor: '#FFF' }}
+              onClick={onOpen}
             >
               <FaTrash />
             </Button>
@@ -130,7 +209,7 @@ const CommentPost: React.FC<CommentPostIprops> = ({ comment }) => {
             >
               REFERENCIA:
             </Text>{' '}
-            a 1km del mercado de abasto
+            {comment?.reference}
           </Text>
         </Flex>
       </Box>
