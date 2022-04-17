@@ -6,12 +6,27 @@ import { useQuery } from '@apollo/client'
 
 import Back from '../../../components/Back'
 import { GET_SUPERMARKETS } from '../../../graphql/queries/supermarket'
+import useAuth from '../../../hooks/useAuth'
+import { GET_USER } from '../../../graphql/queries/user'
+import NotFound from '../../../components/NotFound'
 
 const SupermarketsUpdate: NextPage = () => {
+  const { user } = useAuth()
+
+  const { data: dataUser } = useQuery(GET_USER, {
+    variables: {
+      id: user?.id
+    }
+  })
+
   const { data: dataSupermarkets } = useQuery(GET_SUPERMARKETS, {
     fetchPolicy: 'network-only'
   })
+
   const supermarkets = dataSupermarkets?.getSupermarkets || []
+  const userInfo = dataUser?.getUser || {}
+
+  if (userInfo.role !== 'ADMIN') return <NotFound />
 
   return (
     <Box padding="20px">

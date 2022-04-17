@@ -23,6 +23,9 @@ import {
   UPDATE_SUPERMARKET
 } from '../../../graphql/mutations/supermarket'
 import { GET_SUPERMARKET } from '../../../graphql/queries/supermarket'
+import useAuth from '../../../hooks/useAuth'
+import { GET_USER } from '../../../graphql/queries/user'
+import NotFound from '../../../components/NotFound'
 
 export type FileType = {
   lastModified: number
@@ -35,12 +38,19 @@ export type FileType = {
 
 const SupermarketEditPage: NextPage = () => {
   const router = useRouter()
+  const { user } = useAuth()
 
   const { data: dataSupermarket, loading } = useQuery(GET_SUPERMARKET, {
     variables: {
       id: router?.query?.id
     },
     fetchPolicy: 'network-only'
+  })
+
+  const { data: dataUser } = useQuery(GET_USER, {
+    variables: {
+      id: user?.id
+    }
   })
 
   const supermarket = dataSupermarket?.getSupermarket
@@ -158,6 +168,10 @@ const SupermarketEditPage: NextPage = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const onClose = () => setIsOpen(false)
   const onOpen = () => setIsOpen(true)
+
+  const userInfo = dataUser?.getUser || {}
+
+  if (userInfo.role !== 'ADMIN') return <NotFound />
 
   return (
     <Box padding="20px">

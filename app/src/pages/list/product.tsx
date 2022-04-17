@@ -6,8 +6,19 @@ import Back from '../../components/Back'
 import Loader from '../../components/Loader'
 import Product from '../../components/Product'
 import { GET_PRODUCTS } from '../../graphql/queries/product'
+import useAuth from '../../hooks/useAuth'
+import NotFound from '../../components/NotFound'
+import { GET_USER } from '../../graphql/queries/user'
 
 const ProductsUpdate: React.FC = () => {
+  const { user } = useAuth()
+
+  const { data: dataUser } = useQuery(GET_USER, {
+    variables: {
+      id: user?.id
+    }
+  })
+
   const { data: dataProducts, loading: loadingProducts } = useQuery(
     GET_PRODUCTS,
     {
@@ -15,6 +26,9 @@ const ProductsUpdate: React.FC = () => {
     }
   )
   const products = dataProducts?.getProducts || []
+  const userInfo = dataUser?.getUser || {}
+
+  if (userInfo.role !== 'ADMIN') return <NotFound />
 
   return (
     <Box padding="20px">

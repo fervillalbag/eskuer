@@ -17,11 +17,12 @@ import {
 import { useMutation, useQuery } from '@apollo/client'
 import toast from 'react-hot-toast'
 
-import Back from '../../components/Back'
-import { GET_USER, GET_USERS } from '../../graphql/queries/user'
+import Back from '../../../components/Back'
+import { GET_USER, GET_USERS } from '../../../graphql/queries/user'
 import { FaTrash } from 'react-icons/fa'
-import useAuth from '../../hooks/useAuth'
-import { DELETE_USER } from '../../graphql/mutations/user'
+import useAuth from '../../../hooks/useAuth'
+import { DELETE_USER } from '../../../graphql/mutations/user'
+import NotFound from '../../../components/NotFound'
 
 const UserListPage: NextPage = () => {
   const { data: dataUsers, refetch } = useQuery(GET_USERS, {
@@ -35,13 +36,12 @@ const UserListPage: NextPage = () => {
   const [deleteUser] = useMutation(DELETE_USER)
 
   const { data: dataUser } = useQuery(GET_USER, {
-    fetchPolicy: 'network-only',
     variables: {
       id: userHook?.id
     }
   })
 
-  const userData = dataUser?.getUser
+  const userData = dataUser?.getUser || {}
 
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const onClose = () => setIsOpen(false)
@@ -63,6 +63,8 @@ const UserListPage: NextPage = () => {
 
     onClose()
   }
+
+  if (userData.role !== 'ADMIN') return <NotFound />
 
   return (
     <Box padding="20px">
@@ -119,7 +121,7 @@ const UserListPage: NextPage = () => {
             <Flex alignItems="center">
               <Box>
                 <Image
-                  src={!user?.image ? 'profile-avatar.png' : user?.image}
+                  src={!user?.image ? '/profile-avatar.png' : user?.image}
                   alt=""
                   width="50px"
                   height="50px"

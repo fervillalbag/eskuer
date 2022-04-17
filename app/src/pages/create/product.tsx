@@ -2,11 +2,14 @@ import React, { useRef, useState } from 'react'
 import toast from 'react-hot-toast'
 import { useRouter } from 'next/router'
 import { Box, Button, Image, Input, Select } from '@chakra-ui/react'
-import { useMutation } from '@apollo/client'
+import { useMutation, useQuery } from '@apollo/client'
 
 // import { GET_SUPERMARKETS } from '../../graphql/queries/supermarket'
 import { CREATE_PRODUCT } from '../../graphql/mutations/product'
 import Back from '../../components/Back'
+import useAuth from '../../hooks/useAuth'
+import { GET_USER } from '../../graphql/queries/user'
+import NotFound from '../../components/NotFound'
 
 export type FileType = {
   lastModified: number
@@ -19,6 +22,13 @@ export type FileType = {
 
 const CreateProduct: React.FC = () => {
   const router = useRouter()
+  const { user } = useAuth()
+
+  const { data: dataUser } = useQuery(GET_USER, {
+    variables: {
+      id: user?.id
+    }
+  })
 
   const inputFileRef = useRef(null)
   const [createProduct] = useMutation(CREATE_PRODUCT)
@@ -72,6 +82,10 @@ const CreateProduct: React.FC = () => {
       console.log(error)
     }
   }
+
+  const userInfo = dataUser?.getUser || {}
+
+  if (userInfo.role !== 'ADMIN') return <NotFound />
 
   return (
     <Box>

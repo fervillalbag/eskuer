@@ -13,9 +13,13 @@ import { GET_PRODUCTS } from '../../graphql/queries/product'
 import { CREATE_PRICE } from '../../graphql/mutations/price'
 import Back from '../../components/Back'
 import { GET_PRICES } from '../../graphql/queries/price'
+import useAuth from '../../hooks/useAuth'
+import { GET_USER } from '../../graphql/queries/user'
+import NotFound from '../../components/NotFound'
 
 const CreatePrice: React.FC = () => {
   const router = useRouter()
+  const { user } = useAuth()
 
   const [supermarketId, setSupermarketId] = useState<string | null>(null)
   const [productId, setProductId] = useState<string | null>(null)
@@ -44,11 +48,18 @@ const CreatePrice: React.FC = () => {
     }
   })
 
+  const { data: dataUser } = useQuery(GET_USER, {
+    variables: {
+      id: user?.id
+    }
+  })
+
   const products = dataProducts?.getProducts || []
   const supermarket = dataSupermarket?.getSupermarket || {}
   const supermarkets = dataSupermarkets?.getSupermarkets || []
 
   const product = dataPrice?.getPrice || null
+  const userInfo = dataUser?.getUser || {}
 
   const handleAddPrice = async () => {
     if (!price || !supermarketId || !productId)
@@ -71,6 +82,8 @@ const CreatePrice: React.FC = () => {
     toast.success('Precio añadido')
     return router.push('/')
   }
+
+  if (userInfo.role !== 'ADMIN') return <NotFound />
 
   return (
     <Box>

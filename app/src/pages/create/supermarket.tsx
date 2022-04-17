@@ -1,11 +1,14 @@
 import React, { useRef, useState } from 'react'
 import toast from 'react-hot-toast'
 import { Box, Button, Image, Input } from '@chakra-ui/react'
-import { useMutation } from '@apollo/client'
+import { useMutation, useQuery } from '@apollo/client'
 import { useRouter } from 'next/router'
 
 import { CREATE_SUPERMARKET } from '../../graphql/mutations/supermarket'
 import Back from '../../components/Back'
+import useAuth from '../../hooks/useAuth'
+import { GET_USER } from '../../graphql/queries/user'
+import NotFound from '../../components/NotFound'
 
 export type FileType = {
   lastModified: number
@@ -18,6 +21,14 @@ export type FileType = {
 
 const CreateSupermarket: React.FC = () => {
   const router = useRouter()
+
+  const { user } = useAuth()
+
+  const { data: dataUser } = useQuery(GET_USER, {
+    variables: {
+      id: user?.id
+    }
+  })
 
   const [image, setImage] = useState<string | null>(null)
   const [fileImage, setFileImage] = useState<FileType | null | Blob>(null)
@@ -78,6 +89,10 @@ const CreateSupermarket: React.FC = () => {
       console.log(error)
     }
   }
+
+  const userInfo = dataUser?.getUser || {}
+
+  if (userInfo.role !== 'ADMIN') return <NotFound />
 
   return (
     <Box minHeight="100vh">

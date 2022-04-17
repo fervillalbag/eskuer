@@ -18,16 +18,19 @@ const NotFound: React.FC = () => {
         <Link
           display="inline-block"
           height="auto"
-          padding="15px 32px"
+          rounded="2px 2px 0 0"
+          padding="12px 32px"
           fontWeight="semibold"
           fontSize="1rem"
-          borderRadius="4px"
-          backgroundColor="#003049"
-          color="#FFF"
+          backgroundColor="#FFF"
+          color="#003049"
           textAlign="center"
+          border="1px solid"
+          borderBottom="4px solid"
+          borderColor="#003049"
           _focus={{ shadow: 0 }}
           _hover={{
-            backgroundColor: '#003049'
+            backgroundColor: '#FFF'
           }}
         >
           Volver al inicio

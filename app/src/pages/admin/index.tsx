@@ -187,7 +187,7 @@ const Admin: React.FC = () => {
       </Text>
 
       <Box marginTop="15px">
-        <NextLink href="/user">
+        <NextLink href="/list/user">
           <Link
             width="100%"
             display="flex"

@@ -20,6 +20,9 @@ import Back from '../../../components/Back'
 import { DELETE_PRODUCT, GET_PRODUCT } from '../../../graphql/queries/product'
 import { UPDATE_PRODUCT } from '../../../graphql/mutations/product'
 import toast from 'react-hot-toast'
+import { GET_USER } from '../../../graphql/queries/user'
+import useAuth from '../../../hooks/useAuth'
+import NotFound from '../../../components/NotFound'
 
 export type FileType = {
   lastModified: number
@@ -32,12 +35,19 @@ export type FileType = {
 
 const ProductItemUpdate: React.FC = () => {
   const router = useRouter()
+  const { user } = useAuth()
 
   const { data: dataProduct, loading } = useQuery(GET_PRODUCT, {
     variables: {
       id: router?.query?.id
     },
     fetchPolicy: 'network-only'
+  })
+
+  const { data: dataUser } = useQuery(GET_USER, {
+    variables: {
+      id: user?.id
+    }
   })
 
   const [deleteProduct] = useMutation(DELETE_PRODUCT)
@@ -136,6 +146,9 @@ const ProductItemUpdate: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const onClose = () => setIsOpen(false)
   const onOpen = () => setIsOpen(true)
+
+  const userInfo = dataUser?.getUser || {}
+  if (userInfo.role !== 'ADMIN') return <NotFound />
 
   return (
     <Box padding="20px">
