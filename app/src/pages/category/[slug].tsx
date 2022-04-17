@@ -12,7 +12,6 @@ const CategoryItem: React.FC = () => {
   const {
     query: { slug }
   } = useRouter()
-  console.log(slug)
 
   const { data: productsQuery, loading: loadingProducts } = useQuery(
     GET_PRODUCTS,

@@ -98,10 +98,12 @@ const Post: React.FC<PostIprops> = ({ post }) => {
           fontSize="20px"
           _hover={{ backgroundColor: '#FFF' }}
           onClick={() => {
-            if (!user?.id) {
-              toast.error('Necesitas tener una cuenta para guardar un producto')
+            if (!userLocal?.id) {
+              return toast.error(
+                'Necesitas tener una cuenta para guardar un producto'
+              )
             } else if (likePost?.value) {
-              handleDeleteLikePost()
+              return handleDeleteLikePost()
             } else {
               handleAddLikePost()
             }

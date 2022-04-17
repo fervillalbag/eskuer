@@ -34,6 +34,7 @@ import useAuth from '../../hooks/useAuth'
 import { GET_LIKE_POST } from '../../graphql/queries/likePost'
 import { BsBookmark, BsBookmarkFill } from 'react-icons/bs'
 import { DELETE_POST } from '../../graphql/mutations/post'
+import { GET_COMMENT_POST_ON_POST } from '../../graphql/queries/commentPost'
 
 dayjs.extend(relativeTime)
 dayjs.locale('es')
@@ -63,6 +64,13 @@ const PostItem: NextPage = () => {
     variables: {
       idPost: router?.query?.id,
       idUser: userLocal?.id
+    }
+  })
+
+  const { data: dataCommentsPosts } = useQuery(GET_COMMENT_POST_ON_POST, {
+    fetchPolicy: 'network-only',
+    variables: {
+      idPost: router?.query?.id
     }
   })
 
@@ -110,6 +118,11 @@ const PostItem: NextPage = () => {
 
   const onClose = () => setIsOpen(false)
   const onOpen = () => setIsOpen(true)
+
+  const commentsPosts = dataCommentsPosts?.getCommentPostsOnPost || []
+  const commentsPostOrder = commentsPosts.sort((a, b) =>
+    a.createdAt > b.createdAt ? -1 : 1
+  )
 
   return (
     <Box padding="20px">
@@ -202,14 +215,14 @@ const PostItem: NextPage = () => {
               fontSize="20px"
               _hover={{ backgroundColor: '#FFF' }}
               onClick={() => {
-                if (!user?.id) {
-                  toast.error(
+                if (!userLocal?.id) {
+                  return toast.error(
                     'Necesitas tener una cuenta para guardar un producto'
                   )
                 } else if (likePost?.value) {
-                  handleDeleteLikePost()
+                  return handleDeleteLikePost()
                 } else {
-                  handleAddLikePost()
+                  return handleAddLikePost()
                 }
               }}
               _focus={{ shadow: 0 }}
@@ -249,7 +262,13 @@ const PostItem: NextPage = () => {
               backgroundColor: '#FFF'
             }}
             width="100%"
-            onClick={() => router.push(`/post/comment/create/${post?.id}`)}
+            onClick={() => {
+              if (userLocal?.id) {
+                return router.push(`/post/comment/create/${post?.id}`)
+              } else {
+                return toast.error('Necesitas tener una cuenta para comentar')
+              }
+            }}
           >
             Comentar
           </Button>
@@ -279,11 +298,7 @@ const PostItem: NextPage = () => {
             </Button>
           )}
 
-          <Flex
-            alignItems="center"
-            marginTop="25px"
-            // borderBottom="1px solid #d5dfe4"
-          >
+          <Flex alignItems="center" marginTop="25px">
             <Text
               fontSize="20px"
               color="#003049"
@@ -292,12 +307,13 @@ const PostItem: NextPage = () => {
             >
               Comentarios
             </Text>
-            <Text marginLeft="5px">(2)</Text>
+            <Text marginLeft="5px">{`(${commentsPosts.length})`}</Text>
           </Flex>
 
           <Box marginTop="15px" marginBottom="20px">
-            <CommentPost />
-            <CommentPost />
+            {commentsPostOrder?.map(comment => (
+              <CommentPost key={comment.id} comment={comment} />
+            ))}
           </Box>
         </Box>
       </Box>

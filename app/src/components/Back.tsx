@@ -26,7 +26,13 @@ const Back: React.FC<BackIprops> = ({ title, showButton = true }) => {
             borderBottom="4px solid #003049"
             fontSize="22px"
             _focus={{ border: 0 }}
-            onClick={() => router.back()}
+            onClick={() => {
+              if (router.pathname === '/post/[id]') {
+                router.push('/post')
+              } else {
+                router.back()
+              }
+            }}
           >
             <FaAngleLeft />
           </Button>

@@ -1,20 +1,47 @@
 import React from 'react'
+import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
 import { Box, Button, Flex, Image, Text } from '@chakra-ui/react'
+import { useQuery } from '@apollo/client'
 import { FaTrash } from 'react-icons/fa'
 
-const CommentPost: React.FC = () => {
+import { GET_USER } from '../graphql/queries/user'
+
+import 'dayjs/locale/es'
+import useAuth from '../hooks/useAuth'
+
+dayjs.extend(relativeTime)
+dayjs.locale('es')
+
+interface CommentPostIprops {
+  comment: any
+}
+
+const CommentPost: React.FC<CommentPostIprops> = ({ comment }) => {
+  const { data: dataUser } = useQuery(GET_USER, {
+    variables: {
+      id: comment?.idUser
+    }
+  })
+
+  const { user: userLocal } = useAuth()
+
+  const user = dataUser?.getUser || {}
+
   return (
     <Box
       marginBottom="20px"
-      borderBottom="1px solid #d5dfe4"
-      paddingBottom="20px"
+      border="1px solid #003049"
+      borderBottom="4px solid #003049"
+      padding="20px 15px"
+      backgroundColor="#EFF3F5"
+      rounded="3px 3px 0 0"
     >
-      <Flex marginTop="10px" alignItems="center" justifyContent="space-between">
+      <Flex alignItems="center" justifyContent="space-between">
         <Flex alignItems="center">
           <Box>
             <Image
-              // src={!user?.avatar ? '/profile-avatar.png' : user?.avatar}
-              src="/profile-fer.png"
+              src={!user?.avatar ? '/profile-avatar.png' : user?.avatar}
               width="50px"
               height="50px"
               objectFit="cover"
@@ -30,87 +57,79 @@ const CommentPost: React.FC = () => {
               textTransform="capitalize"
               color="#003049"
             >
-              Fernando Villalba
-              {/* {user?.name} */}
+              {user?.name}
             </Text>
             <Text fontSize="12px" color="#003049">
-              {/* {dayjs(parseInt(post?.createdAt)).fromNow()} */}
-              hace 8 horas
+              {dayjs(parseInt(comment?.createdAt)).fromNow()}
             </Text>
           </Box>
         </Flex>
 
         <Box>
-          <Button
-            minWidth="initial"
-            height="40px"
-            border="1px solid"
-            rounded="3px 3px 0 0"
-            backgroundColor="#FFF"
-            borderBottom="4px solid"
-            borderColor="red.400"
-            color="red.400"
-            _focus={{ shadow: 0 }}
-            _hover={{ backgroundColor: '#FFF' }}
-          >
-            <FaTrash />
-          </Button>
+          {userLocal?.id === user?.id && (
+            <Button
+              minWidth="initial"
+              height="40px"
+              border="1px solid"
+              rounded="3px 3px 0 0"
+              backgroundColor="#FFF"
+              borderBottom="4px solid"
+              borderColor="red.400"
+              color="red.400"
+              _focus={{ shadow: 0 }}
+              _hover={{ backgroundColor: '#FFF' }}
+            >
+              <FaTrash />
+            </Button>
+          )}
         </Box>
       </Flex>
 
       <Box marginTop="5px">
         <Flex as="article" marginBottom="2px">
-          <Text
-            fontWeight="semibold"
-            fontSize="14px"
-            color="#003049"
-            textTransform="uppercase"
-          >
-            SUCURSAL:
-          </Text>
-          <Text color="#003049" fontSize="14px" marginLeft="4px">
-            Fernando de la Mora
-          </Text>
-        </Flex>
-
-        <Flex as="article" marginBottom="2px">
-          <Text
-            fontWeight="semibold"
-            fontSize="14px"
-            color="#003049"
-            textTransform="uppercase"
-          >
-            Dirección:
-          </Text>
-          <Text color="#003049" fontSize="14px" marginLeft="4px">
-            Defensores del Chaco 2230
+          <Text display="inline-block" color="#003049" fontSize="14px">
+            <Text
+              as="span"
+              display="inline-block"
+              fontWeight="semibold"
+              fontSize="14px"
+              color="#003049"
+              textTransform="uppercase"
+            >
+              SUCURSAL:
+            </Text>{' '}
+            {comment?.branchOffice}, {comment?.supermarket}
           </Text>
         </Flex>
 
         <Flex as="article" marginBottom="2px">
-          <Text
-            fontWeight="semibold"
-            fontSize="14px"
-            color="#003049"
-            textTransform="uppercase"
-          >
-            SUPERMERCADO:
-          </Text>
-          <Text color="#003049" fontSize="14px" marginLeft="4px">
-            Casa Grutter
+          <Text color="#003049" fontSize="14px" display="inline-block">
+            <Text
+              as="span"
+              display="inline-block"
+              fontWeight="semibold"
+              fontSize="14px"
+              color="#003049"
+              textTransform="uppercase"
+            >
+              Dirección:
+            </Text>{' '}
+            {comment?.address}
           </Text>
         </Flex>
 
         <Flex as="article" marginBottom="2px">
-          <Text
-            fontWeight="semibold"
-            fontSize="14px"
-            color="#003049"
-            textTransform="uppercase"
-          >
-            REFERENCIA:
-          </Text>
-          <Text color="#003049" fontSize="14px" marginLeft="4px">
+          <Text display="inline-block" color="#003049" fontSize="14px">
+            <Text
+              as="span"
+              display="inline-block"
+              fontWeight="semibold"
+              fontSize="14px"
+              color="#003049"
+              textTransform="uppercase"
+            >
+              REFERENCIA:
+            </Text>{' '}
             a 1km del mercado de abasto
           </Text>
         </Flex>

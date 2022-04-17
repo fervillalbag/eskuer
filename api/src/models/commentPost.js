@@ -18,6 +18,9 @@ const commentPostController = new Schema(
       type: String,
       required: [true, "supermarket is required"],
     },
+    address: {
+      type: String,
+    },
     reference: {
       type: String,
       required: [true, "reference is required"],

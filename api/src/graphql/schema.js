@@ -84,6 +84,7 @@ const typeDefs = gql`
     branchOffice: String
     supermarket: String
     reference: String
+    address: String
     createdAt: String
     updatedAt: String
   }
@@ -93,6 +94,7 @@ const typeDefs = gql`
     idUser: String
     idPost: String
     branchOffice: String
+    address: String
     supermarket: String
     reference: String
   }
