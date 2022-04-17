@@ -35,6 +35,7 @@ import { GET_LIKE_POST } from '../../graphql/queries/likePost'
 import { BsBookmark, BsBookmarkFill } from 'react-icons/bs'
 import { DELETE_POST } from '../../graphql/mutations/post'
 import { GET_COMMENT_POST_ON_POST } from '../../graphql/queries/commentPost'
+import LoaderComment from '../../components/LoaderComment'
 
 dayjs.extend(relativeTime)
 dayjs.locale('es')
@@ -45,7 +46,7 @@ const PostItem: NextPage = () => {
 
   const [isOpen, setIsOpen] = useState<boolean>(false)
 
-  const { data: dataPost } = useQuery(GET_POST, {
+  const { data: dataPost, loading: loadingPost } = useQuery(GET_POST, {
     variables: {
       id: router?.query?.id
     }
@@ -67,12 +68,15 @@ const PostItem: NextPage = () => {
     }
   })
 
-  const { data: dataCommentsPosts } = useQuery(GET_COMMENT_POST_ON_POST, {
-    fetchPolicy: 'network-only',
-    variables: {
-      idPost: router?.query?.id
+  const { data: dataCommentsPosts, loading: loadingComments } = useQuery(
+    GET_COMMENT_POST_ON_POST,
+    {
+      fetchPolicy: 'network-only',
+      variables: {
+        idPost: router?.query?.id
+      }
     }
-  })
+  )
 
   const [createLikePost] = useMutation(CREATE_LIKE_POST)
   const [deleteLikePost] = useMutation(DELETE_LIKE_POST)
@@ -233,14 +237,18 @@ const PostItem: NextPage = () => {
         </Flex>
 
         <Box marginTop="15px">
-          <Image
-            src={post?.image}
-            width="100%"
-            objectFit="contain"
-            height="200px"
-            objectPosition="left center"
-            alt=""
-          />
+          {loadingPost ? (
+            <Box width="100%" height="200px" backgroundColor="#EFF3F5"></Box>
+          ) : (
+            <Image
+              src={post?.image}
+              width="100%"
+              objectFit="contain"
+              height="200px"
+              objectPosition="left center"
+              alt=""
+            />
+          )}
         </Box>
 
         <Box marginTop="20px">
@@ -311,9 +319,16 @@ const PostItem: NextPage = () => {
           </Flex>
 
           <Box marginTop="15px" marginBottom="20px">
-            {commentsPostOrder?.map(comment => (
-              <CommentPost key={comment.id} comment={comment} />
-            ))}
+            {loadingComments ? (
+              <Box>
+                <LoaderComment />
+                <LoaderComment />
+              </Box>
+            ) : (
+              commentsPostOrder?.map(comment => (
+                <CommentPost key={comment.id} comment={comment} />
+              ))
+            )}
           </Box>
         </Box>
       </Box>

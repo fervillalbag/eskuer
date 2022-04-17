@@ -10,10 +10,11 @@ import PostComponent from '../../components/Post'
 import { GET_POSTS } from '../../graphql/queries/post'
 import useAuth from '../../hooks/useAuth'
 import toast from 'react-hot-toast'
+import LoaderPost from '../../components/LoaderPost'
 
 const Post: NextPage = () => {
   const router = useRouter()
-  const { data: dataPosts } = useQuery(GET_POSTS, {
+  const { data: dataPosts, loading: loadingPost } = useQuery(GET_POSTS, {
     fetchPolicy: 'network-only'
   })
 
@@ -57,9 +58,17 @@ const Post: NextPage = () => {
       </Box>
 
       <Box marginTop="25px" paddingBottom="60px">
-        {postsOrder.map(post => (
-          <PostComponent key={post.id} post={post} />
-        ))}
+        {!posts || loadingPost ? (
+          <Box>
+            <LoaderPost />
+            <LoaderPost />
+            <LoaderPost />
+            <LoaderPost />
+            <LoaderPost />
+          </Box>
+        ) : (
+          postsOrder.map(post => <PostComponent key={post.id} post={post} />)
+        )}
       </Box>
 
       <Navbar />
