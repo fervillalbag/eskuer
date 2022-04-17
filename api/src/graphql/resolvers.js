@@ -5,6 +5,7 @@ const userController = require("../controllers/user");
 const likeProduct = require("../controllers/likeProduct");
 const postController = require("../controllers/post");
 const likePostController = require("../controllers/likePost");
+const commentPostController = require("../controllers/commentPost");
 
 const resolvers = {
   Query: {
@@ -44,6 +45,15 @@ const resolvers = {
       likePostController.getLikesPostsUser(idUser),
     getLikePost: (_, { idUser, idPost }) =>
       likePostController.getLikePost(idUser, idPost),
+
+    // Comment Post
+    getCommentPosts: () => commentPostController.getCommentPosts(),
+    getCommentPost: (_, { id }) =>
+      commentPostController.getCommentPost(id),
+    getCommentPostsUser: (_, { idUser }) =>
+      commentPostController.getCommentPostsUser(idUser),
+    getCommentPostsOnPost: (_, { idPost }) =>
+      commentPostController.getCommentPostsOnPost(idPost),
   },
 
   Mutation: {
@@ -89,6 +99,14 @@ const resolvers = {
       likePostController.createLikePost(idUser, idPost),
     deleteLikePost: (_, { id, idUser, idPost }) =>
       likePostController.deleteLikePost(id, idUser, idPost),
+
+    // Comment Post
+    createCommentPost: (_, { input }) =>
+      commentPostController.createCommentPost(input),
+    updateCommentPost: (_, { input }) =>
+      commentPostController.updateCommentPost(input),
+    deleteCommentPost: (_, { id }) =>
+      commentPostController.deleteCommentPost(id),
   },
 };
 

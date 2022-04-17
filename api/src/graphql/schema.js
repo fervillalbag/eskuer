@@ -77,6 +77,26 @@ const typeDefs = gql`
     updatedAt: String
   }
 
+  type CommentPost {
+    id: String
+    idUser: String
+    idPost: String
+    branchOffice: String
+    supermarket: String
+    reference: String
+    createdAt: String
+    updatedAt: String
+  }
+
+  input CommentPostInput {
+    id: String
+    idUser: String
+    idPost: String
+    branchOffice: String
+    supermarket: String
+    reference: String
+  }
+
   input PostInput {
     id: String
     title: String
@@ -158,6 +178,12 @@ const typeDefs = gql`
     getLikePosts: [LikePost]
     getLikesPostsUser(idUser: String): [LikePost]
     getLikePost(idUser: String, idPost: String): IsLike
+
+    # Comment Post
+    getCommentPosts: [CommentPost]
+    getCommentPostsUser(idUser: String): [CommentPost]
+    getCommentPostsOnPost(idPost: String): [CommentPost]
+    getCommentPost(id: String): CommentPost
   }
 
   type Mutation {
@@ -205,6 +231,11 @@ const typeDefs = gql`
       idUser: String
       idPost: String
     ): MutationResponse
+
+    # Comment Post
+    createCommentPost(input: CommentPostInput!): MutationResponse
+    updateCommentPost(input: CommentPostInput!): MutationResponse
+    deleteCommentPost(id: String!): MutationResponse
   }
 `;
 
