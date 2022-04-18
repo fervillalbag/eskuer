@@ -10,11 +10,21 @@ import Back from '../../components/Back'
 import TagProfile from '../../components/TagProfile'
 import useAuth from '../../hooks/useAuth'
 import NotFound from '../../components/NotFound'
+import { useQuery } from '@apollo/client'
+import { GET_USER } from '../../graphql/queries/user'
 
 const Settings: React.FC = () => {
   const { user } = useAuth()
 
-  if (!user) return <NotFound />
+  const { data: dataUser } = useQuery(GET_USER, {
+    variables: {
+      id: user?.id
+    }
+  })
+
+  const userInfo = dataUser?.getUser || {}
+
+  if (!userInfo?.id) return <NotFound />
 
   return (
     <Box padding="20px 20px 100px 20px">
@@ -32,7 +42,7 @@ const Settings: React.FC = () => {
               marginTop="15px"
               _hover={{ textDecoration: 'none' }}
             >
-              <TagProfile user={user} />
+              <TagProfile user={userInfo} />
             </Link>
           </NextLink>
         </Box>

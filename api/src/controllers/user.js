@@ -92,17 +92,31 @@ const login = async (input) => {
 
 const updateUser = async (input) => {
   try {
-    await User.findOneAndUpdate({ _id: input.id }, input);
+    if (input.password) {
+      const salt = bcrypt.genSaltSync(10);
+      const newPasswordCrypt = await bcrypt.hash(
+        input.password,
+        salt
+      );
+
+      await User.findOneAndUpdate(
+        { _id: input.id },
+        {
+          password: newPasswordCrypt,
+        }
+      );
+    } else {
+      await User.findOneAndUpdate({ _id: input.id }, input);
+    }
 
     return {
-      message: "User updated!",
+      message: "Usuario actualizado correctamente",
       success: true,
     };
   } catch (error) {
     console.log(error);
-
     return {
-      message: "Some error!",
+      message: "Error",
       success: false,
     };
   }

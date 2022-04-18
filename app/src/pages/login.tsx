@@ -46,9 +46,12 @@ const Login: React.FC = () => {
       router.push('/')
     } catch (error) {
       if (error?.message === 'User not found!') {
-        toast.error('Este usuario no existe')
+        return toast.error('Este usuario no existe')
       }
-      console.log(error)
+      if (error?.message === 'Email or passoword is incorrect!') {
+        return toast.error('Email o contraseñas no válidas')
+      }
+      console.log(error?.message)
     }
   }
 

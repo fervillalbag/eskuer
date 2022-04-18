@@ -1,27 +1,54 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { NextPage } from 'next'
 import { Box, Button, Input } from '@chakra-ui/react'
-import { useQuery } from '@apollo/client'
+import { useMutation, useQuery } from '@apollo/client'
+import toast from 'react-hot-toast'
 
 import Back from '../../components/Back'
 import useAuth from '../../hooks/useAuth'
 import { GET_USER } from '../../graphql/queries/user'
+import { UPDATE_USER } from '../../graphql/mutations/user'
+import { useRouter } from 'next/router'
 
 const SettingPassword: NextPage = () => {
-  const { user } = useAuth()
+  const { user, logout } = useAuth()
+  const router = useRouter()
 
-  const { data: dataUser } = useQuery(GET_USER, {
+  const { data: dataUser, refetch: refetchUser } = useQuery(GET_USER, {
     variables: {
       id: user?.id
     }
   })
 
   const userInfo = dataUser?.getUser || {}
-  // console.log(userInfo)
+  const [updateUser] = useMutation(UPDATE_USER)
 
-  // useEffect(() => {
-  //   setEmail(userInfo?.email)
-  // }, [userInfo])
+  const [password, setPassword] = useState<string>('')
+  const [newPassword, setNewPassword] = useState<string>('')
+
+  const handleUpdateUser = async () => {
+    if (password !== newPassword) {
+      return toast.error('Las contraseñas no coinciden')
+    }
+
+    try {
+      await updateUser({
+        variables: {
+          input: {
+            id: userInfo?.id,
+            password
+          }
+        }
+      })
+
+      refetchUser()
+      toast.success('Contraseña actualizada correctamente')
+      router.push('/')
+      logout()
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <Box padding="20px">
@@ -38,10 +65,10 @@ const SettingPassword: NextPage = () => {
           backgroundColor="#F9F9F9"
           border="0"
           height="45px"
-          placeholder="introduce contraseña"
+          placeholder="introduce una nueva contraseña"
           marginBottom="15px"
-          // value={email || ''}
-          // onChange={e => setEmail(e.target.value)}
+          value={password || ''}
+          onChange={e => setPassword(e.target.value)}
         />
         <Input
           type="password"
@@ -53,8 +80,8 @@ const SettingPassword: NextPage = () => {
           height="45px"
           placeholder="confirmar contraseña"
           marginBottom="15px"
-          // value={email || ''}
-          // onChange={e => setEmail(e.target.value)}
+          value={newPassword || ''}
+          onChange={e => setNewPassword(e.target.value)}
         />
 
         <Button
@@ -80,7 +107,7 @@ const SettingPassword: NextPage = () => {
             backgroundColor: '#FFF'
           }}
           width="100%"
-          // onClick={handleLogin}
+          onClick={handleUpdateUser}
         >
           Cambiar
         </Button>

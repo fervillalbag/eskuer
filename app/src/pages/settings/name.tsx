@@ -1,28 +1,55 @@
 import React, { useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
 import { NextPage } from 'next'
 import { Box, Button, Input } from '@chakra-ui/react'
-import { useQuery } from '@apollo/client'
+import { useMutation, useQuery } from '@apollo/client'
 
 import Back from '../../components/Back'
 import useAuth from '../../hooks/useAuth'
 import { GET_USER } from '../../graphql/queries/user'
+import { UPDATE_USER } from '../../graphql/mutations/user'
+import { useRouter } from 'next/router'
 
 const SettingName: NextPage = () => {
   const { user } = useAuth()
+  const router = useRouter()
 
-  const { data: dataUser } = useQuery(GET_USER, {
+  const {
+    data: dataUser,
+    loading: loadingUser,
+    refetch: refetchUser
+  } = useQuery(GET_USER, {
     variables: {
       id: user?.id
     }
   })
 
+  const [updateUser] = useMutation(UPDATE_USER)
   const userInfo = dataUser?.getUser || {}
 
   const [name, setName] = useState<string>(userInfo?.name)
 
   useEffect(() => {
     setName(userInfo?.name)
-  }, [userInfo])
+  }, [loadingUser])
+
+  const handleUpdateUser = async () => {
+    try {
+      await updateUser({
+        variables: {
+          input: {
+            id: userInfo?.id,
+            name
+          }
+        }
+      })
+      refetchUser()
+      toast.success('Nombre actualizado correctamente')
+      router.push('/settings/user')
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <Box padding="20px">
@@ -66,7 +93,7 @@ const SettingName: NextPage = () => {
             backgroundColor: '#FFF'
           }}
           width="100%"
-          // onClick={handleLogin}
+          onClick={handleUpdateUser}
         >
           Guardar
         </Button>
