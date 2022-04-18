@@ -98,7 +98,7 @@ const Settings: React.FC = () => {
             </Link>
           </NextLink>
 
-          <NextLink href="/create/price">
+          <NextLink href="/saved/post">
             <Link
               width="100%"
               display="flex"
