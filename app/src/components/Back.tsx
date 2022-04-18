@@ -31,6 +31,12 @@ const Back: React.FC<BackIprops> = ({ title, showButton = true }) => {
                 router.push('/post')
               } else if (router.pathname === '/settings/user') {
                 router.push('/settings')
+              } else if (router.pathname === '/settings/name') {
+                router.push('/settings/user')
+              } else if (router.pathname === '/settings/email') {
+                router.push('/settings/user')
+              } else if (router.pathname === '/settings/password') {
+                router.push('/settings/user')
               } else {
                 router.back()
               }

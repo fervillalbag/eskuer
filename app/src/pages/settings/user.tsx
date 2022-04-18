@@ -22,7 +22,7 @@ const SettingsUser: React.FC = () => {
         </Text>
 
         <Box marginTop="15px">
-          <NextLink href="#">
+          <NextLink href="/settings/name">
             <Link
               width="100%"
               display="flex"
@@ -66,7 +66,7 @@ const SettingsUser: React.FC = () => {
             </Link>
           </NextLink>
 
-          <NextLink href="#">
+          <NextLink href="/settings/email">
             <Link
               width="100%"
               display="flex"
@@ -110,7 +110,7 @@ const SettingsUser: React.FC = () => {
             </Link>
           </NextLink>
 
-          <NextLink href="#">
+          <NextLink href="/settings/password">
             <Link
               width="100%"
               display="flex"
