@@ -1,6 +1,6 @@
 import React from 'react'
 import { NextPage } from 'next'
-import { Box, Button } from '@chakra-ui/react'
+import { Box, Button, Text } from '@chakra-ui/react'
 import { useQuery } from '@apollo/client'
 import { useRouter } from 'next/router'
 
@@ -65,6 +65,10 @@ const Post: NextPage = () => {
             <LoaderPost />
             <LoaderPost />
             <LoaderPost />
+          </Box>
+        ) : postsOrder.length === 0 ? (
+          <Box>
+            <Text>No hay ninguna pregunta realizada</Text>
           </Box>
         ) : (
           postsOrder.map(post => <PostComponent key={post.id} post={post} />)

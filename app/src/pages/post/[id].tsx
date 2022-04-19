@@ -136,7 +136,9 @@ const PostItem: NextPage = () => {
         <ModalContent>
           <ModalHeader padding="15px">Eliminar</ModalHeader>
           <ModalCloseButton />
-          <ModalBody padding="0 15px">¿Desea eliminar la pregunta?</ModalBody>
+          <ModalBody padding="0 15px">
+            ¿Desea eliminar la publicación?
+          </ModalBody>
 
           <ModalFooter
             display="grid"

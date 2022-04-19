@@ -1,5 +1,6 @@
 const Post = require("../models/post");
 const LikePost = require("../models/likePost");
+const CommentPost = require("../models/commentPost");
 
 const getPosts = async () => {
   try {
@@ -84,6 +85,7 @@ const updatePost = async (input) => {
 const deletePost = async (id) => {
   try {
     await LikePost.find({}).deleteMany({ idPost: id });
+    await CommentPost.find({}).deleteMany({ idPost: id });
     await Post.findByIdAndDelete(id);
 
     return {

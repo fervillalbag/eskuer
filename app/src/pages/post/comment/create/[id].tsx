@@ -1,17 +1,26 @@
 import React, { useState } from 'react'
 import toast from 'react-hot-toast'
 import { NextPage } from 'next'
-import { Box, Button, Input } from '@chakra-ui/react'
+import { Box, Button, Image, Input, Text } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
-import { useMutation } from '@apollo/client'
+import { useMutation, useQuery } from '@apollo/client'
 
 import Back from '../../../../components/Back'
 import { CREATE_COMMENT_POST } from '../../../../graphql/mutations/commentPost'
 import useAuth from '../../../../hooks/useAuth'
+import { GET_POST } from '../../../../graphql/queries/post'
 
 const CommentCreate: NextPage = () => {
   const router = useRouter()
   const { user } = useAuth()
+
+  const { data: dataPost } = useQuery(GET_POST, {
+    variables: {
+      id: router?.query?.id
+    }
+  })
+
+  const post = dataPost?.getPost || {}
 
   const [supermarketValue, setSupermarketValue] = useState<string>('')
   const [cityValue, setCityValue] = useState<string>('')
@@ -52,6 +61,17 @@ const CommentCreate: NextPage = () => {
       </Box>
 
       <Box marginTop="20px">
+        <Text marginBottom="6px">Vista previa del producto</Text>
+        <Box marginBottom="20px">
+          <Image
+            src={post?.image}
+            alt={post?.title}
+            width="80px"
+            height="80px"
+            objectFit="cover"
+          />
+        </Box>
+
         <Input
           type="text"
           _focus={{ outline: 0 }}
