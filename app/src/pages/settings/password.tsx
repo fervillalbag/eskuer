@@ -27,6 +27,10 @@ const SettingPassword: NextPage = () => {
   const [newPassword, setNewPassword] = useState<string>('')
 
   const handleUpdateUser = async () => {
+    if (!password || !newPassword) {
+      return toast.error('Ambos campos son obligatorios')
+    }
+
     if (password !== newPassword) {
       return toast.error('Las contraseñas no coinciden')
     }

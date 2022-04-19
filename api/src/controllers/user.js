@@ -1,6 +1,10 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
+const Post = require("../models/post");
+const CommentPost = require("../models/commentPost");
+const LikePost = require("../models/likePost");
+const LikeProduct = require("../models/likeProduct");
 const User = require("../models/user");
 
 const createToken = (user, SECRET_KEY_LOGIN, expiresIn) => {
@@ -124,6 +128,11 @@ const updateUser = async (input) => {
 
 const deleteUser = async (id) => {
   try {
+    await Post.find({}).deleteMany({ idUser: id });
+    await CommentPost.find({}).deleteMany({ idUser: id });
+    await LikePost.find({}).deleteMany({ idUser: id });
+    await LikeProduct.find({}).deleteMany({ idUser: id });
+
     await User.findOneAndDelete({ _id: id });
 
     return {
