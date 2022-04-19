@@ -23,11 +23,11 @@ const NotFound: React.FC = () => {
           fontWeight="semibold"
           fontSize="1rem"
           backgroundColor="#FFF"
-          color="#003049"
+          color="#3E3E3E"
           textAlign="center"
           border="1px solid"
           borderBottom="4px solid"
-          borderColor="#003049"
+          borderColor="#3E3E3E"
           _focus={{ shadow: 0 }}
           _hover={{
             backgroundColor: '#FFF'

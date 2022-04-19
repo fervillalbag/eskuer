@@ -11,16 +11,26 @@ import Loader from '../components/Loader'
 import Product from '../components/Product'
 import { MdLocalGroceryStore } from 'react-icons/md'
 import { GET_PRODUCTS } from '../graphql/queries/product'
+import { GET_SUPERMARKETS } from '../graphql/queries/supermarket'
 
 const Search: React.FC = () => {
   const { data: dataProducts, loading: loadingProducts } =
     useQuery(GET_PRODUCTS)
+
+  const { data: dataSupermarkets, loading: loadingSupermarkets } =
+    useQuery(GET_SUPERMARKETS)
+
   const products = dataProducts?.getProducts || []
+  const supermarkets = dataSupermarkets?.getSupermarkets || []
 
   const [searchValue, setSearchValue] = useState<string>('')
 
   const productsList = products.filter(product =>
     product.name.toLowerCase().includes(searchValue.toLowerCase())
+  )
+
+  const supermarketsList = supermarkets.filter(supermarket =>
+    supermarket.name.toLowerCase().includes(searchValue.toLowerCase())
   )
 
   return (
@@ -40,20 +50,20 @@ const Search: React.FC = () => {
               height="45px"
               value={searchValue}
               onChange={e => setSearchValue(e.target.value)}
-              _focus={{ border: '1px solid #003049' }}
+              _focus={{ border: '1px solid #3E3E3E' }}
             />
           </Box>
 
           <Box>
             <Button
-              type="submit"
+              type="button"
               minWidth="initial"
               height="100%"
               rounded="3px 3px 0 0"
-              backgroundColor="#FDF0D5"
-              color="#003049"
-              border="1px solid #003049"
-              borderBottom="4px solid #003049"
+              backgroundColor="#F5F5F5"
+              color="#3E3E3E"
+              border="1px solid #3E3E3E"
+              borderBottom="4px solid #3E3E3E"
               fontSize="24px"
               _focus={{ border: 0 }}
             >
@@ -63,26 +73,93 @@ const Search: React.FC = () => {
         </Grid>
 
         {searchValue ? (
-          <Box as="main" marginTop="15px">
-            {loadingProducts ? (
-              <Loader />
-            ) : (
-              <Grid gridTemplateColumns="repeat(2, 1fr)" gap="10px">
-                {productsList.length === 0 ? (
+          <Box marginTop="20px">
+            <Text fontWeight="semibold" fontSize="18px" color="#3e3e3e">
+              Productos
+            </Text>
+            <Box as="main" marginTop="10px">
+              {loadingProducts ? (
+                <Loader />
+              ) : (
+                <Grid gridTemplateColumns="repeat(2, 1fr)" gap="10px">
+                  {productsList.length === 0 ? (
+                    <Box gridColumn="1/4">
+                      <Text>
+                        No se encontraron resultados con esta búsqueda
+                      </Text>
+                    </Box>
+                  ) : (
+                    productsList.map(product => (
+                      <NextLink
+                        href={`/product/${product.id}`}
+                        key={product.id}
+                      >
+                        <Link
+                          display="block"
+                          _hover={{ textDecoration: 'none' }}
+                        >
+                          <Product key={product.id} product={product} />
+                        </Link>
+                      </NextLink>
+                    ))
+                  )}
+                </Grid>
+              )}
+            </Box>
+
+            <Box marginTop="15px">
+              <Text fontWeight="semibold" fontSize="18px" color="#3e3e3e">
+                Supermercados
+              </Text>
+
+              <Box marginTop="10px">
+                {loadingSupermarkets ? (
+                  <Loader />
+                ) : supermarketsList.length === 0 ? (
                   <Box gridColumn="1/4">
                     <Text>No se encontraron resultados con esta búsqueda</Text>
                   </Box>
                 ) : (
-                  productsList.map(product => (
-                    <NextLink href={`/product/${product.id}`} key={product.id}>
-                      <Link display="block" _hover={{ textDecoration: 'none' }}>
-                        <Product key={product.id} product={product} />
-                      </Link>
-                    </NextLink>
-                  ))
+                  <Grid
+                    gridTemplateColumns="repeat(2, 1fr)"
+                    marginTop="10px"
+                    gap="20px"
+                  >
+                    {supermarketsList.map(supermarket => (
+                      <NextLink
+                        key={supermarket.id}
+                        href={`/supermarket/${supermarket.id}`}
+                      >
+                        <Link
+                          backgroundColor="#FFF"
+                          rounded="3px 3px 0 0"
+                          height="120px"
+                          padding="10px"
+                          border="1px solid #3E3E3E"
+                          borderBottom="4px solid #3E3E3E"
+                          _hover={{ textDecoration: 'none' }}
+                        >
+                          <Text
+                            textTransform="uppercase"
+                            fontWeight="bold"
+                            color="#3E3E3E"
+                          >
+                            {supermarket.name}
+                          </Text>
+                          <Text
+                            fontSize="12px"
+                            textTransform="uppercase"
+                            color="#3E3E3E"
+                          >
+                            {supermarket.address}
+                          </Text>
+                        </Link>
+                      </NextLink>
+                    ))}
+                  </Grid>
                 )}
-              </Grid>
-            )}
+              </Box>
+            </Box>
           </Box>
         ) : (
           <Box marginTop="30px">
@@ -90,7 +167,7 @@ const Search: React.FC = () => {
               <Link
                 width="100%"
                 display="flex"
-                color="#003049"
+                color="#3E3E3E"
                 textAlign="center"
                 fontWeight="semibold"
                 textTransform="uppercase"
@@ -104,12 +181,12 @@ const Search: React.FC = () => {
                   gap="0 15px"
                   alignItems="center"
                 >
-                  <Text fontSize="40px" color="#D5DFE5" marginRight="15px">
+                  <Text fontSize="40px" color="#F0F0F0" marginRight="15px">
                     <FaStoreAlt />
                   </Text>
                   <Box>
                     <Text
-                      color="#003049"
+                      color="#3E3E3E"
                       textAlign="left"
                       fontSize="12px"
                       fontWeight="semibold"
@@ -134,7 +211,7 @@ const Search: React.FC = () => {
               <Link
                 width="100%"
                 display="flex"
-                color="#003049"
+                color="#3E3E3E"
                 textAlign="center"
                 fontWeight="semibold"
                 textTransform="uppercase"
@@ -148,12 +225,12 @@ const Search: React.FC = () => {
                   gap="0 15px"
                   alignItems="center"
                 >
-                  <Text fontSize="40px" color="#D5DFE5" marginRight="15px">
+                  <Text fontSize="40px" color="#F0F0F0" marginRight="15px">
                     <MdLocalGroceryStore />
                   </Text>
                   <Box>
                     <Text
-                      color="#003049"
+                      color="#3E3E3E"
                       textAlign="left"
                       fontSize="12px"
                       fontWeight="semibold"

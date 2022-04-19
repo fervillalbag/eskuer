@@ -89,8 +89,8 @@ const UserListPage: NextPage = () => {
             <Button
               rounded="3px"
               width="100%"
-              color="#003049"
-              backgroundColor="#D5DFE5"
+              color="#3E3E3E"
+              backgroundColor="#F0F0F0"
               onClick={onClose}
             >
               Cerrar

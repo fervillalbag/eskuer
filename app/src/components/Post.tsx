@@ -91,9 +91,9 @@ const Post: React.FC<PostIprops> = ({ post }) => {
           minWidth="initial"
           height="50px"
           padding="15px"
-          border="1px solid #003049"
+          border="1px solid #3E3E3E"
           rounded="3px 3px 0 0"
-          borderBottom="4px solid #003049"
+          borderBottom="4px solid #3E3E3E"
           backgroundColor="#FFF"
           fontSize="20px"
           _hover={{ backgroundColor: '#FFF' }}

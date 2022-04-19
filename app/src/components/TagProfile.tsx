@@ -24,7 +24,7 @@ const TagProfile: React.FC<TagProfileIprops> = ({ user }) => {
       </Box>
       <Flex width="full" justifyContent="space-between" alignItems="center">
         <Box>
-          <Text fontWeight="semibold" color="#003049">
+          <Text fontWeight="semibold" color="#3E3E3E">
             {user?.name}
           </Text>
           <Text color="#9F9F9F" fontSize="14px">
@@ -36,11 +36,11 @@ const TagProfile: React.FC<TagProfileIprops> = ({ user }) => {
             minWidth="initial"
             width="45px"
             height="45px"
-            backgroundColor="#FDF0D5"
-            color="#003049"
+            backgroundColor="#F5F5F5"
+            color="#3E3E3E"
             border="1px solid"
             borderBottom="4px solid"
-            borderColor="#003049"
+            borderColor="#3E3E3E"
             fontSize="22px"
             rounded="2px 2px 0 0"
             _focus={{ border: 0 }}

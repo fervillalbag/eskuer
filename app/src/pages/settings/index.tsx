@@ -32,7 +32,7 @@ const Settings: React.FC = () => {
         <Back showButton={false} title="Ajustes" />
 
         <Box marginTop="20px" paddingBottom="20px">
-          <Text color="#003049" textTransform="uppercase">
+          <Text color="#3E3E3E" textTransform="uppercase">
             Cuenta
           </Text>
 
@@ -47,9 +47,9 @@ const Settings: React.FC = () => {
           </NextLink>
         </Box>
 
-        <Box width="100%" height="1px" backgroundColor="#D5DFE5"></Box>
+        <Box width="100%" height="1px" backgroundColor="#F0F0F0"></Box>
 
-        <Text color="#003049" marginTop="20px" textTransform="uppercase">
+        <Text color="#3E3E3E" marginTop="20px" textTransform="uppercase">
           Configuración
         </Text>
 
@@ -58,7 +58,7 @@ const Settings: React.FC = () => {
             <Link
               width="100%"
               display="flex"
-              color="#003049"
+              color="#3E3E3E"
               textAlign="center"
               fontWeight="semibold"
               textTransform="uppercase"
@@ -72,12 +72,12 @@ const Settings: React.FC = () => {
                 gap="0 15px"
                 alignItems="center"
               >
-                <Text fontSize="40px" color="#D5DFE5" marginRight="15px">
+                <Text fontSize="40px" color="#F0F0F0" marginRight="15px">
                   <MdLocalGroceryStore />
                 </Text>
                 <Box>
                   <Text
-                    color="#003049"
+                    color="#3E3E3E"
                     textAlign="left"
                     fontSize="12px"
                     fontWeight="semibold"
@@ -102,7 +102,7 @@ const Settings: React.FC = () => {
             <Link
               width="100%"
               display="flex"
-              color="#003049"
+              color="#3E3E3E"
               textAlign="center"
               fontWeight="semibold"
               textTransform="uppercase"
@@ -116,12 +116,12 @@ const Settings: React.FC = () => {
                 gap="0 15px"
                 alignItems="center"
               >
-                <Text fontSize="40px" color="#D5DFE5" marginRight="15px">
+                <Text fontSize="40px" color="#F0F0F0" marginRight="15px">
                   <BsQuestionCircleFill />
                 </Text>
                 <Box>
                   <Text
-                    color="#003049"
+                    color="#3E3E3E"
                     textAlign="left"
                     fontSize="12px"
                     fontWeight="semibold"
@@ -146,7 +146,7 @@ const Settings: React.FC = () => {
             <Link
               width="100%"
               display="flex"
-              color="#003049"
+              color="#3E3E3E"
               textAlign="center"
               fontWeight="semibold"
               textTransform="uppercase"
@@ -160,12 +160,12 @@ const Settings: React.FC = () => {
                 gap="0 15px"
                 alignItems="center"
               >
-                <Text fontSize="40px" color="#D5DFE5" marginRight="15px">
+                <Text fontSize="40px" color="#F0F0F0" marginRight="15px">
                   <IoIosDocument />
                 </Text>
                 <Box>
                   <Text
-                    color="#003049"
+                    color="#3E3E3E"
                     textAlign="left"
                     fontSize="12px"
                     fontWeight="semibold"

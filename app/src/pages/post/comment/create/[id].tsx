@@ -135,9 +135,9 @@ const CommentCreate: NextPage = () => {
           borderRadius="4px"
           backgroundColor="#FFF"
           rounded="3px 3px 0 0"
-          color="#003049"
-          border="1px solid #003049"
-          borderBottom="4px solid #003049"
+          color="#3E3E3E"
+          border="1px solid #3E3E3E"
+          borderBottom="4px solid #3E3E3E"
           _focus={{ shadow: 0 }}
           _hover={{
             backgroundColor: '#FFF'

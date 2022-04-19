@@ -86,7 +86,7 @@ const Login: React.FC = () => {
         />
 
         <Box marginBottom="15px">
-          <Text fontSize="14px" textAlign="center" color="#003049">
+          <Text fontSize="14px" textAlign="center" color="#3E3E3E">
             ¿Aún no tienes una cuenta?{' '}
             <NextLink href="/register">
               <Link fontWeight="bold">Regístrate</Link>
@@ -104,9 +104,9 @@ const Login: React.FC = () => {
           borderRadius="4px"
           backgroundColor="#FFF"
           rounded="3px 3px 0 0"
-          color="#003049"
-          border="1px solid #003049"
-          borderBottom="4px solid #003049"
+          color="#3E3E3E"
+          border="1px solid #3E3E3E"
+          borderBottom="4px solid #3E3E3E"
           _focus={{ shadow: 0 }}
           _hover={{
             backgroundColor: '#FFF'

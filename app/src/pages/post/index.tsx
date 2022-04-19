@@ -36,7 +36,7 @@ const Post: NextPage = () => {
           rounded="3px 3px 0 0"
           border="1px solid"
           borderBottom="4px solid"
-          borderColor="#003049"
+          borderColor="#3E3E3E"
           backgroundColor="#FFF"
           width="100%"
           height="50px"

@@ -71,8 +71,8 @@ const CommentPost: React.FC<CommentPostIprops> = ({
   return (
     <Box
       marginBottom="20px"
-      border="1px solid #003049"
-      borderBottom="4px solid #003049"
+      border="1px solid #3E3E3E"
+      borderBottom="4px solid #3E3E3E"
       padding="20px 15px"
       backgroundColor="#EFF3F5"
       rounded="3px 3px 0 0"
@@ -94,8 +94,8 @@ const CommentPost: React.FC<CommentPostIprops> = ({
             <Button
               rounded="3px"
               width="100%"
-              color="#003049"
-              backgroundColor="#D5DFE5"
+              color="#3E3E3E"
+              backgroundColor="#F0F0F0"
               onClick={onClose}
             >
               Cerrar
@@ -133,11 +133,11 @@ const CommentPost: React.FC<CommentPostIprops> = ({
               fontSize="14px"
               fontWeight="semibold"
               textTransform="capitalize"
-              color="#003049"
+              color="#3E3E3E"
             >
               {user?.name}
             </Text>
-            <Text fontSize="12px" color="#003049">
+            <Text fontSize="12px" color="#3E3E3E">
               {dayjs(parseInt(comment?.createdAt)).fromNow()}
             </Text>
           </Box>
@@ -166,13 +166,13 @@ const CommentPost: React.FC<CommentPostIprops> = ({
 
       <Box marginTop="5px">
         <Flex as="article" marginBottom="2px">
-          <Text display="inline-block" color="#003049" fontSize="14px">
+          <Text display="inline-block" color="#3E3E3E" fontSize="14px">
             <Text
               as="span"
               display="inline-block"
               fontWeight="semibold"
               fontSize="14px"
-              color="#003049"
+              color="#3E3E3E"
               textTransform="uppercase"
             >
               SUCURSAL:
@@ -182,13 +182,13 @@ const CommentPost: React.FC<CommentPostIprops> = ({
         </Flex>
 
         <Flex as="article" marginBottom="2px">
-          <Text color="#003049" fontSize="14px" display="inline-block">
+          <Text color="#3E3E3E" fontSize="14px" display="inline-block">
             <Text
               as="span"
               display="inline-block"
               fontWeight="semibold"
               fontSize="14px"
-              color="#003049"
+              color="#3E3E3E"
               textTransform="uppercase"
             >
               Dirección:
@@ -198,13 +198,13 @@ const CommentPost: React.FC<CommentPostIprops> = ({
         </Flex>
 
         <Flex as="article" marginBottom="2px">
-          <Text display="inline-block" color="#003049" fontSize="14px">
+          <Text display="inline-block" color="#3E3E3E" fontSize="14px">
             <Text
               as="span"
               display="inline-block"
               fontWeight="semibold"
               fontSize="14px"
-              color="#003049"
+              color="#3E3E3E"
               textTransform="uppercase"
             >
               REFERENCIA:

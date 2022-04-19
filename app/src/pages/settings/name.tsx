@@ -82,11 +82,11 @@ const SettingName: NextPage = () => {
           borderRadius="4px"
           backgroundColor="#FFF"
           rounded="3px 3px 0 0"
-          color={name === userInfo?.name ? 'hsl(214, 31%, 80%)' : '#003049'}
-          border="1px solid #003049"
-          borderBottom="4px solid #003049"
+          color={name === userInfo?.name ? 'hsl(214, 31%, 80%)' : '#3E3E3E'}
+          border="1px solid #3E3E3E"
+          borderBottom="4px solid #3E3E3E"
           borderColor={
-            name === userInfo?.name ? 'hsl(214, 31%, 80%)' : '#003049'
+            name === userInfo?.name ? 'hsl(214, 31%, 80%)' : '#3E3E3E'
           }
           _focus={{ shadow: 0 }}
           _hover={{

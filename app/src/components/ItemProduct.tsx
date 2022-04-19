@@ -42,7 +42,7 @@ const ItemProduct: React.FC<ItemProductIprops> = ({ price }) => {
           </Grid>
           <Box marginLeft="10px">
             <Text
-              color="#003049"
+              color="#3E3E3E"
               fontWeight="bold"
               textTransform="uppercase"
               fontSize="12px"
@@ -60,7 +60,7 @@ const ItemProduct: React.FC<ItemProductIprops> = ({ price }) => {
         </Flex>
         <Box>
           <Text
-            color="#003049"
+            color="#3E3E3E"
             fontSize="14px"
             textTransform="uppercase"
             textAlign="right"
@@ -72,7 +72,7 @@ const ItemProduct: React.FC<ItemProductIprops> = ({ price }) => {
       </Flex>
 
       <Box marginTop="5px" gridColumn="1/5">
-        <Text fontSize="12px" color="#003049" textTransform="uppercase">
+        <Text fontSize="12px" color="#3E3E3E" textTransform="uppercase">
           {supermarket?.address}
         </Text>
       </Box>

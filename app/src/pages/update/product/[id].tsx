@@ -169,8 +169,8 @@ const ProductItemUpdate: React.FC = () => {
             <Button
               rounded="3px"
               width="100%"
-              color="#003049"
-              backgroundColor="#D5DFE5"
+              color="#3E3E3E"
+              backgroundColor="#F0F0F0"
               onClick={onClose}
             >
               Cerrar
@@ -254,10 +254,10 @@ const ProductItemUpdate: React.FC = () => {
           padding="12px 32px"
           fontWeight="medium"
           fontSize="1rem"
-          backgroundColor="#D5DFE5"
-          border="1px solid #003049"
-          borderBottom="4px solid #003049"
-          color="#003049"
+          backgroundColor="#F0F0F0"
+          border="1px solid #3E3E3E"
+          borderBottom="4px solid #3E3E3E"
+          color="#3E3E3E"
           onClick={() => inputFileRef.current.click()}
           _focus={{ shadow: 0 }}
         >
@@ -278,10 +278,10 @@ const ProductItemUpdate: React.FC = () => {
           fontWeight="semibold"
           fontSize="1rem"
           borderRadius="3px 3px 0 0"
-          border="1px solid #003049"
+          border="1px solid #3E3E3E"
           backgroundColor="#FFF"
-          borderBottom="4px solid #003049"
-          color="#003049"
+          borderBottom="4px solid #3E3E3E"
+          color="#3E3E3E"
           _focus={{ shadow: 0 }}
           _hover={{
             backgroundColor: '#FFF'

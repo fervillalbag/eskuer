@@ -42,7 +42,7 @@ const Admin: React.FC = () => {
   return (
     <Box padding="20px 20px 90px 20px">
       <Back showButton={false} title="Administrador" />
-      <Text color="#003049" marginTop="20px" textTransform="uppercase">
+      <Text color="#3E3E3E" marginTop="20px" textTransform="uppercase">
         Añadir
       </Text>
 
@@ -51,7 +51,7 @@ const Admin: React.FC = () => {
           <Link
             width="100%"
             display="flex"
-            color="#003049"
+            color="#3E3E3E"
             textAlign="center"
             fontWeight="semibold"
             textTransform="uppercase"
@@ -65,12 +65,12 @@ const Admin: React.FC = () => {
               gap="0 15px"
               alignItems="center"
             >
-              <Text fontSize="40px" color="#D5DFE5" marginRight="15px">
+              <Text fontSize="40px" color="#F0F0F0" marginRight="15px">
                 <MdLocalGroceryStore />
               </Text>
               <Box>
                 <Text
-                  color="#003049"
+                  color="#3E3E3E"
                   textAlign="left"
                   fontSize="12px"
                   fontWeight="semibold"
@@ -95,7 +95,7 @@ const Admin: React.FC = () => {
           <Link
             width="100%"
             display="flex"
-            color="#003049"
+            color="#3E3E3E"
             textAlign="center"
             fontWeight="semibold"
             textTransform="uppercase"
@@ -109,12 +109,12 @@ const Admin: React.FC = () => {
               gap="0 15px"
               alignItems="center"
             >
-              <Text fontSize="40px" color="#D5DFE5" marginRight="15px">
+              <Text fontSize="40px" color="#F0F0F0" marginRight="15px">
                 <FaStoreAlt />
               </Text>
               <Box>
                 <Text
-                  color="#003049"
+                  color="#3E3E3E"
                   textAlign="left"
                   fontSize="12px"
                   fontWeight="semibold"
@@ -139,7 +139,7 @@ const Admin: React.FC = () => {
           <Link
             width="100%"
             display="flex"
-            color="#003049"
+            color="#3E3E3E"
             textAlign="center"
             fontWeight="semibold"
             textTransform="uppercase"
@@ -153,12 +153,12 @@ const Admin: React.FC = () => {
               gap="0 15px"
               alignItems="center"
             >
-              <Text fontSize="40px" color="#D5DFE5" marginRight="15px">
+              <Text fontSize="40px" color="#F0F0F0" marginRight="15px">
                 <AiFillDollarCircle />
               </Text>
               <Box>
                 <Text
-                  color="#003049"
+                  color="#3E3E3E"
                   textAlign="left"
                   fontSize="12px"
                   fontWeight="semibold"
@@ -180,9 +180,9 @@ const Admin: React.FC = () => {
         </NextLink>
       </Box>
 
-      <Box width="100%" height="1px" backgroundColor="#D5DFE5"></Box>
+      <Box width="100%" height="1px" backgroundColor="#F0F0F0"></Box>
 
-      <Text color="#003049" marginTop="20px" textTransform="uppercase">
+      <Text color="#3E3E3E" marginTop="20px" textTransform="uppercase">
         Lista
       </Text>
 
@@ -191,7 +191,7 @@ const Admin: React.FC = () => {
           <Link
             width="100%"
             display="flex"
-            color="#003049"
+            color="#3E3E3E"
             textAlign="center"
             fontWeight="semibold"
             textTransform="uppercase"
@@ -205,12 +205,12 @@ const Admin: React.FC = () => {
               gap="0 15px"
               alignItems="center"
             >
-              <Text fontSize="40px" color="#D5DFE5" marginRight="15px">
+              <Text fontSize="40px" color="#F0F0F0" marginRight="15px">
                 <FiUsers />
               </Text>
               <Box>
                 <Text
-                  color="#003049"
+                  color="#3E3E3E"
                   textAlign="left"
                   fontSize="12px"
                   fontWeight="semibold"
@@ -235,7 +235,7 @@ const Admin: React.FC = () => {
           <Link
             width="100%"
             display="flex"
-            color="#003049"
+            color="#3E3E3E"
             textAlign="center"
             fontWeight="semibold"
             textTransform="uppercase"
@@ -249,12 +249,12 @@ const Admin: React.FC = () => {
               gap="0 15px"
               alignItems="center"
             >
-              <Text fontSize="40px" color="#D5DFE5" marginRight="15px">
+              <Text fontSize="40px" color="#F0F0F0" marginRight="15px">
                 <MdLocalGroceryStore />
               </Text>
               <Box>
                 <Text
-                  color="#003049"
+                  color="#3E3E3E"
                   textAlign="left"
                   fontSize="12px"
                   fontWeight="semibold"
@@ -279,7 +279,7 @@ const Admin: React.FC = () => {
           <Link
             width="100%"
             display="flex"
-            color="#003049"
+            color="#3E3E3E"
             textAlign="center"
             fontWeight="semibold"
             textTransform="uppercase"
@@ -293,12 +293,12 @@ const Admin: React.FC = () => {
               gap="0 15px"
               alignItems="center"
             >
-              <Text fontSize="40px" color="#D5DFE5" marginRight="15px">
+              <Text fontSize="40px" color="#F0F0F0" marginRight="15px">
                 <FaStoreAlt />
               </Text>
               <Box>
                 <Text
-                  color="#003049"
+                  color="#3E3E3E"
                   textAlign="left"
                   fontSize="12px"
                   fontWeight="semibold"
@@ -320,9 +320,9 @@ const Admin: React.FC = () => {
         </NextLink>
       </Box>
 
-      <Box width="100%" height="1px" backgroundColor="#D5DFE5"></Box>
+      <Box width="100%" height="1px" backgroundColor="#F0F0F0"></Box>
 
-      <Text color="#003049" marginTop="20px" textTransform="uppercase">
+      <Text color="#3E3E3E" marginTop="20px" textTransform="uppercase">
         Editar
       </Text>
 
@@ -331,7 +331,7 @@ const Admin: React.FC = () => {
           <Link
             width="100%"
             display="flex"
-            color="#003049"
+            color="#3E3E3E"
             textAlign="center"
             fontWeight="semibold"
             textTransform="uppercase"
@@ -345,12 +345,12 @@ const Admin: React.FC = () => {
               gap="0 15px"
               alignItems="center"
             >
-              <Text fontSize="40px" color="#D5DFE5" marginRight="15px">
+              <Text fontSize="40px" color="#F0F0F0" marginRight="15px">
                 <MdLocalGroceryStore />
               </Text>
               <Box>
                 <Text
-                  color="#003049"
+                  color="#3E3E3E"
                   textAlign="left"
                   fontSize="12px"
                   fontWeight="semibold"
@@ -375,7 +375,7 @@ const Admin: React.FC = () => {
           <Link
             width="100%"
             display="flex"
-            color="#003049"
+            color="#3E3E3E"
             textAlign="center"
             fontWeight="semibold"
             textTransform="uppercase"
@@ -389,12 +389,12 @@ const Admin: React.FC = () => {
               gap="0 15px"
               alignItems="center"
             >
-              <Text fontSize="40px" color="#D5DFE5" marginRight="15px">
+              <Text fontSize="40px" color="#F0F0F0" marginRight="15px">
                 <FaStoreAlt />
               </Text>
               <Box>
                 <Text
-                  color="#003049"
+                  color="#3E3E3E"
                   textAlign="left"
                   fontSize="12px"
                   fontWeight="semibold"

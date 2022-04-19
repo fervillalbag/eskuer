@@ -17,7 +17,7 @@ const SettingsUser: React.FC = () => {
       <Back title="Info personal" />
 
       <Box marginTop="25px">
-        <Text color="#003049" marginTop="20px" textTransform="uppercase">
+        <Text color="#3E3E3E" marginTop="20px" textTransform="uppercase">
           Modificar cuenta
         </Text>
 
@@ -26,7 +26,7 @@ const SettingsUser: React.FC = () => {
             <Link
               width="100%"
               display="flex"
-              color="#003049"
+              color="#3E3E3E"
               textAlign="center"
               fontWeight="semibold"
               textTransform="uppercase"
@@ -40,12 +40,12 @@ const SettingsUser: React.FC = () => {
                 gap="0 15px"
                 alignItems="center"
               >
-                <Text fontSize="40px" color="#D5DFE5" marginRight="15px">
+                <Text fontSize="40px" color="#F0F0F0" marginRight="15px">
                   <FaUser />
                 </Text>
                 <Box>
                   <Text
-                    color="#003049"
+                    color="#3E3E3E"
                     textAlign="left"
                     fontSize="12px"
                     fontWeight="semibold"
@@ -70,7 +70,7 @@ const SettingsUser: React.FC = () => {
             <Link
               width="100%"
               display="flex"
-              color="#003049"
+              color="#3E3E3E"
               textAlign="center"
               fontWeight="semibold"
               textTransform="uppercase"
@@ -84,12 +84,12 @@ const SettingsUser: React.FC = () => {
                 gap="0 15px"
                 alignItems="center"
               >
-                <Text fontSize="40px" color="#D5DFE5" marginRight="15px">
+                <Text fontSize="40px" color="#F0F0F0" marginRight="15px">
                   <FaRegEnvelope />
                 </Text>
                 <Box>
                   <Text
-                    color="#003049"
+                    color="#3E3E3E"
                     textAlign="left"
                     fontSize="12px"
                     fontWeight="semibold"
@@ -114,7 +114,7 @@ const SettingsUser: React.FC = () => {
             <Link
               width="100%"
               display="flex"
-              color="#003049"
+              color="#3E3E3E"
               textAlign="center"
               fontWeight="semibold"
               textTransform="uppercase"
@@ -128,12 +128,12 @@ const SettingsUser: React.FC = () => {
                 gap="0 15px"
                 alignItems="center"
               >
-                <Text fontSize="40px" color="#D5DFE5" marginRight="15px">
+                <Text fontSize="40px" color="#F0F0F0" marginRight="15px">
                   <FaKey />
                 </Text>
                 <Box>
                   <Text
-                    color="#003049"
+                    color="#3E3E3E"
                     textAlign="left"
                     fontSize="12px"
                     fontWeight="semibold"
@@ -161,8 +161,8 @@ const SettingsUser: React.FC = () => {
           width="full"
           height="50px"
           rounded="3px 3px 0 0"
-          border="1px solid #003049"
-          borderBottom="4px solid #003049"
+          border="1px solid #3E3E3E"
+          borderBottom="4px solid #3E3E3E"
           backgroundColor="#FFF"
           onClick={logout}
           marginTop="30px"

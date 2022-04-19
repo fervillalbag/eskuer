@@ -44,8 +44,8 @@ const Navbar: React.FC = () => {
         bottom="20px"
         rounded="5px 5px 0 0"
         zIndex="50"
-        border="1px solid #D5DFE5"
-        borderBottom="4px solid #D5DFE5"
+        border="1px solid #F0F0F0"
+        borderBottom="4px solid #F0F0F0"
       >
         <Flex
           alignItems="center"
@@ -56,7 +56,7 @@ const Navbar: React.FC = () => {
           <NextLink href="/">
             <Link
               fontSize="26px"
-              color={pathname === '/' ? '"#003049"' : '#d5dfe4'}
+              color={pathname === '/' ? '#3E3E3E' : '#E5E5E5'}
             >
               <TiHome />
             </Link>
@@ -64,7 +64,7 @@ const Navbar: React.FC = () => {
           <NextLink href="/search">
             <Link
               fontSize="26px"
-              color={pathname === '/search' ? '"#003049"' : '#d5dfe4'}
+              color={pathname === '/search' ? '#3E3E3E' : '#E5E5E5'}
             >
               <FiSearch />
             </Link>
@@ -73,7 +73,7 @@ const Navbar: React.FC = () => {
             <NextLink href="/admin">
               <Link
                 fontSize="26px"
-                color={pathname === '/admin' ? '#003049' : '#d5dfe4'}
+                color={pathname === '/admin' ? '#3E3E3E' : '#E5E5E5'}
               >
                 <IoIosKey />
               </Link>
@@ -82,7 +82,7 @@ const Navbar: React.FC = () => {
           <NextLink href="/post">
             <Link
               fontSize="26px"
-              color={pathname === '/post' ? '"#003049"' : '#d5dfe4'}
+              color={pathname === '/post' ? '#3E3E3E' : '#E5E5E5'}
             >
               <GoCommentDiscussion />
             </Link>
@@ -91,7 +91,7 @@ const Navbar: React.FC = () => {
             <NextLink href="/settings">
               <Link
                 fontSize="26px"
-                color={pathname === '/settings' ? '"#003049"' : '#d5dfe4'}
+                color={pathname === '/settings' ? '#3E3E3E' : '#E5E5E5'}
               >
                 <IoMdSettings />
               </Link>

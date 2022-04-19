@@ -67,7 +67,7 @@ const Home: React.FC = () => {
           textTransform="uppercase"
           fontSize="16px"
           marginBottom="10px"
-          color="#003049"
+          color="#3E3E3E"
         >
           Categorías
         </Heading>
@@ -84,11 +84,11 @@ const Home: React.FC = () => {
               rounded="3px 3px 0 0"
               marginRight="15px"
               textTransform="lowercase"
-              border="1px solid #003049"
-              borderBottom="4px solid #003049"
+              border="1px solid #3E3E3E"
+              borderBottom="4px solid #3E3E3E"
               onClick={() => router.push(`/category/food`)}
             >
-              <Text color="#003049" fontWeight="semibold">
+              <Text color="#3E3E3E" fontWeight="semibold">
                 Alimentos
               </Text>
             </Flex>
@@ -102,11 +102,11 @@ const Home: React.FC = () => {
               rounded="3px 3px 0 0"
               marginRight="15px"
               textTransform="lowercase"
-              border="1px solid #003049"
-              borderBottom="4px solid #003049"
+              border="1px solid #3E3E3E"
+              borderBottom="4px solid #3E3E3E"
               onClick={() => router.push(`/category/drink`)}
             >
-              <Text color="#003049" fontWeight="semibold">
+              <Text color="#3E3E3E" fontWeight="semibold">
                 Bebidas
               </Text>
             </Flex>
@@ -120,11 +120,11 @@ const Home: React.FC = () => {
               rounded="3px 3px 0 0"
               marginRight="15px"
               textTransform="lowercase"
-              border="1px solid #003049"
-              borderBottom="4px solid #003049"
+              border="1px solid #3E3E3E"
+              borderBottom="4px solid #3E3E3E"
               onClick={() => router.push(`/category/bazar`)}
             >
-              <Text color="#003049" fontWeight="semibold">
+              <Text color="#3E3E3E" fontWeight="semibold">
                 Bazar
               </Text>
             </Flex>
@@ -138,11 +138,11 @@ const Home: React.FC = () => {
               rounded="3px 3px 0 0"
               marginRight="15px"
               textTransform="lowercase"
-              border="1px solid #003049"
-              borderBottom="4px solid #003049"
+              border="1px solid #3E3E3E"
+              borderBottom="4px solid #3E3E3E"
               onClick={() => router.push(`/category/bread`)}
             >
-              <Text color="#003049" fontWeight="semibold">
+              <Text color="#3E3E3E" fontWeight="semibold">
                 Panadería
               </Text>
             </Flex>
@@ -156,7 +156,7 @@ const Home: React.FC = () => {
           textTransform="uppercase"
           fontSize="16px"
           marginBottom="10px"
-          color="#003049"
+          color="#3E3E3E"
         >
           Productos
         </Heading>

@@ -150,8 +150,8 @@ const PostItem: NextPage = () => {
             <Button
               rounded="3px"
               width="100%"
-              color="#003049"
-              backgroundColor="#D5DFE5"
+              color="#3E3E3E"
+              backgroundColor="#F0F0F0"
               onClick={onClose}
             >
               Cerrar
@@ -176,7 +176,7 @@ const PostItem: NextPage = () => {
       </Box>
 
       <Box marginTop="20px">
-        <Text color="#003049">{post?.title}</Text>
+        <Text color="#3E3E3E">{post?.title}</Text>
 
         <Flex
           marginTop="15px"
@@ -200,11 +200,11 @@ const PostItem: NextPage = () => {
                 fontSize="14px"
                 fontWeight="semibold"
                 textTransform="capitalize"
-                color="#003049"
+                color="#3E3E3E"
               >
                 {user?.name}
               </Text>
-              <Text fontSize="12px" color="#003049">
+              <Text fontSize="12px" color="#3E3E3E">
                 {dayjs(parseInt(post?.createdAt)).fromNow()}
               </Text>
             </Box>
@@ -215,9 +215,9 @@ const PostItem: NextPage = () => {
               minWidth="initial"
               height="45px"
               padding="15px"
-              border="1px solid #003049"
+              border="1px solid #3E3E3E"
               rounded="3px 3px 0 0"
-              borderBottom="4px solid #003049"
+              borderBottom="4px solid #3E3E3E"
               backgroundColor="#FFF"
               fontSize="20px"
               _hover={{ backgroundColor: '#FFF' }}
@@ -265,9 +265,9 @@ const PostItem: NextPage = () => {
             borderRadius="4px"
             backgroundColor="#FFF"
             rounded="3px 3px 0 0"
-            color="#003049"
-            border="1px solid #003049"
-            borderBottom="4px solid #003049"
+            color="#3E3E3E"
+            border="1px solid #3E3E3E"
+            borderBottom="4px solid #3E3E3E"
             _focus={{ shadow: 0 }}
             _hover={{
               backgroundColor: '#FFF'
@@ -312,7 +312,7 @@ const PostItem: NextPage = () => {
           <Flex alignItems="center" marginTop="25px">
             <Text
               fontSize="20px"
-              color="#003049"
+              color="#3E3E3E"
               fontWeight="semibold"
               textTransform="uppercase"
             >

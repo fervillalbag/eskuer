@@ -19,11 +19,11 @@ const Back: React.FC<BackIprops> = ({ title, showButton = true }) => {
             minWidth="initial"
             width="50px"
             height="50px"
-            backgroundColor="#FDF0D5"
-            color="#003049"
+            backgroundColor="#F5F5F5"
+            color="#3E3E3E"
             rounded="3px 3px 0 0"
-            border="1px solid #003049"
-            borderBottom="4px solid #003049"
+            border="1px solid #3E3E3E"
+            borderBottom="4px solid #3E3E3E"
             fontSize="22px"
             _focus={{ border: 0 }}
             onClick={() => {
@@ -50,7 +50,7 @@ const Back: React.FC<BackIprops> = ({ title, showButton = true }) => {
         <Text
           fontWeight="bold"
           fontSize="18px"
-          color="#003049"
+          color="#3E3E3E"
           textTransform="uppercase"
         >
           {title || ''}
