@@ -69,7 +69,8 @@ const Back: React.FC<BackIprops> = ({ title, showButton = true }) => {
         router.pathname === '/supermarket' ||
         router.pathname === '/supermarket/[id]' ||
         router.pathname === '/supermarket/product/[id]' ||
-        router.pathname === '/products'
+        router.pathname === '/products' ||
+        router.pathname === '/category/[slug]'
           ? null
           : !user?.email && (
               <Text
