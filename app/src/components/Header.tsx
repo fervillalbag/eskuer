@@ -1,5 +1,5 @@
 import React from 'react'
-import { Flex, Box, Image } from '@chakra-ui/react'
+import { Flex, Box, Image, Text } from '@chakra-ui/react'
 
 import { User } from '../interfaces/User'
 import { useRouter } from 'next/router'
@@ -30,13 +30,19 @@ const Header: React.FC<HeaderIprops> = ({ user }) => {
           }
         }}
       >
-        <Image
-          src={!user?.avatar ? '/profile-avatar.png' : user?.avatar}
-          alt="Profile"
-          width="40px"
-          height="40px"
-          borderRadius="full"
-        />
+        {!user.email ? (
+          <Text fontWeight="semibold" textTransform="uppercase" fontSize="14px">
+            Iniciar sesión
+          </Text>
+        ) : (
+          <Image
+            src={!user?.avatar ? '/profile-avatar.png' : user?.avatar}
+            alt="Profile"
+            width="40px"
+            height="40px"
+            borderRadius="full"
+          />
+        )}
       </Box>
     </Flex>
   )
