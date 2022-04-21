@@ -88,7 +88,8 @@ const ProductItemUpdate: React.FC = () => {
           }
         })
 
-        return toast.success('Producto actualizado')
+        toast.success('Producto actualizado')
+        return router.push('/')
       } catch (error) {
         console.log(error)
         return toast.error('Hubo un error al actualizar. Intente de nuevo')
@@ -120,7 +121,8 @@ const ProductItemUpdate: React.FC = () => {
         }
       })
 
-      return toast.success('Producto actualizado')
+      toast.success('Producto actualizado')
+      return router.push('/')
     } catch (error) {
       console.log(error)
       return toast.error('Hubo un error al actualizar. Intente de nuevo')

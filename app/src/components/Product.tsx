@@ -34,8 +34,9 @@ const Product: React.FC<ProductIprops> = ({ product }) => {
           <Text
             color="white"
             position="absolute"
-            bottom="7px"
-            right="7px"
+            bottom="0"
+            right="0"
+            padding="10px"
             zIndex="20"
             fontSize="14px"
             fontWeight="bold"

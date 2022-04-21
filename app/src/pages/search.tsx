@@ -14,11 +14,19 @@ import { GET_PRODUCTS } from '../graphql/queries/product'
 import { GET_SUPERMARKETS } from '../graphql/queries/supermarket'
 
 const Search: React.FC = () => {
-  const { data: dataProducts, loading: loadingProducts } =
-    useQuery(GET_PRODUCTS)
+  const { data: dataProducts, loading: loadingProducts } = useQuery(
+    GET_PRODUCTS,
+    {
+      fetchPolicy: 'network-only'
+    }
+  )
 
-  const { data: dataSupermarkets, loading: loadingSupermarkets } =
-    useQuery(GET_SUPERMARKETS)
+  const { data: dataSupermarkets, loading: loadingSupermarkets } = useQuery(
+    GET_SUPERMARKETS,
+    {
+      fetchPolicy: 'network-only'
+    }
+  )
 
   const products = dataProducts?.getProducts || []
   const supermarkets = dataSupermarkets?.getSupermarkets || []

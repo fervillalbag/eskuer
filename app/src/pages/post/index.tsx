@@ -53,7 +53,7 @@ const Post: NextPage = () => {
           }}
           boxShadow="0px 0px 3px 10px rgba(255,255,255,1)"
         >
-          Publicar una pregunta
+          Hacer una pregunta
         </Button>
       </Box>
 
