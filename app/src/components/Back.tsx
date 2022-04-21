@@ -2,6 +2,7 @@ import React from 'react'
 import { Box, Flex, Button, Text } from '@chakra-ui/react'
 import { FaAngleLeft } from 'react-icons/fa'
 import { useRouter } from 'next/router'
+import useAuth from '../hooks/useAuth'
 
 interface BackIprops {
   title?: string
@@ -9,6 +10,7 @@ interface BackIprops {
 }
 
 const Back: React.FC<BackIprops> = ({ title, showButton = true }) => {
+  const { user } = useAuth()
   const router = useRouter()
 
   return (
@@ -46,7 +48,12 @@ const Back: React.FC<BackIprops> = ({ title, showButton = true }) => {
           </Button>
         </Box>
       )}
-      <Box marginLeft={!showButton ? '0' : '15px'}>
+      <Flex
+        alignItems="center"
+        justifyContent="space-between"
+        width="100%"
+        marginLeft={!showButton ? '0' : '15px'}
+      >
         <Text
           fontWeight="bold"
           fontSize="18px"
@@ -55,7 +62,20 @@ const Back: React.FC<BackIprops> = ({ title, showButton = true }) => {
         >
           {title || ''}
         </Text>
-      </Box>
+
+        {router.pathname === '/login' || router.pathname === '/register'
+          ? null
+          : !user?.email && (
+              <Text
+                onClick={() => router.push('/login')}
+                fontWeight="semibold"
+                textTransform="uppercase"
+                fontSize="14px"
+              >
+                Iniciar sesión
+              </Text>
+            )}
+      </Flex>
     </Flex>
   )
 }

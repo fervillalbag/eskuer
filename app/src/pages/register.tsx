@@ -30,6 +30,36 @@ const Register: React.FC = () => {
   }, [user])
 
   const handleRegister = async () => {
+    const validateEmailRegex =
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    const validateUsernameRegex = /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/gim
+
+    if (!validateEmailRegex.test(String(email).toLowerCase())) {
+      toast('El email debe ser válido', {
+        icon: '⚠️',
+        style: {
+          borderRadius: '10px',
+          background: '#fff',
+          fontSize: '14px',
+          color: '#333'
+        }
+      })
+      return
+    }
+
+    if (!validateUsernameRegex.test(username)) {
+      toast('El username no debe tener espacio o caracteres especiales', {
+        icon: '⚠️',
+        style: {
+          borderRadius: '10px',
+          background: '#fff',
+          fontSize: '14px',
+          color: '#333'
+        }
+      })
+      return
+    }
+
     if (password !== confirmPassword) {
       return toast.error('Las contraseñas no coinciden')
     }
@@ -53,6 +83,15 @@ const Register: React.FC = () => {
       router.push('/login')
     } catch (error) {
       console.log(error)
+
+      if (error.message === 'Username already exists!') {
+        return toast.error('El username ya existe!')
+      }
+
+      if (error.message === 'Email already exists!') {
+        return toast.error('El email ya existe!')
+      }
+
       toast.error('Hubo un problema al crear la cuenta. Intente de nuevo!')
     }
   }

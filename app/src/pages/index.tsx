@@ -83,13 +83,13 @@ const Home: React.FC = () => {
               padding="10px 20px"
               rounded="3px 3px 0 0"
               marginRight="15px"
-              textTransform="lowercase"
+              textTransform="capitalize"
               border="1px solid #3E3E3E"
               borderBottom="4px solid #3E3E3E"
-              onClick={() => router.push(`/category/food`)}
+              onClick={() => router.push(`/category/verdura`)}
             >
               <Text color="#3E3E3E" fontWeight="semibold">
-                Alimentos
+                Verduras
               </Text>
             </Flex>
             <Flex
@@ -101,10 +101,10 @@ const Home: React.FC = () => {
               padding="10px 20px"
               rounded="3px 3px 0 0"
               marginRight="15px"
-              textTransform="lowercase"
+              textTransform="capitalize"
               border="1px solid #3E3E3E"
               borderBottom="4px solid #3E3E3E"
-              onClick={() => router.push(`/category/drink`)}
+              onClick={() => router.push(`/category/bebida`)}
             >
               <Text color="#3E3E3E" fontWeight="semibold">
                 Bebidas
@@ -119,13 +119,13 @@ const Home: React.FC = () => {
               padding="10px 20px"
               rounded="3px 3px 0 0"
               marginRight="15px"
-              textTransform="lowercase"
+              textTransform="capitalize"
               border="1px solid #3E3E3E"
               borderBottom="4px solid #3E3E3E"
-              onClick={() => router.push(`/category/bazar`)}
+              onClick={() => router.push(`/category/aseo`)}
             >
               <Text color="#3E3E3E" fontWeight="semibold">
-                Bazar
+                Aseo
               </Text>
             </Flex>
             <Flex
@@ -137,13 +137,32 @@ const Home: React.FC = () => {
               padding="10px 20px"
               rounded="3px 3px 0 0"
               marginRight="15px"
-              textTransform="lowercase"
+              textTransform="capitalize"
               border="1px solid #3E3E3E"
               borderBottom="4px solid #3E3E3E"
-              onClick={() => router.push(`/category/bread`)}
+              onClick={() => router.push(`/category/lacteo`)}
             >
               <Text color="#3E3E3E" fontWeight="semibold">
-                Panadería
+                Lácteos
+              </Text>
+            </Flex>
+
+            <Flex
+              as="article"
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              backgroundColor="#FFF"
+              padding="10px 20px"
+              rounded="3px 3px 0 0"
+              marginRight="15px"
+              textTransform="capitalize"
+              border="1px solid #3E3E3E"
+              borderBottom="4px solid #3E3E3E"
+              onClick={() => router.push(`/category/dulce`)}
+            >
+              <Text color="#3E3E3E" fontWeight="semibold">
+                Dulces
               </Text>
             </Flex>
           </Flex>

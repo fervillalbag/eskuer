@@ -45,7 +45,7 @@ const SettingEmail: NextPage = () => {
       })
       refetchUser()
       toast.success('Email actualizado correctamente')
-      router.push('/settings/user')
+      router.push('/settings')
     } catch (error) {
       console.log(error)
     }
