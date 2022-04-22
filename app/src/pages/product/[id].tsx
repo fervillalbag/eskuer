@@ -16,6 +16,7 @@ import {
   CREATE_LIKE_PRODUCT,
   DELETE_LIKE_PRODUCT
 } from '../../graphql/mutations/likeProd'
+import LoaderPrice from '../../components/LoaderPrice'
 
 const Product: React.FC = () => {
   const router = useRouter()
@@ -32,12 +33,15 @@ const Product: React.FC = () => {
     }
   })
 
-  const { data: dataPrices } = useQuery(GET_PRICES_ALL, {
-    fetchPolicy: 'network-only',
-    variables: {
-      idProduct: router?.query?.id
+  const { data: dataPrices, loading: loadingPrices } = useQuery(
+    GET_PRICES_ALL,
+    {
+      fetchPolicy: 'network-only',
+      variables: {
+        idProduct: router?.query?.id
+      }
     }
-  })
+  )
 
   const { data: dataLikeProduct, refetch: refetchLikeProduct } = useQuery(
     GET_LIKE_PRODUCT,
@@ -130,7 +134,19 @@ const Product: React.FC = () => {
       </Flex>
 
       <Box marginTop="20px">
-        {prices.length === 0 ? (
+        {loadingPrices ? (
+          <Box>
+            <LoaderPrice />
+            <LoaderPrice />
+            <LoaderPrice />
+            <LoaderPrice />
+            <LoaderPrice />
+            <LoaderPrice />
+            <LoaderPrice />
+            <LoaderPrice />
+            <LoaderPrice />
+          </Box>
+        ) : prices.length === 0 ? (
           <Box>No hay supermercados con este producto añadido</Box>
         ) : (
           prices.length > 0 &&
