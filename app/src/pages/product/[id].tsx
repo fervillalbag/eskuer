@@ -27,7 +27,6 @@ const Product: React.FC = () => {
   const [deleteLikeProduct] = useMutation(DELETE_LIKE_PRODUCT)
 
   const { data: dataProduct } = useQuery(GET_PRODUCT, {
-    fetchPolicy: 'network-only',
     variables: {
       id: router?.query?.id
     }
@@ -36,7 +35,6 @@ const Product: React.FC = () => {
   const { data: dataPrices, loading: loadingPrices } = useQuery(
     GET_PRICES_ALL,
     {
-      fetchPolicy: 'network-only',
       variables: {
         idProduct: router?.query?.id
       }
@@ -46,7 +44,6 @@ const Product: React.FC = () => {
   const { data: dataLikeProduct, refetch: refetchLikeProduct } = useQuery(
     GET_LIKE_PRODUCT,
     {
-      fetchPolicy: 'network-only',
       variables: {
         input: {
           idProduct: router?.query?.id,
