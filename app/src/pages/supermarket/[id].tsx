@@ -15,7 +15,6 @@ const ProductItem = ({ product }) => {
   const { setSuperSelected } = useContext(SuperContext)
 
   const { data: dataProduct } = useQuery(GET_PRODUCT, {
-    fetchPolicy: 'network-only',
     variables: {
       id: product?.idProduct
     }
