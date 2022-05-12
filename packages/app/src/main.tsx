@@ -11,7 +11,10 @@ const colors = {
 	},
 };
 
-const theme = extendTheme({ colors });
+
+const theme = extendTheme({ colors, fonts: {
+	body: '"Poppins", sans-serif',
+} });
 
 const container = document.getElementById('root');
 ReactDOM.render(
