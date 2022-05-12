@@ -4,5 +4,5 @@ export interface ProductInterface {
   readonly category: string;
   readonly image: string;
   readonly type: string;
-  readonly createdAt: number;
+  readonly createdAt: string;
 }

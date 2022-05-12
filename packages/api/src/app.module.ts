@@ -4,6 +4,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AppService } from './app.service';
 import { AppController } from './app.controller';
 import { ProductModule } from './product/product.module';
+import { MarketModule } from './market/market.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { ProductModule } from './product/product.module';
         useNewUrlParser: true,
       },
     ),
+    MarketModule,
   ],
   controllers: [AppController],
   providers: [AppService],
