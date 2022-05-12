@@ -9,7 +9,7 @@ import { ProductModule } from './product/product.module';
   imports: [
     ProductModule,
     MongooseModule.forRoot(
-      'mongodb+srv://admin:zhCRVlAycw4KgE4U@eskuer.p9wbo.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+      'mongodb+srv://admin:zhCRVlAycw4KgE4U@eskuer.p9wbo.mongodb.net/eskuer?retryWrites=true&w=majority',
       {
         useNewUrlParser: true,
       },
