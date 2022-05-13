@@ -5,6 +5,7 @@ import { AppService } from './app.service';
 import { AppController } from './app.controller';
 import { ProductModule } from './product/product.module';
 import { MarketModule } from './market/market.module';
+import { PriceModule } from './price/price.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { MarketModule } from './market/market.module';
       },
     ),
     MarketModule,
+    PriceModule,
   ],
   controllers: [AppController],
   providers: [AppService],
