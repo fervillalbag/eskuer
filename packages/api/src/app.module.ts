@@ -13,7 +13,7 @@ import { UserModule } from './user/user.module';
   imports: [
     ConfigModule.forRoot(),
     ProductModule,
-    MongooseModule.forRoot(process.env.MONGODB_URI, {
+    MongooseModule.forRoot(process.env.MONGO_URI, {
       useNewUrlParser: true,
     }),
     MarketModule,
