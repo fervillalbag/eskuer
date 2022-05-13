@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
+import { ConfigModule } from '@nestjs/config';
 
 import { AppService } from './app.service';
 import { AppController } from './app.controller';
@@ -10,13 +11,11 @@ import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
+    ConfigModule.forRoot(),
     ProductModule,
-    MongooseModule.forRoot(
-      'mongodb+srv://admin:zhCRVlAycw4KgE4U@eskuer.p9wbo.mongodb.net/eskuer?retryWrites=true&w=majority',
-      {
-        useNewUrlParser: true,
-      },
-    ),
+    MongooseModule.forRoot(process.env.MONGODB_URI, {
+      useNewUrlParser: true,
+    }),
     MarketModule,
     PriceModule,
     UserModule,

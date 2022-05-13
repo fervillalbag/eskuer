@@ -16,5 +16,8 @@
 		"eslint-plugin-promise": "^6.0.0",
 		"eslint-plugin-react": "^7.29.4",
 		"prettier": "^2.6.2"
+	},
+	"dependencies": {
+		"@nestjs/config": "^2.0.0"
 	}
 }
