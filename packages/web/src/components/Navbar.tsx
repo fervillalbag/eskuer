@@ -26,7 +26,7 @@ const Navbar = () => {
 				height='60px'
 				backgroundColor='white'
 				width='calc(100% - 40px)'
-				maxWidth='576px'
+				maxWidth='480px'
 				left='50%'
 				transform='translate(-50%, 0)'
 				position='fixed'

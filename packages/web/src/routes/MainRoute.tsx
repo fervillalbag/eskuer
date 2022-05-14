@@ -3,6 +3,7 @@ import Admin from '../pages/Admin';
 
 import Home from '../pages/Home';
 import Posts from '../pages/Posts';
+import Product from '../pages/Product';
 import Search from '../pages/Search';
 import Settings from '../pages/Settings';
 
@@ -15,6 +16,7 @@ const MainRoute: React.FC = () => {
 				<Route path='/admin' element={<Admin />} />
 				<Route path='/posts' element={<Posts />} />
 				<Route path='/settings' element={<Settings />} />
+				<Route path='/product/:id' element={<Product />} />
 			</Routes>
 		</BrowserRouter>
 	);

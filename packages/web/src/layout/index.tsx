@@ -7,7 +7,7 @@ type LayoutProps = {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
 	return (
-		<Box>
+		<Box maxW={`480px`} margin={`0 auto`}>
 			<Box>{children}</Box>
 			<Navbar />
 		</Box>
