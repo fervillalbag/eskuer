@@ -1,5 +1,5 @@
-import ReactDOM from 'react-dom';
 import { ChakraProvider, extendTheme } from '@chakra-ui/react';
+import { createRoot } from 'react-dom/client';
 
 import App from './App';
 
@@ -11,15 +11,17 @@ const colors = {
 	},
 };
 
-
-const theme = extendTheme({ colors, fonts: {
-	body: '"Poppins", sans-serif',
-} });
+const theme = extendTheme({
+	colors,
+	fonts: {
+		body: '"Poppins", sans-serif',
+	},
+});
 
 const container = document.getElementById('root');
-ReactDOM.render(
+const root = createRoot(container!);
+root.render(
 	<ChakraProvider theme={theme}>
 		<App />
-	</ChakraProvider>,
-	container
+	</ChakraProvider>
 );

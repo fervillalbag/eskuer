@@ -29,5 +29,7 @@ module.exports = {
 	rules: {
 		'@typescript-eslint/no-unused-vars': 'error',
 		'@typescript-eslint/consistent-type-definitions': ['error', 'type'],
+		'react/prop-types': ['off'],
+		'@typescript-eslint/no-non-null-assertion': 'off',
 	},
 };
