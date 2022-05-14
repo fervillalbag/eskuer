@@ -1,12 +1,13 @@
-import { Box } from '@chakra-ui/react';
-
 import MainRoute from './routes/MainRoute';
+import { QueryClientProvider, QueryClient } from 'react-query';
+
+const queryClient = new QueryClient();
 
 function App() {
 	return (
-		<Box>
+		<QueryClientProvider client={queryClient}>
 			<MainRoute />
-		</Box>
+		</QueryClientProvider>
 	);
 }
 
