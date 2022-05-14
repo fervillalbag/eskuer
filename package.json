@@ -1,6 +1,6 @@
 {
 	"scripts": {
-		"app": "cd packages/app/ && npm run dev",
+		"web": "cd packages/web/ && npm run dev",
 		"api": "cd packages/api/ && npm run start:dev",
 		"format": "prettier --write .",
 		"lint": "eslint --fix . --ext .js,.jsx,.ts,.tsx"
