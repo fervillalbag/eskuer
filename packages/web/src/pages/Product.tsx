@@ -23,6 +23,7 @@ const Product: React.FC = () => {
 		data: dataPrices,
 		isLoading: isLoadingPrices,
 		isSuccess: isSuccessPrices,
+		isFetching: isFetchingPrices,
 	} = useQuery('prices', getPrices);
 
 	if (isLoadingProducts && !isSuccessProducts) return <div>cargando..</div>;
@@ -33,7 +34,7 @@ const Product: React.FC = () => {
 		(item: PriceType) => item.idProduct === id
 	);
 
-	if (isFetchingProducts) return <LoadingProduct />;
+	if (isFetchingProducts || isFetchingPrices) return <LoadingProduct />;
 
 	return (
 		<Box padding='20px'>
