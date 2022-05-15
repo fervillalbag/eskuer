@@ -39,13 +39,14 @@ const Navbar = () => {
 				<Flex
 					alignItems='center'
 					height='full'
-					padding='0 30px'
+					padding='0 20px'
 					justifyContent='space-between'
 				>
 					<LinkChakraUI
 						as={Link}
 						to='/'
 						fontSize='26px'
+						padding={`7px 10px`}
 						color={pathname === '/' ? '#3E3E3E' : '#E5E5E5'}
 					>
 						<TiHome />
@@ -54,6 +55,7 @@ const Navbar = () => {
 						as={Link}
 						to='/search'
 						fontSize='26px'
+						padding={`7px 10px`}
 						color={pathname === '/search' ? '#3E3E3E' : '#E5E5E5'}
 					>
 						<FiSearch />
@@ -63,6 +65,7 @@ const Navbar = () => {
 							as={Link}
 							to='/admin'
 							fontSize='26px'
+							padding={`7px 10px`}
 							color={pathname === '/admin' ? '#3E3E3E' : '#E5E5E5'}
 						>
 							<IoIosKey />
@@ -72,6 +75,7 @@ const Navbar = () => {
 						as={Link}
 						to='/posts'
 						fontSize='26px'
+						padding={`7px 10px`}
 						color={pathname === '/posts' ? '#3E3E3E' : '#E5E5E5'}
 					>
 						<GoCommentDiscussion />
@@ -81,6 +85,7 @@ const Navbar = () => {
 							as={Link}
 							to='/settings'
 							fontSize='26px'
+							padding={`7px 10px`}
 							color={pathname === '/settings' ? '#3E3E3E' : '#E5E5E5'}
 						>
 							<IoMdSettings />
