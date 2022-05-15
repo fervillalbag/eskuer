@@ -3,6 +3,7 @@ import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 
 import GoBack from '../components/GoBack';
+import LoadingProduct from '../components/LoadingProduct';
 import PriceValue from '../components/PriceValue';
 import { ProductType } from '../types';
 import { PriceType } from '../types/price';
@@ -15,6 +16,7 @@ const Product: React.FC = () => {
 		data: dataProducts,
 		isLoading: isLoadingProducts,
 		isSuccess: isSuccessProducts,
+		isFetching: isFetchingProducts,
 	} = useQuery('product', () => getProduct(id as string));
 
 	const {
@@ -30,6 +32,8 @@ const Product: React.FC = () => {
 	const pricesFilter = dataPrices.prices.filter(
 		(item: PriceType) => item.idProduct === id
 	);
+
+	if (isFetchingProducts) return <LoadingProduct />;
 
 	return (
 		<Box padding='20px'>
