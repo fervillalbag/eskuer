@@ -11,13 +11,15 @@ import { getPrices } from '../utils/price';
 import { getProduct } from '../utils/product';
 
 const Product: React.FC = () => {
-	const { id } = useParams();
+	const params = useParams();
+	console.log(params);
+
 	const {
 		data: dataProducts,
 		isLoading: isLoadingProducts,
 		isSuccess: isSuccessProducts,
 		isFetching: isFetchingProducts,
-	} = useQuery('product', () => getProduct(id as string));
+	} = useQuery('product', () => getProduct(params?.id as string));
 
 	const {
 		data: dataPrices,
@@ -31,7 +33,7 @@ const Product: React.FC = () => {
 
 	const product: ProductType = dataProducts.product;
 	const pricesFilter = dataPrices.prices.filter(
-		(item: PriceType) => item.idProduct === id
+		(item: PriceType) => item.idProduct === params?.id
 	);
 
 	if (isFetchingProducts || isFetchingPrices) return <LoadingProduct />;
