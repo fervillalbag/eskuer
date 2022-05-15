@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Admin from '../pages/Admin';
+import ErrorPage from '../pages/ErrorPage';
 
 import Home from '../pages/Home';
 import Posts from '../pages/Posts';
@@ -17,6 +18,7 @@ const MainRoute: React.FC = () => {
 				<Route path='/posts' element={<Posts />} />
 				<Route path='/settings' element={<Settings />} />
 				<Route path='/product/:id' element={<Product />} />
+				<Route path='*' element={<ErrorPage />} />
 			</Routes>
 		</BrowserRouter>
 	);
