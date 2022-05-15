@@ -1,17 +1,17 @@
 import { useQuery } from 'react-query';
 import { Box, Grid } from '@chakra-ui/react';
-
-import Layout from '../layout';
-import { getProducts } from '../utils/product';
-import Product from '../components/Product';
-import { ProductType } from '../types';
 import { Link } from 'react-router-dom';
 
-const Home: React.FC = () => {
-	const { data, status } = useQuery('products', getProducts);
+import Layout from '../layout';
+import Product from '../components/Product';
+import { getProducts } from '../utils/product';
+import { ProductType } from '../types';
 
-	if (status === 'loading') return <Box>Cargando..</Box>;
-	if (status === 'error') return <Box>Error</Box>;
+const Home: React.FC = () => {
+	const { data, isError, isLoading } = useQuery('products', getProducts);
+
+	if (isLoading) return <Box>Cargando..</Box>;
+	if (isError) return <Box>Error</Box>;
 
 	return (
 		<Layout>
