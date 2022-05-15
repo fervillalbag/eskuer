@@ -2,6 +2,7 @@ import { Box, Flex, Grid, Image, Text } from '@chakra-ui/react';
 import { useQuery } from 'react-query';
 import { PriceType } from '../types/price';
 import { getMarket } from '../utils/market';
+import LoadingPrice from './LoadingPrice';
 
 type PriceValueProps = {
 	price: PriceType;
@@ -12,10 +13,13 @@ const PriceValue: React.FC<PriceValueProps> = ({ price }) => {
 		data: dataMarket,
 		isLoading: isLoadingMarket,
 		isSuccess: isSuccessMarket,
+		isFetching: isFetchingMarket,
 	} = useQuery('market', () => getMarket(price?.idMarket as string));
 
 	if (isLoadingMarket && !isSuccessMarket) return <div>cargando..</div>;
 	const market = dataMarket.market;
+
+	if (isFetchingMarket) return <LoadingPrice />;
 
 	return (
 		<Box

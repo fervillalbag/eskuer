@@ -1,5 +1,4 @@
 import { Box, Flex } from '@chakra-ui/react';
-import LoadingPrice from './LoadingPrice';
 
 const LoadingProduct: React.FC = () => {
 	return (
@@ -16,19 +15,6 @@ const LoadingProduct: React.FC = () => {
 
 			<Box marginTop={`20px`}>
 				<Box width={`200px`} height={`150px`} bgColor={`#dbdbdb`}></Box>
-			</Box>
-
-			<Box marginTop={`20px`}>
-				<LoadingPrice />
-				<LoadingPrice />
-				<LoadingPrice />
-				<LoadingPrice />
-				<LoadingPrice />
-				<LoadingPrice />
-				<LoadingPrice />
-				<LoadingPrice />
-				<LoadingPrice />
-				<LoadingPrice />
 			</Box>
 		</Box>
 	);
