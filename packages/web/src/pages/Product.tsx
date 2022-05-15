@@ -12,14 +12,13 @@ import { getProduct } from '../utils/product';
 
 const Product: React.FC = () => {
 	const params = useParams();
-	console.log(params);
 
 	const {
 		data: dataProducts,
 		isLoading: isLoadingProducts,
 		isSuccess: isSuccessProducts,
 		isFetching: isFetchingProducts,
-	} = useQuery('product', () => getProduct(params?.id as string));
+	} = useQuery(['product', params?.id], () => getProduct(params?.id as string));
 
 	const {
 		data: dataPrices,
